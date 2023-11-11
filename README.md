@@ -36,3 +36,43 @@ git clone https://iut-info.univ-reims.fr/gitlab/jaco0024/sae3-01-zoo.git
 composer install 
 ```
 
+**Rappel pour push**
+
+- Créer une branche contenant le nom de la fonctionnalité traitée
+
+
+```git branch <nom>```
+
+- Se positionner sur cette branche
+
+
+```git checkout <nom>```
+
+- Retourner sur la branche main une fois le code écrit
+
+```
+git checkout main
+git pull
+```
+
+- Retourner sur sa branche locale
+```
+git checkout <nom>
+git rebase main
+```
+
+- Push le code écrit
+- Demande de merge request sur le repo gitlab
+
+**Exemple de commit**
+
+* ajout d’une fonctionnalité
+
+```git commit -m "add: <fonctionnalité ajoutée>"```
+
+* modification d’une fonctionnalité déjà présente
+
+```git commit -m "edit: <fonctionnalité modifiée>"```
+* suppression d’un fichier
+
+```git commit -m "delete: <fonctionnalité supprimée>"```
