@@ -84,7 +84,7 @@ http://localhost:8000
 Connexion à la bd (.env.local):
 
 ```shell
-DATABASE_URL="mysql://user:password@mysql:3306/dbName?serverVersion=10.11.2-MariaDB&charset=utf8mb4"```
+DATABASE_URL="mysql://user:password@mysql:3306/dbName?serverVersion=10.11.2-MariaDB&charset=utf8mb4"`
 ```
 Générer la base de données et les données factices :
 
