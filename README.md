@@ -6,8 +6,7 @@ WildWonderHub est une application de gestion des visiteurs et des animaux du Zoo
 
 <!-- TOC -->
   * [WildWonderHub (SAE 3.01)](#WildWonderHub--sae-301-)
-  * [Table des matières](#table-des-matires)
-  * [Les auteurs du projet](#les-auteurs-du-projet)
+  * [Les auteurs du projet](#auteurs-du-projet)
   * [Outils utilisés](#outils-utilisés)
   * [Mise en place](#mises-en-place)
   * [Authorisations et utilisateurs de démonstration](#authorisations-et-utilisateurs-de-dmonstration)
