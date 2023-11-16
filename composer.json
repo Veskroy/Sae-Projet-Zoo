@@ -84,6 +84,11 @@
             "Composer\\Config::disableProcessTimeout",
             "symfony serve"
         ],
+        "start:windows" : [
+            "Composer\\Config::disableProcessTimeout",
+            "bin/run-server.bat"
+        ],
+
         "test:cs": [
             "php vendor/bin/php-cs-fixer fix --dry-run"
         ],
