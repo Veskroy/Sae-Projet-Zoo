@@ -10,6 +10,7 @@ WildWonderHub est une application de gestion des visiteurs et des animaux du Zoo
   * [Les auteurs du projet](#les-auteurs-du-projet)
   * [Outils utilisés](#outils-utilisés)
   * [Mise en place](#mises-en-place)
+  * [Authorisations et utilisateurs de démonstration](#authorisations-et-utilisateurs-de-dmonstration)
   * [Rappel pour le projet](#rappel-pour-le-projet)
 <!-- TOC -->
 
@@ -84,7 +85,7 @@ http://localhost:8000
 Connexion à la bd (.env.local):
 
 ```shell
-DATABASE_URL="mysql://user:password@mysql:3306/dbName?serverVersion=10.11.2-MariaDB&charset=utf8mb4"```
+DATABASE_URL="mysql://user:password@mysql:3306/dbName?serverVersion=10.11.2-MariaDB&charset=utf8mb4"`
 ```
 Générer la base de données et les données factices :
 
@@ -92,6 +93,17 @@ Générer la base de données et les données factices :
 composer db
 ```
 Cette commande détruit la bd si elle existe, en crée une nouvelle, effectue les migrations et génére les données factices
+
+## Authorisations et utilisateurs de démonstration
+
+### Administrateur :
+email : root@example.com
+mdp : test
+
+### Utilisateur :
+email : user@example.com
+mpd : test
+
 
 ## Rappel pour le projet
 
