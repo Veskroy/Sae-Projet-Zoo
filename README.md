@@ -154,3 +154,59 @@ git commit -m "edit: <fonctionnalité modifiée>"
 ```shell
 git commit -m "delete: <fonctionnalité supprimée>"
 ```
+
+## Entity
+**Arboresence**
+- Animal
+* private string NameAnm = null
+* private int Gender = null
+* private string DescAnm = null
+* private float Weight = null
+* private float Size = null<
+* private DateTimeInterface $BirthDate = null
+
+- Employee
+* private int id = null
+* private int idSupEmp = null
+
+- Event
+* private int id = null
+* private string Namevent = null
+* private DateTimeInterface DateEvent = null
+* private DateTimeInterface Hstartevent = null
+* private DateTimeInterface Hendevent = null
+* private int MaxiNumPlace = null
+* private string DesEvent = null
+
+- Family</br>
+* private int id = null</br>
+* private string NameFam = null
+* private string DescFam = null
+
+- Pen</br>
+* private int id = null
+* private int Capacity = null
+* private string TypePen = null
+* private float SizePen = null
+* private int Numplace = null
+
+- Species</br>
+*  private int id = null<
+* private string NameSpe = null
+* private string Diet = null
+* private string Origin = null
+* private string Descspe = null
+
+- Spot
+* private int id = null
+* private int CodeSpot = null
+* private string TypeSpot = null
+* private string NameSpot = null
+
+- Ticket</br>
+* private int id = null
+* private DateTimeInterface Date = null
+* private int Price = null
+* private int Period = null
+
+- Visitor
