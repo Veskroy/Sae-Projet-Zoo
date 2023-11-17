@@ -1,0 +1,157 @@
+:root {
+    --primaryGreen: #4F614B;
+    --darkenGreen: #364434;
+    --primaryMarron: #8D6536;
+    --primaryGray: #544C41;
+    --primaryWhite: #FFFFFF;
+    --primaryBlack: #000000;
+    --lightBlack: #0000007a;
+}
+
+/*********/
+/* reset */
+/*********/
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a.menu-link {
+    text-decoration: none !important;
+    color: var(--primaryBlack) !important;
+}
+
+a.menu-link:hover {
+    color: var(--lightBlack) !important;
+}
+
+a.btn {
+    padding: 7px 15px;
+    font-weight: bold;
+}
+
+ul {
+    margin-bottom: 0px !important;
+}
+
+li {
+    list-style-type: none;
+}
+
+/*********************/
+/* styles components */
+/*********************/
+
+a.button-primary {
+    color: var(--primaryWhite);
+    background-color: var(--primaryGreen);
+    border-radius: 10px;
+}
+a.button-secondary {
+    color: var(--primaryGreen);
+    background-color: var(--primaryWhite);
+    border: 1px solid var(--primaryGreen);
+    border-radius: 10px;
+}
+
+a.button-primary:hover {
+    background-color: var(--darkenGreen);
+}
+
+a.button-secondary:hover {
+    background-color: var(--primaryGreen);
+    color: var(--primaryWhite);
+}
+
+/***************/
+/* header, nav */
+/***************/
+
+header.header div.main-infos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header div.main-infos a {
+    color: var(--primaryGreen);
+    font-weight: bold;
+}
+
+header.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 3vw;
+    padding-block: 10px;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--primaryGray);
+    margin-bottom: 50px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    width: 40px;
+    aspect-ratio: 1;
+}
+
+header nav div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+div#hamburger-menu {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+/*****************/
+/* media queries */
+/*****************/
+
+@media screen and (max-width: 800px) {
+    header.header nav {
+        display: none;
+    }
+
+    header.header nav.open {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        background-color: var(--primaryWhite);
+        border: 1px solid var(--darkenGreen);
+    }
+
+    header.header nav.open div {
+        flex-direction: column;
+        padding: 30px;
+        align-items: baseline;
+    }
+
+    header.header nav.open div a {
+        width: 100%;
+    }
+
+    div#hamburger-menu {
+        display: block;
+    }
+}
