@@ -54,8 +54,8 @@ final class UserFactory extends ModelFactory
         $lastname = self::faker()->lastname();
 
         return [
-            'address' => self::faker()->text(255),
-            'city' => self::faker()->text(255),
+            'address' => self::faker()->address(),
+            'city' => self::faker()->city(),
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $this->normalizeName($firstname).'.'.$this->normalizeName($lastname).'@'.self::faker()->domainName(),
