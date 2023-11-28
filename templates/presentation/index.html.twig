@@ -4,5 +4,10 @@
 
 
 {% block body %}
-    <h1></h1>
+    {% if app.user %}
+        <h1>Bienvenue sur le site du Zoo de la Palmyre, {{ app.user.getFirstName() }} {{ app.user.getLastName() }}!</h1>
+    {% else %}
+        <h1>Bienvenue sur le site du Zoo de la Palmyre!</h1>
+        <h3>Connectez ou inscrivez-vous pour profiter pleinement des nouveautés!</h3>
+    {% endif %}
 {% endblock %}

@@ -1,4 +1,11 @@
+/* imports */
+
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Didact+Gothic&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* variables */
+
 :root {
+    /* colors */
     --primaryGreen: #4F614B;
     --darkenGreen: #364434;
     --primaryMarron: #8D6536;
@@ -8,6 +15,10 @@
     --lightBlack: #0000007a;
     --inputBackground: #D9D9D9;
     --footerBackground: #ECECEC;
+
+    /* fonts */
+    --main-font-family-text: 'Didact Gothic', 'Inter', sans-serif;
+    --titles-font-family: 'Dangrek', 'Inter', sans-serif;
 }
 
 /*********/
@@ -18,20 +29,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--main-font-family-text);
 }
 
 a {
-    text-decoration: none !important;
-    color: var(--primaryBlack) !important;
+    text-decoration: none;
+    color: var(--primaryBlack);
+    cursor: pointer;
+}
+
+h1, h2, h3 {
+    font-family: var(--titles-font-family);
 }
 
 a.menu-link {
-    text-decoration: none !important;
-    color: var(--primaryBlack) !important;
+    text-decoration: none;
+    color: var(--primaryBlack);
+    font-family: var(--titles-font-family);
+    font-weight: bold;
 }
 
 a.menu-link:hover {
-    color: var(--lightBlack) !important;
+    color: var(--lightBlack);
 }
 
 a.btn {
@@ -40,7 +59,7 @@ a.btn {
 }
 
 ul {
-    margin-bottom: 0px !important;
+    margin-bottom: 0px;
 }
 
 li {
@@ -61,17 +80,17 @@ html, body {
 }
 
 a.btn:hover, a.btn:focus {
-    color: var(--primaryWhite) !important;
+    color: var(--primaryWhite);
 }
 
 a.button-primary {
-    color: var(--primaryWhite) !important;
+    color: var(--primaryWhite);
     background-color: var(--primaryGreen);
     border-radius: 10px;
 }
 
 a.button-secondary {
-    color: var(--primaryGreen) !important;
+    color: var(--primaryGreen);
     background-color: var(--primaryWhite);
     border: 1px solid var(--primaryGreen);
     border-radius: 10px;
@@ -135,6 +154,17 @@ div#hamburger-menu {
     display: none;
 }
 
+a.profil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
+}
+
+a.profil:hover {
+    transform: translateY(-3px);
+}
+
 /**********/
 /* footer */
 /**********/
@@ -156,11 +186,14 @@ footer div.container-links {
 }
 
 footer div.container-links a:hover {
-    text-decoration: underline !important;
+    text-decoration: underline;
 }
 
 footer div.newsletter {
     width: 60%;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
 }
 
 footer div.newsletter p {
@@ -233,10 +266,17 @@ div.content {
 
     header.header nav.open div a {
         width: 100%;
+        text-align: center;
     }
 
     div#hamburger-menu {
         display: block;
+    }
+    a.profil::before {
+        content: 'profil';
+        font-size: 18px;
+        margin-right: 5px;
+        font-weight: bold;
     }
 }
 
