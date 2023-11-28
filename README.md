@@ -58,7 +58,7 @@ Rend le  projet conforme à la norme PSR-12 :
 composer fix:cs
 ```
 
-Permet de tester le code, de détruire la bd,de la recrée et enfin de crée le schéma :
+Permet de tester le code, de détruire la bd, de la recréer et enfin de créer le schéma :
 
 ```shell
 composer test:codeception
@@ -91,9 +91,15 @@ Générer la base de données et les données factices :
 ```shell
 composer db
 ```
-Cette commande détruit la bd si elle existe, en crée une nouvelle, effectue les migrations et génére les données factices
+Cette commande détruit la bd si elle existe, en crée une nouvelle, effectue les migrations et génère les données factices.
 
 ## Authorisations et utilisateurs de démonstration
+
+
+| Email               | Mot de passe | Type de compte      |
+|---------------------|--------------|---------------------|
+| root@example.com    | test         | Administrateur      |
+| user@example.com    | test         | Utilisateur         |
 
 ### Administrateur :
 email : root@example.com
