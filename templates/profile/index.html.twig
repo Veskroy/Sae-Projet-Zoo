@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ user.firstname }}{% endblock %}
+
+{% block body %}
+
+    <div class="profile">
+
+        <div class="intro-profile">
+            <h1>Votre profil</h1>
+            <p>Bonjour, {{ user.firstname }} {{ user.lastname }}</p>
+        </div>
+
+        <div class="edit-profile">
+
+            <div class="">
+                <h4>Modifier votre profil</h4>
+                <!-- form à ajouter -->
+                <div class="btn-actions">
+                    <a class="btn button-primary" href="{{ path('app_logout') }}">Supprimer votre compte</a>
+                    <a class="btn button-secondary" href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="liste-reservations">
+            <div class="">
+                <!-- form à ajouter -->
+            </div>
+        </div>
+        
+    </div>
+
+
+{% endblock %}
