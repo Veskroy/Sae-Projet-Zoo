@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TicketRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,6 +24,14 @@ class Ticket
 
     #[ORM\Column(nullable: true)]
     private ?int $Period = null;
+
+    #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
+    private Collection $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -72,6 +82,30 @@ class Ticket
     public function setPeriod(?int $Period): static
     {
         $this->Period = $Period;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvent(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(event $event): static
+    {
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        $this->events->removeElement($event);
 
         return $this;
     }
