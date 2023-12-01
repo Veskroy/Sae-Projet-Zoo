@@ -1,7 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event{% endblock %}
+{% block title %}Évènements à venir{% endblock %}
+
+{% block javascripts %}
+    <script src={{ asset('scripts/eventCalendar.js') }}></script>
+{% endblock %}
 
 {% block body %}
-
+    <h1>Calendrier des évènements</h1>
+    <div id='calendar'></div>
+    <h1>Liste des évènements</h1>
+    {% for event in events %}
+        <div>
+            <a>{{ event.nameEvent }}</a>
+            <p>Nombre de places :</p>
+            <p>{{ event.descEvent }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}
