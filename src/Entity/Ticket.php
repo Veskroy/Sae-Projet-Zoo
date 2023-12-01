@@ -28,6 +28,10 @@ class Ticket
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
     private Collection $events;
 
+    #[ORM\ManyToOne(inversedBy: 'tickets')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -94,6 +98,18 @@ class Ticket
     public function removeEvent(Event $event): static
     {
         $this->events->removeElement($event);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
