@@ -17,13 +17,13 @@ class Ticket
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $Date = null;
+    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Price = null;
+    private ?int $price = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Period = null;
+    private ?int $period = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
     private Collection $events;
@@ -38,50 +38,38 @@ class Ticket
         return $this->id;
     }
 
-    public function getIdTck(): ?int
-    {
-        return $this->IdTck;
-    }
-
-    public function setIdTck(?int $IdTck): static
-    {
-        $this->IdTck = $IdTck;
-
-        return $this;
-    }
-
     public function getDate(): ?\DateTimeInterface
     {
-        return $this->Date;
+        return $this->date;
     }
 
     public function setDate(?\DateTimeInterface $Date): static
     {
-        $this->Date = $Date;
+        $this->date = $Date;
 
         return $this;
     }
 
     public function getPrice(): ?int
     {
-        return $this->Price;
+        return $this->price;
     }
 
     public function setPrice(?int $Price): static
     {
-        $this->Price = $Price;
+        $this->price = $Price;
 
         return $this;
     }
 
     public function getPeriod(): ?int
     {
-        return $this->Period;
+        return $this->period;
     }
 
     public function setPeriod(?int $Period): static
     {
-        $this->Period = $Period;
+        $this->period = $Period;
 
         return $this;
     }
