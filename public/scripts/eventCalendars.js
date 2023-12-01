@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let calendar = new FullCalendar.Calendar(calendarEl, {
         //locale: frLocale,
         initialView: 'dayGridMonth',
+        firstDay: 1,
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
