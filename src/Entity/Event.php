@@ -17,22 +17,22 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
-    private ?string $Namevent = null;
+    private ?string $namevent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $DateEvent = null;
+    private ?\DateTimeInterface $dateEvent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $Hstartevent = null;
+    private ?\DateTimeInterface $hstartevent = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $Hendevent = null;
+    private ?\DateTimeInterface $hendevent = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $MaxiNumPlace = null;
+    private ?int $maxiNumPlace = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $DesEvent = null;
+    private ?string $desEvent = null;
 
     #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'Event')]
     private Collection $tickets;
@@ -49,72 +49,72 @@ class Event
 
     public function getNamevent(): ?string
     {
-        return $this->Namevent;
+        return $this->namevent;
     }
 
     public function setNamevent(?string $Namevent): static
     {
-        $this->Namevent = $Namevent;
+        $this->namevent = $Namevent;
 
         return $this;
     }
 
     public function getDateEvent(): ?\DateTimeInterface
     {
-        return $this->DateEvent;
+        return $this->dateEvent;
     }
 
     public function setDateEvent(?\DateTimeInterface $DateEvent): static
     {
-        $this->DateEvent = $DateEvent;
+        $this->dateEvent = $DateEvent;
 
         return $this;
     }
 
     public function getHstartevent(): ?\DateTimeInterface
     {
-        return $this->Hstartevent;
+        return $this->hstartevent;
     }
 
     public function setHstartevent(?\DateTimeInterface $Hstartevent): static
     {
-        $this->Hstartevent = $Hstartevent;
+        $this->hstartevent = $Hstartevent;
 
         return $this;
     }
 
     public function getHendevent(): ?\DateTimeInterface
     {
-        return $this->Hendevent;
+        return $this->hendevent;
     }
 
     public function setHendevent(?\DateTimeInterface $Hendevent): static
     {
-        $this->Hendevent = $Hendevent;
+        $this->hendevent = $Hendevent;
 
         return $this;
     }
 
     public function getMaxiNumPlace(): ?int
     {
-        return $this->MaxiNumPlace;
+        return $this->maxiNumPlace;
     }
 
     public function setMaxiNumPlace(?int $MaxiNumPlace): static
     {
-        $this->MaxiNumPlace = $MaxiNumPlace;
+        $this->maxiNumPlace = $MaxiNumPlace;
 
         return $this;
     }
 
     public function getDesEvent(): ?string
     {
-        return $this->DesEvent;
+        return $this->desEvent;
     }
 
     public function setDesEvent(?string $DesEvent): static
     {
-        $this->DesEvent = $DesEvent;
+        $this->desEvent = $DesEvent;
 
         return $this;
     }
