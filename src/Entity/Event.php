@@ -17,22 +17,22 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
-    private ?string $namevent = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateEvent = null;
+    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $hstartevent = null;
+    private ?\DateTimeInterface $hstart = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $hendevent = null;
+    private ?\DateTimeInterface $hend = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $maxiNumPlace = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $desEvent = null;
+    private ?string $desc = null;
 
     #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'Event')]
     private Collection $tickets;
@@ -47,50 +47,50 @@ class Event
         return $this->id;
     }
 
-    public function getNamevent(): ?string
+    public function getName(): ?string
     {
-        return $this->namevent;
+        return $this->name;
     }
 
-    public function setNamevent(?string $Namevent): static
+    public function setName(?string $Name): static
     {
-        $this->namevent = $Namevent;
+        $this->name = $Name;
 
         return $this;
     }
 
-    public function getDateEvent(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->dateEvent;
+        return $this->date;
     }
 
-    public function setDateEvent(?\DateTimeInterface $DateEvent): static
+    public function setDate(?\DateTimeInterface $Date): static
     {
-        $this->dateEvent = $DateEvent;
+        $this->date = $Date;
 
         return $this;
     }
 
-    public function getHstartevent(): ?\DateTimeInterface
+    public function getHstart(): ?\DateTimeInterface
     {
-        return $this->hstartevent;
+        return $this->hstart;
     }
 
-    public function setHstartevent(?\DateTimeInterface $Hstartevent): static
+    public function setHstart(?\DateTimeInterface $Hstart): static
     {
-        $this->hstartevent = $Hstartevent;
+        $this->hstart = $Hstart;
 
         return $this;
     }
 
-    public function getHendevent(): ?\DateTimeInterface
+    public function getHend(): ?\DateTimeInterface
     {
-        return $this->hendevent;
+        return $this->hend;
     }
 
-    public function setHendevent(?\DateTimeInterface $Hendevent): static
+    public function setHend(?\DateTimeInterface $Hend): static
     {
-        $this->hendevent = $Hendevent;
+        $this->hend = $Hend;
 
         return $this;
     }
@@ -107,14 +107,14 @@ class Event
         return $this;
     }
 
-    public function getDesEvent(): ?string
+    public function getDesc(): ?string
     {
-        return $this->desEvent;
+        return $this->desc;
     }
 
-    public function setDesEvent(?string $DesEvent): static
+    public function setDesc(?string $Desc): static
     {
-        $this->desEvent = $DesEvent;
+        $this->desc = $Desc;
 
         return $this;
     }
