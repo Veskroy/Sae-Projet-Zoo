@@ -47,6 +47,8 @@ class ProfileController extends AbstractController
                 $entityManager->remove($user);
                 $entityManager->flush();
 
+                $this->addFlash('success', 'Votre compte a bien été supprimé!');
+
                 return $this->redirectToRoute('app_login', ['deleteProfileMessage' => true]);
             } else {
                 return $this->redirectToRoute('app_profile', ['user' => $user]);
