@@ -101,15 +101,6 @@ Cette commande détruit la bd si elle existe, en crée une nouvelle, effectue le
 | root@example.com    | test         | Administrateur      |
 | user@example.com    | test         | Utilisateur         |
 
-### Administrateur :
-email : root@example.com
-mdp : test
-
-### Utilisateur :
-email : user@example.com
-mpd : test
-
-
 ## Rappel pour le projet
 
 - Créer une branche contenant le nom de la fonctionnalité traitée
