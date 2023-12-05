@@ -53,9 +53,11 @@ a.menu-link:hover {
     color: var(--lightBlack);
 }
 
-a.btn {
+a.btn, button.btn {
     padding: 7px 15px;
     font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
 ul {
@@ -75,32 +77,46 @@ html, body {
 /* styles components */
 /*********************/
 
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
 .full-width {
     width: 100%;
 }
 
-a.btn:hover, a.btn:focus {
+a.btn:hover, a.btn:focus, button.btn:hover, button.btn:focus  {
     color: var(--primaryWhite);
 }
 
-a.button-primary {
+a.button-primary,
+button.button-primary {
     color: var(--primaryWhite);
     background-color: var(--primaryGreen);
     border-radius: 10px;
 }
 
-a.button-secondary {
+a.button-secondary, button.button-secondary {
     color: var(--primaryGreen);
     background-color: var(--primaryWhite);
     border: 1px solid var(--primaryGreen);
     border-radius: 10px;
 }
 
-a.button-primary:hover, a.button-primary:focus {
+a.button-primary:hover, a.button-primary:focus,
+button.button-primary:hover, button.button-primary:focus {
     background-color: var(--darkenGreen);
 }
 
-a.button-secondary:hover, a.button-secondary:focus {
+a.button-secondary:hover, a.button-secondary:focus,
+button.button-secondary:hover, button.button-secondary:focus {
     background-color: var(--primaryGreen);
 }
 
@@ -164,6 +180,31 @@ a.profil {
 a.profil:hover {
     transform: translateY(-3px);
 }
+
+/*********/
+/* forms */
+/*********/
+
+div.warning-message {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+div.warning-message h3 {
+    text-align: center;
+    font-size: 24px;
+}
+
+div.delete-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 50px;
+}
+
 
 /**********/
 /* footer */
@@ -236,8 +277,22 @@ footer div.container-infos p.copyright {
 
 div.content {
     margin-inline: 3vw;
+    height: 100%;
 }
 
+/***********/
+/* profile */
+/***********/
+
+div.profile {
+    width: 100%;
+    background-color: red;
+    padding: 25px;
+}
+
+div.intro-profile {
+    text-align: center;
+}
 
 /*****************/
 /* media queries */
