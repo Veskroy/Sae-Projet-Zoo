@@ -7,6 +7,7 @@ use App\Repository\TicketRepository;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
+use function Symfony\Component\Clock\now;
 
 /**
  * @extends ModelFactory<Ticket>
@@ -46,8 +47,12 @@ final class TicketFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+
         return [
-            'user' => UserFactory::new(),
+            'user' => null, // Temporaire on initialise  A null
+            'date'=> self::faker()->date(),
+            'price'=> self::faker()->numberBetween(0,200),
+            'period'=>self::faker()->numberBetween(0,14),
         ];
     }
 

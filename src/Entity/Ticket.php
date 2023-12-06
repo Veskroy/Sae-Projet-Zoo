@@ -26,11 +26,11 @@ class Ticket
     private ?int $period = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
-    private Collection $events;
+    private Collection $events ;
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null; // true a modifier
 
     public function __construct()
     {
