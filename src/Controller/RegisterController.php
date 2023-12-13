@@ -27,14 +27,20 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $form->get('password')->getData();
-            $user->setPassword($userPasswordHasher->hashPassword($user, $password));
-            $entityManager->persist($user);
-            $entityManager->flush();
+            // vérification si un utilisateur a déjà l'email saisi
+            $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);
 
-            $this->addFlash('success', 'Votre compte a bien été créé!');
-            return $this->redirectToRoute('app_login');
-            
+            if ($existingUser) {
+                $this->addFlash('error', 'Cet email est déjà associé à un compte.');
+            } else {
+                $password = $form->get('password')->getData();
+                $user->setPassword($userPasswordHasher->hashPassword($user, $password));
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre compte a bien été créé!');
+                return $this->redirectToRoute('app_login');
+            }
         }
 
         return $this->render('register/index.html.twig', [
