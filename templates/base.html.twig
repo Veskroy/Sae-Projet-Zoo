@@ -21,7 +21,19 @@
         {{ include('navbar.html.twig') }}
 
         <div class="content">
-            {% block body %}{% endblock %}
+            <div class="container-body-infos">
+
+                <!-- message indiquant que le compte a été supprimé -->
+                {% for message in app.flashes('success') %}
+                    <p class="message message-success">{{ message }}</p>
+                {% endfor %}
+
+                {% for message in app.flashes('error') %}
+                    <p class="message message-error">{{ message }}</p>
+                {% endfor %}
+
+                {% block body %}{% endblock %}
+            </div>
         </div>
 
         {{ include('footer.html.twig') }}

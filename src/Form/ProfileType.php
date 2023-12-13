@@ -18,7 +18,9 @@ class ProfileType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('email', EmailType::class)
-            ->add('phone', TelType::class)
+            ->add('phone', TelType::class, [
+                'required' => false,
+            ])
             ->add('address')
             ->add('pc')
             ->add('city')
