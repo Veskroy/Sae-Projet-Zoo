@@ -23,13 +23,22 @@
         <div class="content">
             <div class="container-body-infos">
 
-                <!-- message indiquant que le compte a été supprimé -->
+                <!-- message affiché dans le cas d'un succès sur un formulaire -->
+
                 {% for message in app.flashes('success') %}
                     <p class="message message-success">{{ message }}</p>
                 {% endfor %}
 
+                <!-- message affiché dans le cas d'une erreur sur un formulaire -->
+
                 {% for message in app.flashes('error') %}
                     <p class="message message-error">{{ message }}</p>
+                {% endfor %}
+
+                <!-- message affiché dans le cas d'une information importante -->
+
+                {% for message in app.flashes('warning') %}
+                    <p class="message message-warning">{{ message }}</p>
                 {% endfor %}
 
                 {% block body %}{% endblock %}
