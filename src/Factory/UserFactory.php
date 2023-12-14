@@ -8,6 +8,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
+use Faker\Provider\Address;
 
 /**
  * @extends ModelFactory<User>
@@ -54,13 +55,14 @@ final class UserFactory extends ModelFactory
         $lastname = self::faker()->lastname();
 
         return [
-            'address' => self::faker()->address(),
+            'address' => self::faker()->streetAddress(),
             'city' => self::faker()->city(),
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $this->normalizeName($firstname).'.'.$this->normalizeName($lastname).'@'.self::faker()->domainName(),
             'password' => self::faker()->text(),
-            'pc' => self::faker()->text(5),
+            //'pc' => self::faker()->text(5),
+            'pc' => Address::postcode(),
             'roles' => [],
         ];
     }
