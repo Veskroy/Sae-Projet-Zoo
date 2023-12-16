@@ -13,6 +13,11 @@
             {% if app.user %}
                 <a href={{path('app_home')}} class="menu-link">Consulter les réservations</a>
                 <a href={{path('app_home')}} class="btn button-secondary">Réserver</a>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href={{path('admin')}} class="btn button-admin">Admin</a>
+                {% endif %}
+
                 <a href={{path('app_profile')}} class="menu-link profil">
                     <img src={{asset('images/icons/profil_icon.svg')}} alt="icone de profil" />
                 </a>
