@@ -72,7 +72,28 @@ class UserCrudController extends AbstractCrudController
             yield TextField::new('pc', 'Postal Code'),
             yield TextField::new('city', 'City'),
             yield TextField::new('address', 'Address'),
-            yield ArrayField::new('roles', 'Role(s)')
+            yield ArrayField::new('roles', 'Rôle')
+                ->formatValue(function (array $roles) {
+                    if (in_array('ROLE_ADMIN', $roles)) {
+                        return <<<HTML
+                            <span class="material-symbols-outlined">
+                                admin_panel_settings
+                            </span>
+                            HTML;
+                    } elseif (in_array('ROLE_USER', $roles)) {
+                        return <<<HTML
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                            HTML;
+                    } else {
+                        return <<<HTML
+                            <span class="material-symbols-outlined">
+                                error
+                            </span>
+                            HTML;
+                    }
+                }),
         ];
     }
 
