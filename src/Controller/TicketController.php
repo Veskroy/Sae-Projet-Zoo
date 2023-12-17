@@ -13,10 +13,11 @@ class TicketController extends AbstractController
     #[Route('/ticket', name: 'app_ticket')]
     public function index(TicketRepository $ticket): Response
     {
-        $ticketbuy= $ticket->findBy([], ['id' => 'ASC']);
+        $tickets= $ticket->findBy([], ['id' => 'ASC']);
+
         return $this->render('ticket/index.html.twig', [
             'controller_name' => 'TicketController',
-            'ticket' => $ticketbuy
+            'tickets' => $tickets
         ]);
     }
 
@@ -24,6 +25,6 @@ class TicketController extends AbstractController
     public function show(Ticket $ticket): Response
     {
         return $this->render('ticket/show.html.twig', [
-            '' => $]);
+            'Ticket' => $ticket]);
     }
 }
