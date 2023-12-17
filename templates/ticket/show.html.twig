@@ -1,10 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ticket{% endblock %}
+{% block title %} Recapitulatif du Ticket N°{{ ticket. id }}{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/base.css')}}" type="text/css">
 {% endblock %}
- <h1> {{ ticket.id }}</h1>
-{% block body %}
 
+{% block body %}
+    <h1>Recapitulatiof de votre ticket </h1>
+
+    <table>
+        <tr>
+            <td> Numero de ticket </td>
+            <td> Prix de ticket</td>
+            <td> Date d'application Ticket </td>
+            <td> Type de ticket  </td>
+            <td> Proprietaire ticket  </td>
+            <td> Activité Ticket  </td>
+
+        </tr>
+        <tr>
+            <td> N° {{ ticket.id}} </td>
+            <td> {{ ticket.price}} € </td>
+            <td> {{ ticket.period}} </td>
+            <td> {{ ticket.type}} </td>
+
+        </tr>
+    </table>
 {% endblock %}
