@@ -30,7 +30,10 @@ class Ticket
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     #[ORM\JoinColumn(nullable: true)]
-    private ?User $user = null; // true a modifier
+    private ?User $user = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $type = null; // true a modifier
 
     public function __construct()
     {
@@ -110,6 +113,18 @@ class Ticket
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $Type): static
+    {
+        $this->type = $Type;
 
         return $this;
     }

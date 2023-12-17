@@ -50,9 +50,10 @@ final class TicketFactory extends ModelFactory
 
         return [
             'user' => null, // Temporaire on initialise  A null
-            'date'=> self::faker()->date(),
+            'date'=> null,
             'price'=> self::faker()->numberBetween(0,200),
             'period'=>self::faker()->numberBetween(0,14),
+            'type' => null,
         ];
     }
 
