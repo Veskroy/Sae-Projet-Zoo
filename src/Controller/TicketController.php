@@ -27,4 +27,17 @@ class TicketController extends AbstractController
         return $this->render('ticket/show.html.twig', [
             'ticket' => $ticket]);
     }
+
+    #[Route ('/ticket/Create', name: 'app_ticket_create')]
+    public function create() :Response
+    {return $this->render('ticket/', [
+       ]); }
+    #[Route ('/ticket/{id}/delete', name: 'app_ticket_delete')]
+    public function delete(Ticket $ticket) :Response
+    {return $this->render('ticket/', [
+    ]); }
+    #[Route ('/ticket/{id}/Update', name: 'app_ticket_update')]
+    public function update() :Response
+    {return $this->render('ticket/', [
+    ]); }
 }
