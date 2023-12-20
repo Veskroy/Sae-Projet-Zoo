@@ -15,7 +15,7 @@ class PresentationController extends AbstractController
         $user = $this->getUser();
 
         if ($user instanceof User) {
-            $areInformationsFilled = $user->getPc() || $user->getAddress() || $user->getCity() || $user->getPhone();
+            $areInformationsFilled = !in_array(null, [$user->getPc(), $user->getAddress(), $user->getCity(), $user->getPhone()]);
             if (!$areInformationsFilled) {
                 $this->addFlash('warning', 'Vos informations semblent incomplètes, complétez les en accédant à votre profil.');
             }

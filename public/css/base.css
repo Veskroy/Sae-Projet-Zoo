@@ -114,7 +114,7 @@ body {
 }
 
 h1.main-title {
-    margin-block: 20px;
+    /*margin-block: 20px;*/
     position: relative;
     width: max-content;
     margin-inline: auto;
@@ -275,6 +275,10 @@ a.profil {
     transition: .2s;
 }
 
+a.profil img {
+    object-fit: cover;
+}
+
 a.profil:hover {
     transform: translateY(-3px);
 }
@@ -304,16 +308,16 @@ div.delete-form {
 }
 
 div.intro-profile {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 20px auto 0;
+    gap: 20px;
 }
 
-div.intro-profile::after {
-    content: '';
-    display: block;
-    margin: 30px auto;
-    width: 70%;
-    height: 1px;
-    background-color: var(--primaryGray);
+div.intro-profile {
+    text-align: center;
 }
 
 div.edit-profile {
@@ -385,7 +389,8 @@ form.register-form div.check-terms div label {
 
 form.change-form div,
 form.password-form div,
-form.register-form div {
+form.register-form div,
+form.avatar-form div {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -404,6 +409,11 @@ div.edit-profile div.btn-actions {
     display: flex;
     justify-content: center;
     gap: 20px;
+}
+
+div.intro-profile img.avatar {
+    max-width: 100px;
+    object-fit: cover;
 }
 
 
@@ -495,7 +505,7 @@ div.container-body-infos {
 /* media queries */
 /*****************/
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
     header.header nav {
         display: none;
     }
@@ -599,5 +609,9 @@ div.container-body-infos {
         width: 70%;
         margin: 0 auto 50px;
         border-radius: 10px;
+    }
+    div.intro-profile {
+        justify-content: center;
+        flex-direction: row;
     }
 }
