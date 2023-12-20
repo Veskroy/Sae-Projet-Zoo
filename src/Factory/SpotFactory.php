@@ -47,7 +47,7 @@ final class SpotFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'TypeSpot' => self::faker()->text(10),
+            'name' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
         ];
     }
 
