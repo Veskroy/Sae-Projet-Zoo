@@ -35,6 +35,9 @@ class Animal
     #[ORM\ManyToOne(inversedBy: 'animal')]
     private ?Species $species = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animal')]
+    private ?Pen $pen = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Animal
     public function setSpecies(?Species $species): static
     {
         $this->species = $species;
+
+        return $this;
+    }
+
+    public function getPen(): ?Pen
+    {
+        return $this->pen;
+    }
+
+    public function setPen(?Pen $pen): static
+    {
+        $this->pen = $pen;
 
         return $this;
     }

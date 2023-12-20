@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PenRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PenRepository::class)]
@@ -24,6 +26,14 @@ class Pen
 
     #[ORM\Column(nullable: true)]
     private ?int $Numplace = null;
+
+    #[ORM\OneToMany(mappedBy: 'pen', targetEntity: Animal::class)]
+    private Collection $animal;
+
+    public function __construct()
+    {
+        $this->animal = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,36 @@ class Pen
     public function setNumplace(?int $Numplace): static
     {
         $this->Numplace = $Numplace;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Animal>
+     */
+    public function getAnimal(): Collection
+    {
+        return $this->animal;
+    }
+
+    public function addAnimal(Animal $animal): static
+    {
+        if (!$this->animal->contains($animal)) {
+            $this->animal->add($animal);
+            $animal->setPen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimal(Animal $animal): static
+    {
+        if ($this->animal->removeElement($animal)) {
+            // set the owning side to null (unless already changed)
+            if ($animal->getPen() === $this) {
+                $animal->setPen(null);
+            }
+        }
 
         return $this;
     }
