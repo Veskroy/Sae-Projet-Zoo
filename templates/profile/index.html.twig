@@ -7,38 +7,49 @@
     <div class="profile">
 
         <div class="intro-profile">
-            <h1>Votre profil</h1>
-            <p>Bonjour, {{ user.firstname }} {{ user.lastname }}</p>
+            <div class="title">
+                <h1 class="main-title">Votre profil</h1>
+                <p>Bonjour, {{ user.firstname }} {{ user.lastname }}</p>
+            </div>
+            {% if app.user.avatarPathname is not null %}
+                <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+            {% endif  %}
         </div>
 
         <div class="edit-profile">
 
-                <!-- form à ajouter -->
+            <!-- form à ajouter -->
 
-                {{ form_start(formChangeInformations) }}
+            {{ form_start(formChangeAvatar) }}
 
-                    {{ form_row(formChangeInformations.firstName, {'label': 'Mon prénom'}) }}
-                    {{ form_row(formChangeInformations.lastName, {'label': 'Mon nom de famille'}) }}
-                    {{ form_row(formChangeInformations.email, {'label': 'Mon email'}) }}
-                    {{ form_row(formChangeInformations.phone, {'label': 'Mon numéro de téléphone'}) }}
-                    {{ form_row(formChangeInformations.address, {'label': 'Mon adresse'}) }}
-                    {{ form_row(formChangeInformations.pc, {'label': 'Mon code postal'}) }}
-                    {{ form_row(formChangeInformations.city, {'label': 'Ma ville'}) }}
+            {{ form_row(formChangeAvatar.avatar, {'label': 'Ma photo de profil'}) }}
 
-                {{ form_end(formChangeInformations) }}
+            {{ form_end(formChangeAvatar) }}
 
-                {{ form_start(formChangePassword) }}
+            {{ form_start(formChangeInformations) }}
 
-                    {{ form_row(formChangePassword.currentPassword, {'label': 'Mot de passe actuel'}) }}
-                    {{ form_row(formChangePassword.newPassword.first, {'label': 'Nouveau mot de passe'}) }}
-                    {{ form_row(formChangePassword.newPassword.second, {'label': 'Nouveau mot de passe'}) }}
+            {{ form_row(formChangeInformations.firstName, {'label': 'Mon prénom'}) }}
+            {{ form_row(formChangeInformations.lastName, {'label': 'Mon nom de famille'}) }}
+            {{ form_row(formChangeInformations.email, {'label': 'Mon email'}) }}
+            {{ form_row(formChangeInformations.phone, {'label': 'Mon numéro de téléphone'}) }}
+            {{ form_row(formChangeInformations.address, {'label': 'Mon adresse'}) }}
+            {{ form_row(formChangeInformations.pc, {'label': 'Mon code postal'}) }}
+            {{ form_row(formChangeInformations.city, {'label': 'Ma ville'}) }}
 
-                {{ form_end(formChangePassword) }}
+            {{ form_end(formChangeInformations) }}
 
-                <div class="btn-actions">
-                    <a class="btn button-primary" href="{{ path('app_profile_delete') }}">Supprimer mon compte</a>
-                    <a class="btn button-secondary" href="{{ path('app_logout') }}">Me déconnecter</a>
-                </div>
+            {{ form_start(formChangePassword) }}
+
+            {{ form_row(formChangePassword.currentPassword, {'label': 'Mot de passe actuel'}) }}
+            {{ form_row(formChangePassword.newPassword.first, {'label': 'Nouveau mot de passe'}) }}
+            {{ form_row(formChangePassword.newPassword.second, {'label': 'Nouveau mot de passe'}) }}
+
+            {{ form_end(formChangePassword) }}
+
+            <div class="btn-actions">
+                <a class="btn button-primary" href="{{ path('app_profile_delete') }}">Supprimer mon compte</a>
+                <a class="btn button-secondary" href="{{ path('app_logout') }}">Me déconnecter</a>
+            </div>
 
         </div>
 
@@ -47,7 +58,7 @@
                 <!-- form à ajouter -->
             </div>
         </div>
-        
+
     </div>
 
 
