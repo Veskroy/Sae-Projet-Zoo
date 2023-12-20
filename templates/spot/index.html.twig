@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Zones du Zoo{% endblock %}
 
 {% block body %}
+    <h1>Les Zones du Zoo</h1>
+    {% for spot in spots %}
+            <li>{{ spot.name }}</li>
+    {% endfor %}
 
 {% endblock %}
+
