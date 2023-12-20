@@ -14,51 +14,51 @@ class Spot
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $CodeSpot = null;
+    private ?int $code = null;
 
     #[ORM\Column(length: 10)]
-    private ?string $TypeSpot = null;
+    private ?string $type = null;
 
     #[ORM\Column(length: 30, nullable: true)]
-    private ?string $NameSpot = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCodeSpot(): ?int
+    public function getCode(): ?int
     {
-        return $this->CodeSpot;
+        return $this->code;
     }
 
-    public function setCodeSpot(?int $CodeSpot): static
+    public function setCode(?int $code): static
     {
-        $this->CodeSpot = $CodeSpot;
+        $this->code = $code;
 
         return $this;
     }
 
-    public function getTypeSpot(): ?string
+    public function getType(): ?string
     {
-        return $this->TypeSpot;
+        return $this->type;
     }
 
-    public function setTypeSpot(string $TypeSpot): static
+    public function setType(string $type): static
     {
-        $this->TypeSpot = $TypeSpot;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getNameSpot(): ?string
+    public function getName(): ?string
     {
-        return $this->NameSpot;
+        return $this->name;
     }
 
-    public function setNameSpot(?string $NameSpot): static
+    public function setName(?string $name): static
     {
-        $this->NameSpot = $NameSpot;
+        $this->name = $name;
 
         return $this;
     }

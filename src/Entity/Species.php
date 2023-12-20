@@ -16,16 +16,16 @@ class Species
     private ?int $id = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $NameSpe = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Diet = null;
+    private ?string $diet = null;
 
     #[ORM\Column(length: 60, nullable: true)]
-    private ?string $Origin = null;
+    private ?string $origin = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Descspe = null;
+    private ?string $desc = null;
 
     #[ORM\ManyToOne(inversedBy: 'species')]
     private ?Family $family = null;
@@ -43,50 +43,50 @@ class Species
         return $this->id;
     }
 
-    public function getNameSpe(): ?string
+    public function getName(): ?string
     {
-        return $this->NameSpe;
+        return $this->name;
     }
 
-    public function setNameSpe(?string $NameSpe): static
+    public function setName(?string $name): static
     {
-        $this->NameSpe = $NameSpe;
+        $this->name = $name;
 
         return $this;
     }
 
     public function getDiet(): ?string
     {
-        return $this->Diet;
+        return $this->diet;
     }
 
-    public function setDiet(?string $Diet): static
+    public function setDiet(?string $diet): static
     {
-        $this->Diet = $Diet;
+        $this->diet = $diet;
 
         return $this;
     }
 
     public function getOrigin(): ?string
     {
-        return $this->Origin;
+        return $this->origin;
     }
 
-    public function setOrigin(?string $Origin): static
+    public function setOrigin(?string $origin): static
     {
-        $this->Origin = $Origin;
+        $this->origin = $origin;
 
         return $this;
     }
 
-    public function getDescspe(): ?string
+    public function getDesc(): ?string
     {
-        return $this->Descspe;
+        return $this->desc;
     }
 
-    public function setDescspe(?string $Descspe): static
+    public function setDesc(?string $desc): static
     {
-        $this->Descspe = $Descspe;
+        $this->desc = $desc;
 
         return $this;
     }

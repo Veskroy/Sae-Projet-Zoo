@@ -16,10 +16,10 @@ class Family
     private ?int $id = null;
 
     #[ORM\Column(length: 60, nullable: true)]
-    private ?string $NameFam = null;
+    private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $DescFam = null;
+    private ?string $desc = null;
 
     #[ORM\OneToMany(mappedBy: 'family', targetEntity: Species::class)]
     private Collection $species;
@@ -34,26 +34,26 @@ class Family
         return $this->id;
     }
 
-    public function getNameFam(): ?string
+    public function getName(): ?string
     {
-        return $this->NameFam;
+        return $this->name;
     }
 
-    public function setNameFam(?string $NameFam): static
+    public function setName(?string $name): static
     {
-        $this->NameFam = $NameFam;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getDescFam(): ?string
+    public function getDesc(): ?string
     {
-        return $this->DescFam;
+        return $this->desc;
     }
 
-    public function setDescFam(?string $DescFam): static
+    public function setDesc(?string $desc): static
     {
-        $this->DescFam = $DescFam;
+        $this->desc = $desc;
 
         return $this;
     }
