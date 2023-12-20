@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FamilyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FamilyRepository::class)]
@@ -18,6 +20,14 @@ class Family
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $DescFam = null;
+
+    #[ORM\OneToMany(mappedBy: 'family', targetEntity: Species::class)]
+    private Collection $species;
+
+    public function __construct()
+    {
+        $this->species = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +54,36 @@ class Family
     public function setDescFam(?string $DescFam): static
     {
         $this->DescFam = $DescFam;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Species>
+     */
+    public function getSpecies(): Collection
+    {
+        return $this->species;
+    }
+
+    public function addSpecies(Species $species): static
+    {
+        if (!$this->species->contains($species)) {
+            $this->species->add($species);
+            $species->setFamily($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecies(Species $species): static
+    {
+        if ($this->species->removeElement($species)) {
+            // set the owning side to null (unless already changed)
+            if ($species->getFamily() === $this) {
+                $species->setFamily(null);
+            }
+        }
 
         return $this;
     }

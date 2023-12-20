@@ -25,6 +25,9 @@ class Species
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Descspe = null;
 
+    #[ORM\ManyToOne(inversedBy: 'species')]
+    private ?Family $family = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Species
     public function setDescspe(?string $Descspe): static
     {
         $this->Descspe = $Descspe;
+
+        return $this;
+    }
+
+    public function getFamily(): ?Family
+    {
+        return $this->family;
+    }
+
+    public function setFamily(?Family $family): static
+    {
+        $this->family = $family;
 
         return $this;
     }
