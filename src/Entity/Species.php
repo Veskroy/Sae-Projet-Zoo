@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SpeciesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpeciesRepository::class)]
@@ -27,6 +29,14 @@ class Species
 
     #[ORM\ManyToOne(inversedBy: 'species')]
     private ?Family $family = null;
+
+    #[ORM\OneToMany(mappedBy: 'species', targetEntity: Animal::class)]
+    private Collection $animal;
+
+    public function __construct()
+    {
+        $this->animal = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Species
     public function setFamily(?Family $family): static
     {
         $this->family = $family;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Animal>
+     */
+    public function getAnimal(): Collection
+    {
+        return $this->animal;
+    }
+
+    public function addAnimal(Animal $animal): static
+    {
+        if (!$this->animal->contains($animal)) {
+            $this->animal->add($animal);
+            $animal->setSpecies($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimal(Animal $animal): static
+    {
+        if ($this->animal->removeElement($animal)) {
+            // set the owning side to null (unless already changed)
+            if ($animal->getSpecies() === $this) {
+                $animal->setSpecies(null);
+            }
+        }
 
         return $this;
     }

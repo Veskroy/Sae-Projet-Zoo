@@ -32,6 +32,9 @@ class Animal
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $BirthDate = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animal')]
+    private ?Species $species = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Animal
     public function setBirthDate(?\DateTimeInterface $BirthDate): static
     {
         $this->BirthDate = $BirthDate;
+
+        return $this;
+    }
+
+    public function getSpecies(): ?Species
+    {
+        return $this->species;
+    }
+
+    public function setSpecies(?Species $species): static
+    {
+        $this->species = $species;
 
         return $this;
     }
