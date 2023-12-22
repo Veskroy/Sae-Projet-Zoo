@@ -21,6 +21,18 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
+    public function countAnswersForAllQuestionsAndOrderByDateDesc(): array
+    {
+        return $this->createQueryBuilder('q')
+            ->select('q as question')
+            ->addSelect('COUNT(answers) as count')
+            ->leftJoin('q.answers', 'answers')
+            ->groupBy('question')
+            ->orderBy('q.createdAt', 'DESC')
+            ->getQuery()
+            ->execute();
+    }
+
 //    /**
 //     * @return Question[] Returns an array of Question objects
 //     */
