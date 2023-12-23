@@ -8,7 +8,9 @@
     /* colors */
     --primaryGreen: #4F614B;
     --darkenGreen: #364434;
-    --primaryMarron: #8D6536;
+    --primaryBrown: #8D6536;
+    --secondaryBrown: #4F3C26;
+    --secondaryBrown-hover: #36291b;
     --primaryGray: #544C41;
     --primaryWhite: #FFFFFF;
     --primaryBlack: #000000;
@@ -35,6 +37,11 @@
     /* fonts */
     --main-font-family-text: 'Didact Gothic', 'Inter', sans-serif;
     --titles-font-family: 'Dangrek', 'Inter', sans-serif;
+
+    /* font-sizes */
+    --font-size-l: clamp(20px, 4vw, 32px);
+    --font-size-m: clamp(16px, 2vw, 24px);
+    --font-size-s: clamp(14px, 1.8vw, 18px);
 }
 
 /*********/
@@ -56,6 +63,7 @@ a {
 
 h1, h2, h3 {
     font-family: var(--titles-font-family);
+    font-size: var(--font-size-l);
 }
 
 a.menu-link {
@@ -120,20 +128,7 @@ h1.main-title {
     margin-inline: auto;
 }
 
-h1.main-title::after {
-    content: '';
-    background-image: url("/images/Sae_Zoo_Image/LogoSAE_Zoo.png");
-    display: block;
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -60px;
-}
-
-a.btn:hover, a.btn:focus, button.btn:hover, button.btn:focus  {
+a.btn:hover, a.btn:focus, button.btn:hover, button.btn:focus {
     color: var(--primaryWhite);
 }
 
@@ -157,6 +152,19 @@ button.button-primary:hover, button.button-primary:focus {
 a.button-secondary:hover, a.button-secondary:focus,
 button.button-secondary:hover, button.button-secondary:focus {
     background-color: var(--primaryGreen);
+}
+
+a.button-tertiary {
+    background-color: var(--secondaryBrown);
+    color: white;
+}
+
+a.button-tertiary:hover {
+    background-color: var(--secondaryBrown-hover);
+}
+
+a.cursor-not-allowed {
+    cursor: not-allowed !important;
 }
 
 a.button-admin {
@@ -416,7 +424,92 @@ div.intro-profile img.avatar {
     object-fit: cover;
 }
 
+/*******/
+/* faq */
+/*******/
 
+/* card */
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    /* background: red; */
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.faq-container h5.question__title {
+    font-size: var(--font-size-m);
+    color: var(--primaryGreen);
+}
+
+.faq-container p.question__answers-total {
+    color: var(--primaryGray);
+    font-size: var(--font-size-s);
+}
+
+.faq-container .card-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    border: 1px solid var(--primaryBlack);
+    border-radius: 15px;
+    padding: 15px;
+    gap: 60px;
+}
+
+.faq-container .question-title {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.faq-container .card-question .card-question__mains-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.faq-container .card-question .card-question__mains-infos .question__author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-question__mains-infos .question__author img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.card-question__mains-infos .question__author p {
+    font-size: 14px;
+}
+
+.card-question .card-question__bottom-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-question .card-question__bottom-infos .question-state a.button-secondary {
+    margin-left: 10px;
+}
+
+.card-question .card-question__bottom-infos .question-dates {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-question .card-question__bottom-infos .question-dates p {
+    font-size: 14px;
+}
+
+.card-question .card-question__bottom-infos .question-dates p.date-creation {
+    color: var(--primaryGray);
+}
 
 /**********/
 /* footer */
@@ -489,7 +582,8 @@ footer div.container-infos p.copyright {
 
 div.content {
     height: 100%;
-    width: 100%;
+    /* width: 100%; */
+    width: 100vw;
     margin: 0;
     padding: 30px;
     background-color: var(--primaryWhite);
@@ -614,4 +708,29 @@ div.container-body-infos {
         justify-content: center;
         flex-direction: row;
     }
+    .card-question {
+        padding: 2vw !important;
+    }
+    .card-question .card-question__bottom-infos {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card-question .card-question__bottom-infos .question-dates {
+        text-align: right;
+    }
+
+    h1.main-title::after {
+        content: '';
+        background-image: url("/images/Sae_Zoo_Image/LogoSAE_Zoo.png");
+        display: block;
+        width: 40px;
+        height: 40px;
+        background-size: cover;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: -60px;
+    }
+
 }

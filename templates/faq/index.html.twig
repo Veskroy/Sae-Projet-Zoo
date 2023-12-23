@@ -3,4 +3,51 @@
 {% block title %}FAQ{% endblock %}
 
 {% block body %}
+    <h1 class="main-title">Foire aux questions du Zoo de la Palmyre</h1>
+
+    <div class="faq-container">
+        {% for data in questions %}
+            <div class="card-question">
+                <div class="card-question__mains-infos">
+                    <div class="question-title">
+                        <h5 class="question__title">{{ data.question.title }}</h5>
+                        <p class="question__answers-total">{{ data.count }} {{ data.count == 0 ? 'réponse' : 'réponses' }}</p>
+                    </div>
+                    <div class="question__author">
+                        {% if data.question.author.avatarPathname is not null %}
+                            <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+                        {% else %}
+                            <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
+                        {% endif %}
+                        <p class="author">{{ data.question.author.firstname }} {{ data.question.author.lastname }}</p>
+                    </div>
+                </div>
+                <div class="card-question__bottom-infos">
+                    <div class="question-state">
+                        {% if data.question.isResolved %}
+                            <a href="#" class="btn button-primary">
+                                Résolue
+                            </a>
+                        {% else %}
+                            <a href="#" class="btn button-tertiary cursor-not-allowed">
+                                Non-résolue
+                            </a>
+                        {% endif %}
+                        <a href="#" class="btn button-secondary">
+                            Voir la question
+                        </a>
+                    </div>
+                    <div class="question-dates">
+                        {% if data.question.updatedAt is null %}
+                            <p>Dernière activité le {{ data.question.updatedAt|date('d/m/Y/h.m:s') }}</p>
+                        {% else %}
+                            <p>Cette question n'a pas été modifiée.</p>
+                        {% endif %}
+                        <p class="date-creation">Question créée le {{ data.question.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}
