@@ -13,19 +13,25 @@ class QuestionsFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        QuestionFactory::createMany(10, function () {
-            $faker = Factory::create();
-            $updatedAt = $faker->dateTimeBetween('-2 years');
-            return [
-                'author' => UserFactory::random(),
-                'updatedAt' =>
-                    $faker->boolean(80) ?
-                        \DateTimeImmutable::createFromMutable($updatedAt)
-                        : null
-            ];
-        });
-
-        $manager->flush();
+        $allUsers = UserFactory::all();
+        if (!empty($allUsers)) {
+            foreach ($allUsers as $user) {
+                QuestionFactory::createMany(3, function () use ($user) {
+                    $faker = Factory::create();
+                    $updatedAt = $faker->dateTimeBetween('-2 years');
+                    return [
+                        'author' => $user,
+                        'updatedAt' =>
+                            $faker->boolean(80) ?
+                                \DateTimeImmutable::createFromMutable($updatedAt)
+                                : null
+                    ];
+                });
+            }
+            $manager->flush();
+        } else {
+            throw new \Exception('No users found');
+        }
     }
 
     public function getDependencies(): array {
