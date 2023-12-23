@@ -20,9 +20,27 @@ class FAQController extends AbstractController
         // récupération de toutes les questions avec le nombre de réponses pour chacune d'entre elles
         $questions = $questionRepository->countAnswersForAllQuestionsAndOrderByDateDesc();
 
+        // récupération de toutes les questions posées par l'utilisateur courant
+        $questionsByUser = $questionRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
+
         return $this->render('faq/index.html.twig', [
             'user' => $user,
             'questions' => $questions,
+            'ownQuestions' => $questionsByUser,
         ]);
     }
+
+    #[Route('/faq/{id}', name: 'app_faq_show')]
+    public function show(QuestionRepository $questionRepository): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        return $this->render('faq/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
 }
