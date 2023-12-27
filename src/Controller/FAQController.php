@@ -7,6 +7,7 @@ use App\Entity\Question;
 use App\Form\AnswerType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,9 @@ class FAQController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/faq/{id}', name: 'app_faq_show')]
     public function show(QuestionRepository $questionRepository, Question $questionId, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -69,7 +73,7 @@ class FAQController extends AbstractController
             //$answer->setAuthor($user);
             $answer->setAuthor($this->getUser());
             $answer->setQuestion($question);
-            $answer->setCreatedAt(new \DateTimeImmutable('now'));
+            $answer->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
 
             $entityManager->persist($answer);
             $entityManager->flush();
