@@ -140,6 +140,14 @@ body {
     margin-block: 50px;
 }
 
+.mt-50 {
+    margin-top: 50px;
+}
+
+.mt-100 {
+    margin-top: 100px;
+}
+
 h1.main-title {
     /*margin-block: 20px;*/
     position: relative;
@@ -214,6 +222,12 @@ label {
     font-size: 14px;
 }
 
+textarea {
+    resize: vertical;
+    min-height: 50px;
+    padding: 10px;
+}
+
 a.login-btn {
     display: block;
     margin: 25px auto 30px;
@@ -239,6 +253,7 @@ a.login-btn {
 /* message lors d'envoi de formulaire */
 
 p.message {
+    width: 100%;
     padding: 15px;
     border-radius: 10px;
 }
@@ -405,7 +420,7 @@ div.edit-profile form::after {
     margin-top: 30px;
 }
 
-form.register-form {
+form.register-form, form.reply-form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -432,7 +447,8 @@ form.register-form div.check-terms div label {
 form.change-form div,
 form.password-form div,
 form.register-form div,
-form.avatar-form div {
+form.avatar-form div,
+form.reply-form div {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -625,7 +641,6 @@ p.date-creation {
 .question-answers-container .count-answers {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
 }
 
 /**********/
@@ -710,6 +725,7 @@ div.container-body-infos {
     background-color: rgba(255, 255, 255, 0.92);
     border-radius: 10px;
     max-width: 1100px;
+    padding: 0 0 100px;
 }
 
 /*****************/
@@ -805,9 +821,9 @@ div.container-body-infos {
         justify-content: flex-end !important;
     }
     div.container-body-infos {
-        padding: 40px;
         width: 95%;
         margin: 0 auto;
+        padding: 40px 40px 100px;
     }
     body {
         height: 100%;
@@ -817,7 +833,6 @@ div.container-body-infos {
 @media screen and (min-width: 1000px) {
     p.message {
         padding: 15px;
-        width: 70%;
         margin: 0 auto 50px;
         border-radius: 10px;
     }
