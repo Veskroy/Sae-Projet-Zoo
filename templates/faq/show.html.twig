@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="show-question">
+        <div class="data-question">
+            <h2>{{ question.title }}</h2>
+            <div class="question__author">
+                {% if question.author.avatarPathname is not null %}
+                    <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+                {% else %}
+                    <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
+                {% endif %}
+                <p class="author">{{ question.author.firstname }} {{ question.author.lastname }}</p>
+            </div>
+            <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y h:m') }}</p>
+        </div>
+        <p class="question__description">{{ question.description }}</p>
+    </div>
+
+    <div class="question-answers-container">
+        <div class="count-answers">
+            <h3>{{ answersLength }} réponses</h3>
+            <div class="line"></div>
+        </div>
+    {% for answer in answers %}
+        <div class="answer">
+            <div class="answer__author">
+                {% if answer.author.avatarPathname is not null %}
+                    <img src="{{ asset('uploads/avatars/' ~ answer.author.avatarPathname) }}" alt="avatar" class="avatar">
+                {% else %}
+                    <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
+                {% endif %}
+                <p class="author">{{ answer.author.firstname }} {{ answer.author.lastname }} - {{ answer.createdAt|date('d/m/Y h:m') }}</p>
+                {% if answer.author == question.author %}
+                    <span class="badge badge-author">
+                        Auteur
+                    </span>
+                {% endif %}
+            </div>
+            <div class="answer-description">
+                <p>{{ answer.description }}</p>
+                {% if answer.updatedAt is not null %}
+                    <p class="update">Updated</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
