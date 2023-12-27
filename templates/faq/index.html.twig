@@ -5,7 +5,37 @@
 {% block body %}
     <h1 class="main-title">Foire aux questions du Zoo de la Palmyre</h1>
 
+    <div class="questions-user">
+        <h2 class="second-title">Vos derniers posts</h2>
+        {% if ownQuestions is null %}
+            <p>Vous n'avez pas encore créé de questions.</p>
+        {% else %}
+            <div class="own-question-container">
+            {% for ownQuestion in ownQuestions %}
+                <div class="own-question">
+                    {% if ownQuestion.isResolved %}
+                        <p class="question-state">Question résolue</p>
+                    {% else %}
+                        <p class="question-state">Question non résolue</p>
+                    {% endif %}
+                    <div class="own-question__main-infos">
+                        <h5 class="question__title">{{ ownQuestion.title }}</h5>
+                        <p class="date-creation">Question créée le {{ ownQuestion.createdAt|date('d/m/Y') }}</p>
+                    </div>
+                    <a href="{{ path('app_faq_show', {'id': ownQuestion.id }) }}" class="btn button-primary">
+                        Accéder au post
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="line line-mbc"></div>
+
     <div class="faq-container">
+        <h2 class="second-title">Les posts les plus récents</h2>
+        <div class="questions-container">
         {% for data in questions %}
             <div class="card-question">
                 <div class="card-question__mains-infos">
@@ -25,29 +55,30 @@
                 <div class="card-question__bottom-infos">
                     <div class="question-state">
                         {% if data.question.isResolved %}
-                            <a href="#" class="btn button-primary">
+                            <a class="btn button-primary cursor-not-allowed">
                                 Résolue
                             </a>
                         {% else %}
-                            <a href="#" class="btn button-tertiary cursor-not-allowed">
+                            <a class="btn button-tertiary cursor-not-allowed">
                                 Non-résolue
                             </a>
                         {% endif %}
-                        <a href="#" class="btn button-secondary">
+                        <a href="{{ path('app_faq_show', {'id': data.question.id }) }}" class="btn button-secondary">
                             Voir la question
                         </a>
                     </div>
                     <div class="question-dates">
                         {% if data.question.updatedAt is null %}
-                            <p>Dernière activité le {{ data.question.updatedAt|date('d/m/Y/h.m:s') }}</p>
+                            <p>Pas d'activité récente.</p>
                         {% else %}
-                            <p>Cette question n'a pas été modifiée.</p>
+                            <p>Dernière activité le {{ data.question.updatedAt|date('d/m/Y h.m:s') }}</p>
                         {% endif %}
                         <p class="date-creation">Question créée le {{ data.question.createdAt|date('d/m/Y') }}</p>
                     </div>
                 </div>
             </div>
         {% endfor %}
+        </div>
     </div>
 
 {% endblock %}
