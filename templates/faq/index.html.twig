@@ -71,7 +71,7 @@
                         {% if data.question.updatedAt is null %}
                             <p>Pas d'activité récente.</p>
                         {% else %}
-                            <p>Dernière activité le {{ data.question.updatedAt|date('d/m/Y h.m:s') }}</p>
+                            <p>Dernière activité le {{ data.question.updatedAt|date('d/m/y H:i') }}</p>
                         {% endif %}
                         <p class="date-creation">Question créée le {{ data.question.createdAt|date('d/m/Y') }}</p>
                     </div>
