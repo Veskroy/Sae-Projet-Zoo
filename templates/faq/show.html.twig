@@ -12,6 +12,11 @@
                     <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
                 {% endif %}
                 <p class="author">{{ question.author.firstname }} {{ question.author.lastname }}</p>
+                {% if question.author.isAdmin() %}
+                    <span class="badge badge-admin">
+                        Admin
+                    </span>
+                {% endif %}
             </div>
             <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y h:m') }}</p>
         </div>
@@ -35,6 +40,11 @@
                 {% if answer.author == question.author %}
                     <span class="badge badge-author">
                         Auteur
+                    </span>
+                {% endif %}
+                {% if answer.author.isAdmin() %}
+                    <span class="badge badge-admin">
+                        Admin
                     </span>
                 {% endif %}
             </div>
