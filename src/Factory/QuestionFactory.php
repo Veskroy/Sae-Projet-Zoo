@@ -47,11 +47,11 @@ final class QuestionFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'author' => UserFactory::new(),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(),
             'isResolved' => self::faker()->boolean(),
             'title' => self::faker()->text(50),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-2 years')),
+            'updatedAt' => self::faker()->boolean(80) ? \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-1 year')) : null,
         ];
     }
 

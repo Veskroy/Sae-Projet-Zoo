@@ -47,10 +47,8 @@ final class AnswerFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'author' => UserFactory::new(),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(),
-            'question' => QuestionFactory::new(),
+            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-2 years')),
         ];
     }
 
