@@ -1,17 +1,44 @@
 {% extends 'base.html.twig' %}
 
+
+{% block title %}
+    Post - {{ question.title }}
+{% endblock %}
+
 {% block body %}
 
+    <a href="{{ path('app_faq') }}" class="link">Retour au forum</a>
     <div class="show-question">
         <div class="data-question">
-            <h2>{{ question.title }}</h2>
+            <div class="question-main__informations">
+                <h2>{{ question.title }}</h2>
+                <div class="question-state">
+                    {% if app.user == question.author or app.user.isAdmin %}
+                        {{ form_start(formSetResolved) }}
+
+                            {{ form_row(formSetResolved.submit,
+                                {
+                                    'label': question.isResolved ? 'Réouvrir le post' : 'Fermer le post',
+                                    'class': 'fjkg'
+                                })
+                            }}
+
+                        {{ form_end(formSetResolved) }}
+                    {% endif %}
+                    <span class="badge badge-resolved">
+                        Post {{ question.isResolved ? 'fermé' : 'ouvert' }}
+                    </span>
+                </div>
+            </div>
             <div class="question__author">
                 {% if question.author.avatarPathname is not null %}
                     <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
                 {% else %}
                     <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
                 {% endif %}
+
                 <p class="author">{{ question.author.firstname }} {{ question.author.lastname }}</p>
+
                 {% if question.author.isAdmin() %}
                     <span class="badge badge-admin">
                         Admin
@@ -58,19 +85,24 @@
     {% endfor %}
     </div>
 
-    <div class="reply mt-50">
+    {% if question.isResolved %}
 
-        {{ form_start(formAnswer) }}
+        <div class="question-resolved mt-50">
+            <h5>Ce post est résolu!</h5>
+            <a class="btn button-primary" href="{{ path('app_faq_create') }}">En créer un nouveau</a>
+        </div>
 
-            {{ form_row(formAnswer.description, {'label': 'Votre réponse', 'attr': {'class': 'form-control'}}) }}
+    {% else %}
+        <div class="reply mt-50">
 
-        {{ form_end(formAnswer) }}
+            {{ form_start(formAnswer) }}
 
-    </div>
+                {{ form_row(formAnswer.description, {'label': 'Votre réponse', 'attr': {'class': 'form-control'}}) }}
+
+            {{ form_end(formAnswer) }}
+
+        </div>
+
+    {% endif %}
 
 {% endblock %}
-
-{% block title %}
-    Post - {{ question.title }}
-{% endblock %}
-
