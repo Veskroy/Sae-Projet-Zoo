@@ -3,6 +3,9 @@
 {% block body %}
     <a href="{{ path('app_forum') }}" class="link">Retour au forum</a>
     <h2 class="second-title">Vos derniers posts</h2>
+    <a href="{{ path('app_question_new') }}" class="link">
+        Créer un post
+    </a>
     <div class="questions-user">
         {% if ownQuestions is null %}
             <p>Vous n'avez pas encore créé de questions.</p>

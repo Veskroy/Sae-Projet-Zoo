@@ -9,7 +9,7 @@
         <div class="intro-profile">
             <div class="title">
                 <h1 class="main-title">Votre profil</h1>
-                <p>Bonjour, {{ user.firstname }} {{ user.lastname }}</p>
+                <p>Bonjour, {{ user.toString() }}</p>
             </div>
             {% if app.user.avatarPathname is not null %}
                 <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">

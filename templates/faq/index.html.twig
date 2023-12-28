@@ -9,6 +9,10 @@
         Voir mes posts
     </a>
 
+    <a href="{{ path('app_question_new') }}" class="link">
+        Créer un post
+    </a>
+
     <div class="faq-container">
         <h2 class="second-title">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
         <div class="questions-container">
@@ -39,7 +43,7 @@
                             {% else %}
                                 <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
                             {% endif %}
-                            <p class="author">{{ question.author.firstname }} {{ question.author.lastname }}</p>
+                            <p class="author">{{ question.author.toString() }}</p>
                         </div>
                         <div class="question-dates">
                             <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y') }}</p>
