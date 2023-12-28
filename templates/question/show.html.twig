@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 
-
 {% block title %}
     Post - {{ question.title }}
 {% endblock %}
 
 {% block body %}
 
-    <a href="{{ path('app_faq') }}" class="link">Retour au forum</a>
+    <a href="{{ path('app_forum') }}" class="link">Retour au forum</a>
     <div class="show-question">
         <div class="data-question">
             <div class="question-main__informations">
@@ -89,7 +88,7 @@
 
         <div class="question-resolved mt-50">
             <h5>Ce post est résolu!</h5>
-            <a class="btn button-primary" href="{{ path('app_faq_create') }}">En créer un nouveau</a>
+            <a class="btn button-primary" href="{{ path('app_presentation') }}">En créer un nouveau</a>
         </div>
 
     {% else %}

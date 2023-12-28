@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('app_faq') }}" class="link">Retour au forum</a>
+    <a href="{{ path('app_forum') }}" class="link">Retour au forum</a>
     <h2 class="second-title">Vos derniers posts</h2>
     <div class="questions-user">
         {% if ownQuestions is null %}
@@ -22,7 +22,7 @@
                             <h5 class="question__title">{{ ownQuestion.title }}</h5>
                             <p class="date-creation">Question créée le {{ ownQuestion.createdAt|date('d/m/Y') }}</p>
                         </div>
-                        <a href="{{ path('app_faq_show', {'id': ownQuestion.id }) }}" class="btn button-primary">
+                        <a href="{{ path('app_question_show', {'id': ownQuestion.id }) }}" class="btn button-primary">
                             Accéder au post
                         </a>
                     </div>
