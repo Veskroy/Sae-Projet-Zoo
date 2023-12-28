@@ -3,82 +3,55 @@
 {% block title %}FAQ{% endblock %}
 
 {% block body %}
-    <h1 class="main-title">Foire aux questions du Zoo de la Palmyre</h1>
+    <h1 class="main-title">Forum du Zoo de la Palmyre</h1>
 
-    <div class="questions-user">
-        <h2 class="second-title">Vos derniers posts</h2>
-        {% if ownQuestions is null %}
-            <p>Vous n'avez pas encore créé de questions.</p>
-        {% else %}
-            <div class="own-question-container">
-            {% for ownQuestion in ownQuestions %}
-                <div class="own-question">
-                    {% if ownQuestion.isResolved %}
-                        <p class="question-state">Question résolue</p>
-                    {% else %}
-                        <p class="question-state">Question non résolue</p>
-                    {% endif %}
-                    <div class="own-question__main-infos">
-                        <h5 class="question__title">{{ ownQuestion.title }}</h5>
-                        <p class="date-creation">Question créée le {{ ownQuestion.createdAt|date('d/m/Y') }}</p>
-                    </div>
-                    <a href="{{ path('app_faq_show', {'id': ownQuestion.id }) }}" class="btn button-primary">
-                        Accéder au post
-                    </a>
-                </div>
-            {% endfor %}
-            </div>
-        {% endif %}
-    </div>
-
-    <div class="line line-mbc"></div>
+    <a href="{{ path('app_faq_user_questions') }}" class="link">
+        Voir mes posts
+    </a>
 
     <div class="faq-container">
         <h2 class="second-title">Les posts les plus récents</h2>
         <div class="questions-container">
-        {% for data in questions %}
+        {% for question in pagination %}
             <div class="card-question">
+                <a href="{{ path('app_faq_show', {'id': question.id }) }}" class="question-link link-hidden"></a>
                 <div class="card-question__mains-infos">
                     <div class="question-title">
-                        <h5 class="question__title">{{ data.question.title }}</h5>
-                        <p class="question__answers-total">{{ data.count }} {{ data.count == 0 ? 'réponse' : 'réponses' }}</p>
+                        <h5 class="question__title">{{ question.title }}</h5>
+                        <div class="data-answers">
+                            <span>
+                                <img src="{{ asset('images/icons/message_icon.svg') }}" alt="msg-icon" class="msg-icon" />
+                                {{ question.countAnswers }}
+                            </span>
+                            {% if question.isResolved %}
+                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="checked-icon" />
+                            {% else %}
+                                <a class="btn button-tertiary cursor-not-allowed">
+                                    Non-résolu
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                     <div class="question__author">
-                        {% if data.question.author.avatarPathname is not null %}
-                            <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
-                        {% else %}
-                            <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
-                        {% endif %}
-                        <p class="author">{{ data.question.author.firstname }} {{ data.question.author.lastname }}</p>
-                    </div>
-                </div>
-                <div class="card-question__bottom-infos">
-                    <div class="question-state">
-                        {% if data.question.isResolved %}
-                            <a class="btn button-primary cursor-not-allowed">
-                                Résolue
-                            </a>
-                        {% else %}
-                            <a class="btn button-tertiary cursor-not-allowed">
-                                Non-résolue
-                            </a>
-                        {% endif %}
-                        <a href="{{ path('app_faq_show', {'id': data.question.id }) }}" class="btn button-secondary">
-                            Voir la question
-                        </a>
-                    </div>
-                    <div class="question-dates">
-                        {% if data.question.updatedAt is null %}
-                            <p>Pas d'activité récente.</p>
-                        {% else %}
-                            <p>Dernière activité le {{ data.question.updatedAt|date('d/m/y H:i') }}</p>
-                        {% endif %}
-                        <p class="date-creation">Question créée le {{ data.question.createdAt|date('d/m/Y') }}</p>
+                        <div class="author">
+                            {% if question.author.avatarPathname is not null %}
+                                <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+                            {% else %}
+                                <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
+                            {% endif %}
+                            <p class="author">{{ question.author.firstname }} {{ question.author.lastname }}</p>
+                        </div>
+                        <div class="question-dates">
+                            <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y') }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
         </div>
+
+        {{ knp_pagination_render(pagination) }}
+
     </div>
 
 {% endblock %}
