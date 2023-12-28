@@ -82,6 +82,28 @@ class FAQController extends AbstractController
             return $this->redirectToRoute('app_faq_show', ['id' => $question->getId()]);
         }
 
+        // formulaire pour "réouvrir" son post ou le fermer
+
+        $formSetResolved = $this->createFormBuilder(options: ['attr' => ['class' => 'setResolved']])
+            ->add('submit', SubmitType::class)
+            ->getForm();
+
+        $formSetResolved->handleRequest($request);
+
+        if ($formSetResolved->isSubmitted() && $formSetResolved->isValid()) {
+            // utiliser isAdmin plutôt que in_array(...)
+            if ($user === $question->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles())) {
+                $question->setIsResolved(!$question->isIsResolved());
+
+                $entityManager->persist($question);
+                $entityManager->flush();
+
+                $this->addFlash('success', $question->isIsResolved() ? 'Ce post a bien été clôturé!' : 'Ce post a bien été réouvert!');
+                return $this->redirectToRoute('app_faq_show', ['id' => $question->getId()]);
+            } else {
+                $this->addFlash('error', 'Vous n\'avez pas les droits requis.');
+            }
+        }
 
         return $this->render('faq/show.html.twig', [
             'user' => $user,
@@ -89,6 +111,7 @@ class FAQController extends AbstractController
             'answers' => $answers,
             'answersLength' => $answersLength,
             'formAnswer' => $formAnswer,
+            'formSetResolved' => $formSetResolved
         ]);
     }
 
