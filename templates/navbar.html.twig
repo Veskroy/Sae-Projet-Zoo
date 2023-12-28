@@ -11,7 +11,7 @@
             <a href={{path('app_home')}} class="menu-link">Accueil</a>
 
             {% if app.user %}
-                <a href={{path('app_faq')}} class="menu-link">Foire aux questions</a>
+                <a href={{path('app_faq')}} class="menu-link">Forum</a>
                 <a href={{path('app_home')}} class="btn button-secondary">Réserver</a>
                 <a href={{path('app_logout')}} class="btn button-primary">Se déconnecter</a>
 
@@ -27,7 +27,6 @@
                 {% endif %}
                 </a>
             {% else %}
-                <a href={{path('app_home')}} class="menu-link">FAQ</a>
                 <a href={{path('app_home')}} class="menu-link">Contact</a>
                 <a href={{path('app_login')}} class="btn button-secondary" href={{path('app_login')}}>Se connecter</a>
                 <a href={{ path('app_register') }} class="btn button-primary">S'inscrire</a>
