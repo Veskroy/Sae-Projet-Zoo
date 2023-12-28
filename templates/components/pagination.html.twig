@@ -6,7 +6,7 @@
 
     {% if pagination.totalItemCount > pagination.itemNumberPerPage %}
 
-        <a href="{{ path('app_faq', {'page': 1}) }}"
+        <a href="{{ path('app_forum', {'page': 1}) }}"
            class="btn-pagination link-first {{ pagination.currentPageNumber > 1 ? "" : "disabled" }}"
         >
             <<
@@ -25,7 +25,7 @@
                         >
                             {{ i }}</span>
                     {% else %}
-                        <a href="{{ path('app_faq', {'page': i}) }}"
+                        <a href="{{ path('app_forum', {'page': i}) }}"
                            class="btn-pagination link-page"
                         >{{ i }}</a>
                     {% endif %}
@@ -37,7 +37,7 @@
             {% endif %}
         </div>
 
-        <a href="{{ path('app_faq', {'page': roundedResult}) }}"
+        <a href="{{ path('app_forum', {'page': roundedResult}) }}"
            class="btn-pagination link-last {{ pagination.currentPageNumber != roundedResult ? "" : "disabled" }}">
             >>
         </a>

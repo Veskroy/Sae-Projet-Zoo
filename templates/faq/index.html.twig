@@ -5,16 +5,16 @@
 {% block body %}
     <h1 class="main-title">Forum du Zoo de la Palmyre</h1>
 
-    <a href="{{ path('app_faq_user_questions') }}" class="link">
+    <a href="{{ path('app_user_questions') }}" class="link">
         Voir mes posts
     </a>
 
     <div class="faq-container">
-        <h2 class="second-title">Les posts les plus récents</h2>
+        <h2 class="second-title">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
         <div class="questions-container">
         {% for question in pagination %}
             <div class="card-question">
-                <a href="{{ path('app_faq_show', {'id': question.id }) }}" class="question-link link-hidden"></a>
+                <a href="{{ path('app_question_show', {'id': question.id }) }}" class="question-link link-hidden"></a>
                 <div class="card-question__mains-infos">
                     <div class="question-title">
                         <h5 class="question__title">{{ question.title }}</h5>
@@ -49,10 +49,6 @@
             </div>
         {% endfor %}
         </div>
-
-        {#
-            {{ knp_pagination_render(pagination) }}
-        #}
 
         {{ include('components/pagination.html.twig', { 'pagination': pagination }) }}
 
