@@ -8,18 +8,18 @@ use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class AnswersFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @throws \Exception
-     */
     public function load(ObjectManager $manager): void
     {
         //AnswerFactory::createMany(10);
         $allUsers = UserFactory::repository()->findAll();
+
         if (!empty($allUsers)) {
             $allQuestions = QuestionFactory::repository()->findAll();
+
             foreach ($allQuestions as $question) {
                 $random = range(0, 10);
                 AnswerFactory::createMany($random[array_rand($random)], function () use ($question) {
@@ -29,6 +29,7 @@ class AnswersFixtures extends Fixture implements DependentFixtureInterface
                     ];
                 });
             }
+
             $manager->flush();
         }
         else {

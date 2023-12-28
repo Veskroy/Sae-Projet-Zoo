@@ -22,27 +22,27 @@
 
             {{ form_start(formChangeAvatar) }}
 
-            {{ form_row(formChangeAvatar.avatar, {'label': 'Ma photo de profil'}) }}
+                {{ form_row(formChangeAvatar.avatar, {'label': 'Ma photo de profil'}) }}
 
             {{ form_end(formChangeAvatar) }}
 
             {{ form_start(formChangeInformations) }}
 
-            {{ form_row(formChangeInformations.firstName, {'label': 'Mon prénom'}) }}
-            {{ form_row(formChangeInformations.lastName, {'label': 'Mon nom de famille'}) }}
-            {{ form_row(formChangeInformations.email, {'label': 'Mon email'}) }}
-            {{ form_row(formChangeInformations.phone, {'label': 'Mon numéro de téléphone'}) }}
-            {{ form_row(formChangeInformations.address, {'label': 'Mon adresse'}) }}
-            {{ form_row(formChangeInformations.pc, {'label': 'Mon code postal'}) }}
-            {{ form_row(formChangeInformations.city, {'label': 'Ma ville'}) }}
+                {{ form_row(formChangeInformations.firstName, {'label': 'Mon prénom'}) }}
+                {{ form_row(formChangeInformations.lastName, {'label': 'Mon nom de famille'}) }}
+                {{ form_row(formChangeInformations.email, {'label': 'Mon email'}) }}
+                {{ form_row(formChangeInformations.phone, {'label': 'Mon numéro de téléphone'}) }}
+                {{ form_row(formChangeInformations.address, {'label': 'Mon adresse'}) }}
+                {{ form_row(formChangeInformations.pc, {'label': 'Mon code postal'}) }}
+                {{ form_row(formChangeInformations.city, {'label': 'Ma ville'}) }}
 
             {{ form_end(formChangeInformations) }}
 
             {{ form_start(formChangePassword) }}
 
-            {{ form_row(formChangePassword.currentPassword, {'label': 'Mot de passe actuel'}) }}
-            {{ form_row(formChangePassword.newPassword.first, {'label': 'Nouveau mot de passe'}) }}
-            {{ form_row(formChangePassword.newPassword.second, {'label': 'Nouveau mot de passe'}) }}
+                {{ form_row(formChangePassword.currentPassword, {'label': 'Mot de passe actuel'}) }}
+                {{ form_row(formChangePassword.newPassword.first, {'label': 'Nouveau mot de passe'}) }}
+                {{ form_row(formChangePassword.newPassword.second, {'label': 'Nouveau mot de passe'}) }}
 
             {{ form_end(formChangePassword) }}
 
