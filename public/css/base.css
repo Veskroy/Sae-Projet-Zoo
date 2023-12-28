@@ -510,7 +510,7 @@ div.edit-profile form::after {
     margin-top: 30px;
 }
 
-form.register-form, form.reply-form {
+form.register-form, form.reply-form, form.question-form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -534,11 +534,7 @@ form.register-form div.check-terms div label {
     margin: 0;
 }
 
-form.change-form div,
-form.password-form div,
-form.register-form div,
-form.avatar-form div,
-form.reply-form div {
+form div {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -805,6 +801,20 @@ form.setResolved button#form_submit {
 
 form.setResolved button#form_submit:hover {
     background-color: var(--primaryWhite-hover);
+}
+
+/* création d'un post */
+
+.question-new {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.container-question-new .question-new__main-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 /**********/
