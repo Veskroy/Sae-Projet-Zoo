@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Answer;
 use App\Entity\Question;
 use App\Form\AnswerType;
+use App\Form\QuestionType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -20,7 +21,7 @@ class QuestionController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/question/{id}', name: 'app_question_show')]
+    #[Route('/question/{id}', name: 'app_question_show', requirements: ['id' => '\d+'])]
     public function show(QuestionRepository $questionRepository, Question $questionId, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -109,6 +110,42 @@ class QuestionController extends AbstractController
         return $this->render('question/data.html.twig', [
             'user' => $user,
             'ownQuestions' => $ownQuestions,
+        ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/question/new', name: 'app_question_new')]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $question = new Question();
+
+        $formQuestion = $this->createForm(QuestionType::class, $question, ['attr' => ['class' => 'question-form']])
+            ->add('submit', SubmitType::class, ['label' => 'Créer le post', 'attr' => ['class' => 'btn button-primary full-width']]);
+
+        $formQuestion->handleRequest($request);
+
+        if ($formQuestion->isSubmitted() && $formQuestion->isValid()) {
+            //$answer->setAuthor($user);
+            $question->setAuthor($this->getUser());
+            $question->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
+            $question->setIsResolved(false);
+
+            $entityManager->persist($question);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre post a bien été créé!');
+            return $this->redirectToRoute('app_user_questions');
+        }
+        return $this->render('question/new.html.twig', [
+            'user' => $user,
+            'formQuestion' => $formQuestion,
         ]);
     }
 
