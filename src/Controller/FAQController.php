@@ -8,6 +8,7 @@ use App\Form\AnswerType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FAQController extends AbstractController
 {
     #[Route('/faq', name: 'app_faq')]
-    public function index(QuestionRepository $questionRepository): Response
+    public function index(QuestionRepository $questionRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -25,15 +26,21 @@ class FAQController extends AbstractController
         }
 
         // récupération de toutes les questions avec le nombre de réponses pour chacune d'entre elles
-        $questions = $questionRepository->countAnswersForAllQuestionsAndOrderByDateDesc();
+        //$questions = $questionRepository->countAnswersForAllQuestionsAndOrderByDateDesc();
 
-        // récupération de toutes les questions posées par l'utilisateur courant
-        $ownQuestions = $questionRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
+        // pagination
+        $pagination = $paginator->paginate(
+            $questionRepository->getAllQuestionsOrderByDateDesc(),
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        //dd($pagination);
 
         return $this->render('faq/index.html.twig', [
             'user' => $user,
-            'questions' => $questions,
-            'ownQuestions' => $ownQuestions,
+            //'questions' => $questions,
+            'pagination' => $pagination,
         ]);
     }
 
