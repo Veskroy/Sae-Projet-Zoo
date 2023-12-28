@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('app_faq') }}" class="link">Retour au forum</a>
+    <h2 class="second-title">Vos derniers posts</h2>
+    <div class="questions-user">
+        {% if ownQuestions is null %}
+            <p>Vous n'avez pas encore créé de questions.</p>
+        {% else %}
+            <div class="own-question-container">
+                {% for ownQuestion in ownQuestions %}
+                    <div class="own-question">
+                        {% if ownQuestion.isResolved %}
+                            <div>
+                                <p class="question-state">Question résolue</p>
+                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="checked-icon" />
+                            </div>
+                        {% else %}
+                            <p class="question-state">Question non résolue</p>
+                        {% endif %}
+                        <div class="own-question__main-infos">
+                            <h5 class="question__title">{{ ownQuestion.title }}</h5>
+                            <p class="date-creation">Question créée le {{ ownQuestion.createdAt|date('d/m/Y') }}</p>
+                        </div>
+                        <a href="{{ path('app_faq_show', {'id': ownQuestion.id }) }}" class="btn button-primary">
+                            Accéder au post
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
