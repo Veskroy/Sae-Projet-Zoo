@@ -115,4 +115,21 @@ class FAQController extends AbstractController
         ]);
     }
 
+    #[Route('/faq/user/questions', name: 'app_faq_user_questions')]
+    public function userQuestions(QuestionRepository $questionRepository): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // récupération de toutes les questions posées par l'utilisateur courant
+        $ownQuestions = $questionRepository->findBy(['author' => $user], ['createdAt' => 'DESC']);
+
+        return $this->render('faq/data.html.twig', [
+            'user' => $user,
+            'ownQuestions' => $ownQuestions,
+        ]);
+    }
+
 }
