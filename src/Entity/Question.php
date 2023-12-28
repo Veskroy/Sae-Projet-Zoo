@@ -128,6 +128,11 @@ class Question
         return $this->answers;
     }
 
+    public function countAnswers(): int
+    {
+        return $this->answers->count();
+    }
+
     public function addAnswer(Answer $answer): static
     {
         if (!$this->answers->contains($answer)) {
