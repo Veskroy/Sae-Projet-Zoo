@@ -6,7 +6,18 @@
 
 {% block body %}
 
-    <a href="{{ path('app_forum') }}" class="link">Retour au forum</a>
+    <div class="btn-actions-question">
+        <a href="{{ path('app_forum') }}" class="link">
+            <img src="{{ asset('images/icons/back_icon.svg') }}" alt="back icon" class="back-icon" />
+            Retour au forum</a>
+
+        {% if app.user == question.author or app.user.isAdmin %}
+            <a href="{{ path('app_question_edit', {'id': question.id}) }}">
+                <img src="{{ asset('images/icons/edit_icon.svg') }}" alt="edit icon" class="edit-icon" />
+                Modifier
+            </a>
+        {% endif %}
+    </div>
     <div class="show-question">
         <div class="data-question">
             <div class="question-main__informations">
@@ -28,7 +39,7 @@
                     </span>
                 </div>
             </div>
-            <div class="question__author">
+            <div class="author">
                 {% if question.author.avatarPathname is not null %}
                     <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
                 {% else %}
@@ -50,33 +61,49 @@
 
     <div class="question-answers-container mt-50">
         <div class="count-answers">
-            <h3>{{ answersLength }} réponses</h3>
+            <h3>
+                {{ answersLength > 1 ? answersLength ~ ' réponses' : answersLength ~ ' réponse' }}
+            </h3>
             <div class="line"></div>
         </div>
     {% for answer in answers %}
         <div class="answer">
-            <div class="answer__author">
-                {% if answer.author.avatarPathname is not null %}
-                    <img src="{{ asset('uploads/avatars/' ~ answer.author.avatarPathname) }}" alt="avatar" class="avatar">
-                {% else %}
-                    <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
-                {% endif %}
-                <p class="author">{{ answer.author.firstname }} {{ answer.author.lastname }} - {{ answer.createdAt|date('d/m/y H:i') }}</p>
-                {% if answer.author == question.author %}
-                    <span class="badge badge-author">
-                        Auteur
-                    </span>
-                {% endif %}
-                {% if answer.author.isAdmin() %}
-                    <span class="badge badge-admin">
-                        Admin
-                    </span>
-                {% endif %}
+            <div class="answer__informations">
+                <div class="author">
+                    {% if answer.author.avatarPathname is not null %}
+                        <img src="{{ asset('uploads/avatars/' ~ answer.author.avatarPathname) }}" alt="avatar" class="avatar">
+                    {% else %}
+                        <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
+                    {% endif %}
+                    <p class="author">{{ answer.author.firstname }} {{ answer.author.lastname }} - {{ answer.createdAt|date('d/m/y H:i') }}</p>
+                    {% if answer.author == question.author %}
+                        <span class="badge badge-author">
+                            Auteur
+                        </span>
+                    {% endif %}
+                    {% if answer.author.isAdmin() %}
+                        <span class="badge badge-admin">
+                            Admin
+                        </span>
+                    {% endif %}
+                </div>
             </div>
             <div class="answer-description">
-                <p>{{ answer.description }}</p>
+                <p class="text">{{ answer.description }}</p>
+                    {% if answer.author == user or user.isAdmin %}
+                        {{ include('components/dropdown.html.twig' ,
+                            {
+                                'actions': [
+                                    {
+                                        'label': 'Modifier',
+                                        'path': path('app_answer_edit', {'id': answer.id})
+                                    }
+                                ],
+                            }
+                        ) }}
+                    {% endif %}
                 {% if answer.updatedAt is not null %}
-                    <p class="update">Updated</p>
+                    <p class="update">Modifié le {{ answer.updatedAt|date('d/m/y H:i') }}</p>
                 {% endif %}
             </div>
         </div>
@@ -87,7 +114,7 @@
 
         <div class="question-resolved mt-50">
             <h5>Ce post est résolu!</h5>
-            <a class="btn button-primary" href="{{ path('app_presentation') }}">En créer un nouveau</a>
+            <a class="btn button-primary" href="{{ path('app_question_new') }}">En créer un nouveau</a>
         </div>
 
     {% else %}
