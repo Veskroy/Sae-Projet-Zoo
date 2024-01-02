@@ -12,6 +12,8 @@
 
         {% block javascripts %}
             <script src={{ asset('scripts/menuHeader.js')}} defer></script>
+            <script src={{ asset('scripts/toggleModal.js')}} defer></script>
+            <script src={{ asset('scripts/dropdownMenu.js')}} defer></script>
         {% endblock %}
 
     </head>
@@ -26,19 +28,19 @@
                 <!-- message affiché dans le cas d'un succès sur un formulaire -->
 
                 {% for message in app.flashes('success') %}
-                    <p class="message message-success">{{ message }}</p>
+                    <p class="message message-success mb-50">{{ message }}</p>
                 {% endfor %}
 
                 <!-- message affiché dans le cas d'une erreur sur un formulaire -->
 
                 {% for message in app.flashes('error') %}
-                    <p class="message message-error">{{ message }}</p>
+                    <p class="message message-error mb-50">{{ message }}</p>
                 {% endfor %}
 
                 <!-- message affiché dans le cas d'une information importante -->
 
                 {% for message in app.flashes('warning') %}
-                    <p class="message message-warning">{{ message }}</p>
+                    <p class="message message-warning mb-50">{{ message }}</p>
                 {% endfor %}
 
                 {% block body %}{% endblock %}
