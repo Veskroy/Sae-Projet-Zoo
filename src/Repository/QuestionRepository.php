@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,16 +22,11 @@ class QuestionRepository extends ServiceEntityRepository
         parent::__construct($registry, Question::class);
     }
 
-    public function countAnswersForAllQuestionsAndOrderByDateDesc(): array
+    public function getAllQuestionsOrderByDateDesc(): Query
     {
         return $this->createQueryBuilder('q')
-            ->select('q as question')
-            ->addSelect('COUNT(answers) as count')
-            ->leftJoin('q.answers', 'answers')
-            ->groupBy('question')
             ->orderBy('q.createdAt', 'DESC')
-            ->getQuery()
-            ->execute();
+            ->getQuery();
     }
 
 //    /**
