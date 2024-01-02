@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Answer;
 use App\Entity\Question;
 use App\Form\AnswerType;
+use App\Form\DeleteType;
 use App\Form\QuestionType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,6 +56,7 @@ class QuestionController extends AbstractController
             $answer->setAuthor($this->getUser());
             $answer->setQuestion($question);
             $answer->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
+            $question->setUpdatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
 
             $entityManager->persist($answer);
             $entityManager->flush();
@@ -147,6 +149,70 @@ class QuestionController extends AbstractController
             'user' => $user,
             'formQuestion' => $formQuestion,
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route('/question/{id}/edit', name: 'app_question_edit')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, Question $question): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        } else if ($question->getAuthor() !== $user && !($user->isAdmin())) {
+            $this->addFlash('error', 'Vous n\'avez pas les droits pour modifier ce post.');
+            return $this->redirectToRoute('app_forum');
+        }
+
+        // édition d'un post
+
+        $formEdit = $this->createForm(QuestionType::class, $question, [
+            'attr' => ['class' => 'question-form']
+        ])
+            ->add('submit', SubmitType::class, ['label' => 'Modifier le post', 'attr' => ['class' => 'btn button-primary full-width']]);
+
+        $formEdit->handleRequest($request);
+
+        if ($formEdit->isSubmitted() && $formEdit->isValid()) {
+            $question->setUpdatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris')));
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Ce post a été modifié avec succès!');
+            return $this->redirectToRoute('app_question_show', ['id' => $question->getId()]);
+        }
+
+
+        // suppression d'un post
+
+        $formDelete = $this->createForm(DeleteType::class, null, [
+            'attr' => ['class' => 'delete-form'],
+        ]);
+
+        $formDelete->handleRequest($request);
+
+        if ($formDelete->isSubmitted()) {
+            if ($formDelete->get('delete')->isClicked()) {
+                // suppression du post
+                $entityManager->remove($question);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Ce post a bien été supprimé!');
+
+                return $this->redirectToRoute('app_user_questions');
+            } else {
+                return $this->redirectToRoute('app_question_edit', ['id' => $question->getId()]);
+            }
+        } else {
+            return $this->render('question/edit.html.twig',
+                [
+                    'question' => $question,
+                    'formDelete' => $formDelete,
+                    'formEdit' => $formEdit
+                ]
+            );
+        }
+
     }
 
 }
