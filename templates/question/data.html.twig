@@ -7,7 +7,7 @@
         Créer un post
     </a>
     <div class="questions-user">
-        {% if ownQuestions is null %}
+        {% if ownQuestions is empty %}
             <p>Vous n'avez pas encore créé de questions.</p>
         {% else %}
             <div class="own-question-container">
@@ -22,7 +22,7 @@
                             <p class="question-state">Question non résolue</p>
                         {% endif %}
                         <div class="own-question__main-infos">
-                            <h5 class="question__title">{{ ownQuestion.title }}</h5>
+                            <h5 class="question__title">{{ ownQuestion.title|u.truncate(30, '...') }}</h5>
                             <p class="date-creation">Question créée le {{ ownQuestion.createdAt|date('d/m/Y') }}</p>
                         </div>
                         <a href="{{ path('app_question_show', {'id': ownQuestion.id }) }}" class="btn button-primary">
