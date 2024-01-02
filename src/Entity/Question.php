@@ -35,7 +35,7 @@ class Question
     #[ORM\Column]
     private ?bool $isResolved = null;
 
-    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class)]
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, cascade: ['remove'])]
     private Collection $answers;
 
     public function __construct()
