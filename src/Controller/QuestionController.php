@@ -39,11 +39,6 @@ class QuestionController extends AbstractController
 
         // formulaire de réponse à une question
 
-        /* $formAnswer = $this->createFormBuilder(options: ['attr' => ['class' => 'reply-form']])
-            ->add('description')
-            ->add('submit', SubmitType::class, ['label' => 'Répondre', 'attr' => ['class' => 'btn button-primary']])
-            ->getForm(); */
-
         $answer = new Answer();
 
         $formAnswer = $this->createForm(AnswerType::class, $answer, ['attr' => ['class' => 'reply-form']])
