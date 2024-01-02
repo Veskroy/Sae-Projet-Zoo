@@ -6,11 +6,15 @@
 
     {% if pagination.totalItemCount > pagination.itemNumberPerPage %}
 
-        <a href="{{ path('app_forum', {'page': 1}) }}"
-           class="btn-pagination link-first {{ pagination.currentPageNumber > 1 ? "" : "disabled" }}"
-        >
-            <<
-        </a>
+        {% if pagination.currentPageNumber > 1 %}
+            <a href="{{ path('app_forum', {'page': 1}) }}" class="btn-pagination link-first">
+                <<
+            </a>
+        {% else %}
+            <a class="btn-pagination link-first disabled cursor-not-allowed">
+                <<
+            </a>
+        {% endif %}
 
         <div class="pagination-data">
             {% if (pagination.currentPageNumber - numberPagesDisplayed) > 1 %}
@@ -37,10 +41,15 @@
             {% endif %}
         </div>
 
-        <a href="{{ path('app_forum', {'page': roundedResult}) }}"
-           class="btn-pagination link-last {{ pagination.currentPageNumber != roundedResult ? "" : "disabled" }}">
-            >>
-        </a>
+        {% if pagination.currentPageNumber != roundedResult %}
+            <a href="{{ path('app_forum', {'page': roundedResult}) }}" class="btn-pagination link-last">
+                >>
+            </a>
+        {% else %}
+            <a class="btn-pagination link-last disabled cursor-not-allowed">
+                >>
+            </a>
+        {% endif %}
 
     {% else %}
 
