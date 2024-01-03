@@ -1,5 +1,3 @@
-// delete modal
-
 const allModals = document.querySelectorAll('.modal-delete');
 
 for (const modal of allModals) {
@@ -10,5 +8,3 @@ for (const modal of allModals) {
         modalForm.classList.toggle('visible');
     });
 }
-
-// update/delete modal

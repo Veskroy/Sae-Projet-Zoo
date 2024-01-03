@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil de {{ user.firstname }}{% endblock %}
+{% block title %}Profil de {{ user.toString() }}{% endblock %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
 
         <div class="intro-profile">
             <div class="title">
-                <h1 class="main-title">Votre profil</h1>
+                <h1 class="main-title green">Votre profil</h1>
                 <p>Bonjour, {{ user.toString() }}</p>
             </div>
             {% if app.user.avatarPathname is not null %}
@@ -17,8 +17,6 @@
         </div>
 
         <div class="edit-profile">
-
-            <!-- form à ajouter -->
 
             {{ form_start(formChangeAvatar) }}
 
