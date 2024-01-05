@@ -24,11 +24,11 @@
                         <h5 class="question__title">{{ question.title|u.truncate(30, '...') }}</h5>
                         <div class="data-answers">
                             <span>
-                                <img src="{{ asset('images/icons/message_icon.svg') }}" alt="msg-icon" class="msg-icon" />
+                                <img src="{{ asset('images/icons/message_icon.svg') }}" alt="msg-icon" class="basic-icon msg-icon" />
                                 {{ question.countAnswers }}
                             </span>
                             {% if question.isResolved %}
-                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="checked-icon" />
+                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="basic-icon checked-icon" />
                             {% else %}
                                 <a class="btn button-tertiary cursor-not-allowed">
                                     Non-résolu
@@ -51,6 +51,10 @@
                             {% endif %}
                             <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y') }}</p>
                         </div>
+                        <span class="badge badge-likes">
+                                {{ question.countLikes }}
+                                <img src="{{ asset('images/icons/like_icon.svg') }}" alt="like icon" class="basic-icon like-icon" />
+                        </span>
                     </div>
                 </div>
             </div>
