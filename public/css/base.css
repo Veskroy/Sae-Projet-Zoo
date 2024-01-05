@@ -70,6 +70,7 @@ a {
 
 h1, h2, h3 {
     font-family: var(--titles-font-family);
+    position: relative;
 }
 
 h1, h2 {
@@ -148,6 +149,20 @@ body {
 
 .line.line-mbc {
     margin-block: 50px;
+}
+
+h3.presentation__title {
+    width: max-content;
+}
+
+h3.presentation__title::after {
+    content: '';
+    width: 30%;
+    height: 5px;
+    background-color: var(--primaryGreen);
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 /* margins */
@@ -249,8 +264,12 @@ body {
 h1.main-title {
     /*margin-block: 20px;*/
     position: relative;
-    width: max-content;
     margin-inline: auto;
+    text-align: center;
+}
+
+h1.green {
+    color: var(--primaryGreen);
 }
 
 a.btn:hover, a.btn:focus, button.btn:hover, button.btn:focus {
@@ -304,6 +323,7 @@ a.cursor-not-allowed {
 a.button-admin {
     color: var(--primaryWhite);
     background-color: var(--red-color-admin);
+    /* width: max-content; */
 }
 
 a.button-admin:hover {
@@ -378,18 +398,21 @@ img.checked-icon {
 
 a.link {
     font-size: 16px;
+    gap: 5px;
+    width: max-content;
+    color: var(--primaryGreen);
+    text-decoration: underline;
+}
+
+a.mbc {
+    margin-block: 20px;
     display: flex;
     align-items: center;
-    gap: 5px;
-    margin-block: 20px;
-    width: max-content;
-    color: var(--primaryBlack);
-    text-decoration: none;
 }
 
 a.link:hover {
     color: var(--primaryGray);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* pagination */
@@ -454,7 +477,6 @@ a.link:hover {
 p.message {
     width: 100%;
     padding: 15px;
-    border-radius: 10px;
 }
 
 p.message-success {
@@ -488,6 +510,10 @@ header.header div.main-infos {
 header div.main-infos a {
     color: var(--primaryGreen);
     font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }
 
 header.header {
@@ -500,8 +526,8 @@ header.header {
     position: sticky;
     top: 0;
     border-bottom: 1px solid var(--primaryGray);
-    z-index: 10;
     background-color: white;
+    z-index: 9999;
 }
 
 header nav {
@@ -604,7 +630,7 @@ div.btn-actions a {
 div.edit-profile form {
     display: flex;
     flex-wrap: wrap;
-    width: 70%;
+    width: 100%;
     justify-content: space-between;
     margin: 0 auto;
     gap: 20px;
@@ -657,16 +683,121 @@ div.edit-profile form button {
 
 div.edit-profile div.btn-actions {
     margin-top: 50px;
-    margin-inline: auto;
     width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
 }
 
 img.avatar {
     max-width: 50px;
     object-fit: cover;
+}
+
+/************/
+/* homepage */
+/************/
+
+div.homepage {
+    height: 100%;
+    width: 100vw;
+}
+
+.presentation-base .carousel {
+    background-color: green;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-content__nav {
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel .carousel-content__nav img.arrow-left {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.carousel .carousel-content__nav img.arrow-right {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.carousel .carousel-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.carousel-content__item {
+    min-width: 100%;
+    transition: .7s;
+}
+
+.carousel-content__item img {
+    width: 100%;
+    min-height: 100%;
+    max-height: 600px;
+    object-fit: cover;
+}
+
+img.icon-arrows {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+}
+
+img.icon-arrows:hover {
+    transform: scale(1.25);
+}
+
+.presentation-content {
+    width: 95%;
+    margin-inline: auto;
+    margin-block: 40px;
+    max-width: 1300px;
+    padding: 20px;
+}
+
+.presentation-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.presentation-infos .presentation-infos__text {
+    font-size: var(--font-size-s);
+    text-align: justify;
+}
+
+.presentation-infos img {
+    width: auto;
+    max-width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.presentation-user {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.presentation-user div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /*********/
@@ -1041,7 +1172,7 @@ div.content {
     background-color: var(--primaryWhite);
 }
 
-div.container-body-infos {
+div.content div.container-body-infos {
     background-color: rgba(255, 255, 255, 0.92);
     border-radius: 10px;
     max-width: 1100px;
@@ -1055,10 +1186,6 @@ div.container-body-infos {
 @media screen and (max-width: 900px) {
     header.header nav {
         display: none;
-    }
-
-    div.content {
-        min-height: 85vh;
     }
 
     header.header nav.open {
@@ -1125,6 +1252,12 @@ div.container-body-infos {
 }
 
 @media screen and (min-width: 800px) {
+    p.message {
+        padding: 15px;
+        margin: 20px 20px 50px 20px;
+        border-radius: 10px;
+        width: auto;
+    }
     form.change-form div, form.register-form div, a.login-btn {
         width: 45%;
     }
@@ -1140,22 +1273,27 @@ div.container-body-infos {
         display: flex;
         justify-content: flex-end !important;
     }
-    div.container-body-infos {
+    div.content div.container-body-infos {
         width: 95%;
         margin: 0 auto;
         padding: 40px 40px 100px;
     }
+    div.homepage div.container-body-infos {
+        width: 100%;
+    }
     body {
         height: 100%;
+    }
+    div.edit-profile form {
+        width: 70%;
+    }
+    div.edit-profile div.btn-actions {
+        margin-inline: auto;
+        gap: 20px;
     }
 }
 
 @media screen and (min-width: 1000px) {
-    p.message {
-        padding: 15px;
-        margin: 0 auto 50px;
-        border-radius: 10px;
-    }
     div.intro-profile {
         justify-content: center;
         flex-direction: row;
@@ -1171,8 +1309,7 @@ div.container-body-infos {
     .card-question .card-question__bottom-infos .question-dates {
         text-align: right;
     }
-
-    h1.main-title::after {
+    /*h1.main-title::after {
         content: '';
         background-image: url("/images/Sae_Zoo_Image/LogoSAE_Zoo.png");
         display: block;
@@ -1184,6 +1321,8 @@ div.container-body-infos {
         transform: translateY(-50%);
         left: -60px;
     }
+     */
+
     .questions-user .own-question {
         width: calc(100% / 3.5);
     }
@@ -1197,5 +1336,22 @@ div.container-body-infos {
     .faq-container .question-title {
         flex-direction: row;
         align-items: center;
+    }
+
+    .presentation-infos {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .presentation-infos__text {
+        width: 70%;
+        max-width: calc(100% - 250px);
+    }
+
+    .presentation-user div {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
     }
 }

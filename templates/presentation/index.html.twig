@@ -2,12 +2,78 @@
 
 {% block title %}WildWonderHub{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/carousel.js')}}" defer></script>
+{% endblock %}
 
 {% block body %}
-    {% if app.user %}
-        <h1>Bienvenue sur le site du Zoo de la Palmyre, {{ app.user.getFirstName() }} {{ app.user.getLastName() }}!</h1>
-    {% else %}
-        <h1>Bienvenue sur le site du Zoo de la Palmyre!</h1>
-        <h3>Connectez ou inscrivez-vous pour profiter pleinement des nouveautés!</h3>
-    {% endif %}
+
+    <div class="presentation-base">
+
+        <h1 class="main-title mt-50 mb-50 green">
+            Bienvenue sur le site du Zoo de la Palmyre !
+        </h1>
+
+        <div class="carousel">
+            <div class="carousel-content__nav">
+                <img src="{{ asset('images/icons/left-arrow_icon.svg') }}" class="icon-arrows arrow-left" alt="arrow icon" />
+                <img src="{{ asset('images/icons/right-arrow_icon.svg') }}" class="icon-arrows arrow-right" alt="arrow icon" />
+            </div>
+            <div class="carousel-content">
+                <div class="carousel-content__item">
+                    <img src="{{ asset('images/img-animaux/panda-roux.png') }}" alt="img animal" />
+                </div>
+                <div class="carousel-content__item">
+                    <img src="{{ asset('images/img-animaux/zebres-girafes.png') }}" alt="img animal" />
+                </div>
+                <div class="carousel-content__item">
+                    <img src="{{ asset('images/img-animaux/zoo.png') }}" alt="img animal" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="presentation-content">
+        <h3 class="presentation__title">Qu’est-ce-que le Zoo de la Palmyre ?</h3>
+
+        <div class="presentation-infos mt-50">
+            <p class="presentation-infos__text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, placeat. Illo nulla beatae harum qui, id vel sunt quasi nihil laudantium sequi dolor officiis eligendi enim velit iure aspernatur! Soluta.
+                Amet error ullam commodi placeat nesciunt fuga quasi recusandae inventore impedit pariatur deserunt voluptatibus tempora eos, asperiores praesentium magni quidem doloremque qui mollitia. Nemo sequi odit delectus facilis dolore accusantium.
+                Laborum error voluptate neque culpa possimus reprehenderit, cum et ipsa explicabo sequi expedita laboriosam unde eveniet omnis quas inventore mollitia ad perspiciatis iste optio, nesciunt aliquam? Earum quo animi quidem?
+                Accusantium quibusdam officia voluptate aliquid aperiam, minima, deleniti itaque eligendi, adipisci exercitationem mollitia sapiente consequatur corporis modi necessitatibus harum tempore. Voluptatibus illum delectus aspernatur veniam corporis error eum labore incidunt!
+                <br />
+                <br />
+                Pour toutes questions, n’hésitez pas à consulter notre <a class="link" href="{{ path('app_forum') }}">forum</a> ou <a class="link" href="{{ path('app_presentation') }}">nous contacter</a> à notre adresse mail !
+            </p>
+            <img src="{{ asset('images/img-animaux/suricates.png') }}" alt="img animal" />
+        </div>
+
+        <div class="line line-mbc"></div>
+
+        <div class="presentation-user mb-100">
+            {% if app.user %}
+                <h3>Bonjour, {{ app.user.toString() }}!</h3>
+                <p class="mt-50">N'hésitez pas à réserver un nouveau ticket pour notre Zoo <a class="link" href="{{ path('app_presentation') }}">ici</a>,
+                    ou à consulter vos tickets déjà réservés <a class="link" href="{{ path('app_presentation') }}">ici</a> !
+                </p>
+                <p>Si vous avez la moindre question concernant le fonctionnement de notre Zoo, consultez notre forum <a class="link" href="{{ path('app_forum') }}">ici</a> et créez un post !</p>
+            {% else %}
+                <h5>Connectez-vous ou inscrivez-vous pour profiter pleinement des fonctionnalités que peut proposer le Zoo de la Palmyre !</h5>
+                <p>Si vous avez la moindre question concernant le fonctionnement de notre Zoo, consultez notre forum <a class="link" href="{{ path('app_forum') }}">ici</a> et créez un post !</p>
+                <div class="mt-50">
+                    <a class="btn button-secondary" href="{{ path('app_register') }}">S'inscrire</a>
+                    <a class="btn button-primary" href="{{ path('app_login') }}">Se connecter</a>
+                </div>
+            {% endif %}
+            {% if app.user %}
+                {% if app.user.isAdmin() %}
+                    <a class="btn button-admin" href="{{ path('admin') }}">Accès administratif</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}
