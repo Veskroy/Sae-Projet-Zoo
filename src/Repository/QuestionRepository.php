@@ -25,8 +25,18 @@ class QuestionRepository extends ServiceEntityRepository
     public function getAllQuestionsOrderByDateDesc(): Query
     {
         return $this->createQueryBuilder('q')
-            ->orderBy('q.createdAt', 'DESC')
+            ->orderBy('q.updatedAt', 'DESC')
             ->getQuery();
+    }
+
+    public function search(string $text = ''): array {
+        return $this->createQueryBuilder('q')
+            ->where('q.title LIKE :text')
+            ->orWhere('q.description LIKE :text')
+            ->setParameter('text', '%' . $text . '%')
+            ->orderBy('q.updatedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
