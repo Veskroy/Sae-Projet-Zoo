@@ -14,7 +14,23 @@
     </a>
 
     <div class="faq-container">
-        <h2 class="second-title">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
+        <h2 class="second-title mt-50 mb-50">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
+
+        <form action="{{ path('app_forum') }}" method="GET">
+            <div>
+                <label for="search">Rechercher une question</label>
+                <input type="text" name="search" id="search" placeholder="Saisissez un mot clé...">
+                <button class="btn button-primary" type="submit">Rechercher</button>
+            </div>
+        </form>
+
+        {% if search %}
+            <p class="mt-50">Résultats de la recherche pour <strong>{{ search }}</strong></p>
+            {% if pagination.totalItemCount == 0 %}
+                <p>Votre recherche n'a donné aucun résultat !</p>
+            {% endif %}
+        {% endif %}
+
         <div class="questions-container">
         {% for question in pagination %}
             <div class="card-question">
