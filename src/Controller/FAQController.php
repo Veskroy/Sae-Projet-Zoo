@@ -19,11 +19,20 @@ class FAQController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
+        $res = $questionRepository->getAllQuestionsOrderByDateDesc();
+
+        // recherche d'une question
+
+        $searchData = $request->query->get('search');
+        if ($searchData) {
+            $res = $questionRepository->search($searchData);
+        }
+
         // pagination
         $pagination = $paginator->paginate(
-            $questionRepository->getAllQuestionsOrderByDateDesc(),
-            $request->query->getInt('page', 1),
-            10
+            //$questionRepository->getAllQuestionsOrderByDateDesc(),
+            $res,
+            $request->query->getInt('page', 1)
         );
 
         //dd($pagination);
@@ -31,6 +40,7 @@ class FAQController extends AbstractController
         return $this->render('faq/index.html.twig', [
             'user' => $user,
             'pagination' => $pagination,
+            'search' => $searchData,
         ]);
     }
 
