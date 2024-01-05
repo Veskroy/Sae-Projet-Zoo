@@ -13,8 +13,8 @@ class FamilyController extends AbstractController
     public function index(familyRepository $familyRepository): Response
     {
         $families = $familyRepository->findBy([], ['name' => 'ASC']);
-        return $this->render('spot/index.html.twig', [
-            'spots' => $families,
+        return $this->render('family/index.html.twig', [
+            'families' => $families,
         ]);
     }
 }

@@ -47,6 +47,7 @@ final class FamilyFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
+            'name' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
         ];
     }
 

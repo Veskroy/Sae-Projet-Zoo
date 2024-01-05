@@ -3,5 +3,9 @@
 {% block title %}Family{% endblock %}
 
 {% block body %}
-
+<h1>Listes des Familles</h1>
+<div class="familylist">
+    {% for family in families %}
+            <li>{{ family.name }}</li>
+    {% endfor %}
 {% endblock %}
