@@ -7,7 +7,7 @@
     {% if pagination.totalItemCount > pagination.itemNumberPerPage %}
 
         {% if pagination.currentPageNumber > 1 %}
-            <a href="{{ path('app_forum', {'page': 1}) }}" class="btn-pagination link-first">
+            <a href="{{ path('app_forum', {'page': 1, 'search': app.request.query.get('search')}) }}" class="btn-pagination link-first">
                 <<
             </a>
         {% else %}
@@ -29,7 +29,7 @@
                         >
                             {{ i }}</span>
                     {% else %}
-                        <a href="{{ path('app_forum', {'page': i}) }}"
+                        <a href="{{ path('app_forum', {'page': i, 'search': app.request.query.get('search')}) }}"
                            class="btn-pagination link-page"
                         >{{ i }}</a>
                     {% endif %}
@@ -42,7 +42,7 @@
         </div>
 
         {% if pagination.currentPageNumber != roundedResult %}
-            <a href="{{ path('app_forum', {'page': roundedResult}) }}" class="btn-pagination link-last">
+            <a href="{{ path('app_forum', {'page': roundedResult, 'search': app.request.query.get('search')}) }}" class="btn-pagination link-last">
                 >>
             </a>
         {% else %}
@@ -50,10 +50,6 @@
                 >>
             </a>
         {% endif %}
-
-    {% else %}
-
-        <p>Il n'y a pas d'autres données.</p>
 
     {% endif %}
 
