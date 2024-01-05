@@ -1354,4 +1354,34 @@ div.content div.container-body-infos {
         justify-content: center;
         gap: 20px;
     }
+
+    /********/
+    /* Spot */
+    /********/
+
+    .allcartespot {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 5%;
+    }
+    .cartespot{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        width: 250px;
+        margin: 5px;
+        background-color: #364434;
+        color: #FFFFFF;
+        border-radius: 30px;
+    }
+    img.img-spot{
+        height: 175px;
+        width: 175px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
 }
