@@ -1,0 +1,60 @@
+{% set result = pagination.totalItemCount / pagination.itemNumberPerPage %}
+{% set roundedResult = result|round(0, 'ceil') %}
+{% set numberPagesDisplayed = 2 %}
+
+<div class="pagination">
+
+    {% if pagination.totalItemCount > pagination.itemNumberPerPage %}
+
+        {% if pagination.currentPageNumber > 1 %}
+            <a href="{{ path('app_forum', {'page': 1}) }}" class="btn-pagination link-first">
+                <<
+            </a>
+        {% else %}
+            <a class="btn-pagination link-first disabled cursor-not-allowed">
+                <<
+            </a>
+        {% endif %}
+
+        <div class="pagination-data">
+            {% if (pagination.currentPageNumber - numberPagesDisplayed) > 1 %}
+                <span class="btn-pagination indicator">...</span>
+            {% endif %}
+
+            {% for i in (pagination.currentPageNumber - numberPagesDisplayed)..(pagination.currentPageNumber+numberPagesDisplayed) %}
+                {% if i > 0 and i <= roundedResult %}
+                    {% if pagination.currentPageNumber == i %}
+                        <span class=
+                              "btn-pagination pagination-actual-number"
+                        >
+                            {{ i }}</span>
+                    {% else %}
+                        <a href="{{ path('app_forum', {'page': i}) }}"
+                           class="btn-pagination link-page"
+                        >{{ i }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if (pagination.currentPageNumber + numberPagesDisplayed) < roundedResult %}
+                <span class="btn-pagination indicator">...</span>
+            {% endif %}
+        </div>
+
+        {% if pagination.currentPageNumber != roundedResult %}
+            <a href="{{ path('app_forum', {'page': roundedResult}) }}" class="btn-pagination link-last">
+                >>
+            </a>
+        {% else %}
+            <a class="btn-pagination link-last disabled cursor-not-allowed">
+                >>
+            </a>
+        {% endif %}
+
+    {% else %}
+
+        <p>Il n'y a pas d'autres données.</p>
+
+    {% endif %}
+
+</div>

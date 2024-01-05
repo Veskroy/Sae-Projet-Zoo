@@ -3,4 +3,62 @@
 {% block title %}FAQ{% endblock %}
 
 {% block body %}
+    <h1 class="main-title green">Forum du Zoo de la Palmyre</h1>
+
+    <a href="{{ path('app_user_questions') }}" class="link mbc">
+        Voir mes posts
+    </a>
+
+    <a href="{{ path('app_question_new') }}" class="link mbc">
+        Créer un post
+    </a>
+
+    <div class="faq-container">
+        <h2 class="second-title">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
+        <div class="questions-container">
+        {% for question in pagination %}
+            <div class="card-question">
+                <a href="{{ path('app_question_show', {'id': question.id }) }}" class="question-link link-hidden"></a>
+                <div class="card-question__mains-infos">
+                    <div class="question-title">
+                        <h5 class="question__title">{{ question.title|u.truncate(30, '...') }}</h5>
+                        <div class="data-answers">
+                            <span>
+                                <img src="{{ asset('images/icons/message_icon.svg') }}" alt="msg-icon" class="msg-icon" />
+                                {{ question.countAnswers }}
+                            </span>
+                            {% if question.isResolved %}
+                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="checked-icon" />
+                            {% else %}
+                                <a class="btn button-tertiary cursor-not-allowed">
+                                    Non-résolu
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="question__author">
+                        <div class="author">
+                            {% if question.author.avatarPathname is not null %}
+                                <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+                            {% else %}
+                                <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
+                            {% endif %}
+                            <p class="author">{{ question.author.toString() }}</p>
+                        </div>
+                        <div class="question-dates">
+                            {% if question.updatedAt %}
+                                <p class="date-creation">Dernière réponse le {{ question.updatedAt|date('d/m/Y H:i') }}</p>
+                            {% endif %}
+                            <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+
+        {{ include('components/pagination.html.twig', { 'pagination': pagination }) }}
+
+    </div>
+
 {% endblock %}

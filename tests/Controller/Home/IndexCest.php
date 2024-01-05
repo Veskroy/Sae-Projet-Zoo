@@ -39,6 +39,6 @@ class IndexCest
     {
         $I->amOnPage('/profile');
         $I->seeCurrentRouteIs('app_login');
-        $I->see('Please sign in');
+        $I->see('Connectez-vous!');
     }
 }

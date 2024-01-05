@@ -56,8 +56,8 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             yield IdField::new('id', 'ID')->hideOnForm(),
-            yield TextField::new('firstname','Firstname'),
-            yield TextField::new('lastname','Lastname'),
+            yield TextField::new('firstname', 'Prénom'),
+            yield TextField::new('lastname', 'Nom de famille'),
             yield TextField::new('password')->hideOnIndex()
                 ->setFormType(PasswordType::class)
                 ->setFormTypeOptions(
@@ -68,10 +68,10 @@ class UserCrudController extends AbstractCrudController
                     ]
                 ),
             yield TextField::new('email','Email'),
-            yield TextField::new('phone', 'Phone'),
-            yield TextField::new('pc', 'Postal Code'),
-            yield TextField::new('city', 'City'),
-            yield TextField::new('address', 'Address'),
+            yield TextField::new('phone', 'Numéro de téléphone'),
+            yield TextField::new('pc', 'Code postal'),
+            yield TextField::new('city', 'Ville'),
+            yield TextField::new('address', 'Adresse'),
             yield ArrayField::new('roles', 'Rôle')
                 ->formatValue(function (array $roles) {
                     if (in_array('ROLE_ADMIN', $roles)) {

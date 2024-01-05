@@ -2,21 +2,25 @@
 
 namespace App\Controller;
 
+use App\Form\AvatarType;
 use App\Form\DeleteType;
 use App\Form\ProfilePasswordType;
 use App\Form\ProfileType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
-    public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, SluggerInterface $slugger, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
         if (!$user) {
@@ -61,10 +65,44 @@ class ProfileController extends AbstractController
             }
         }
 
+        // formulaire pour avatar
+
+        $formChangeAvatar = $this->createForm(AvatarType::class, null, [
+                'attr' => ['class' => 'avatar-form'], ]
+        )->add('edit', SubmitType::class, ['label' => 'Modifier mon avatar', 'attr' => ['class' => 'btn button-primary full-width']]);
+
+        $formChangeAvatar->handleRequest($request);
+
+        if ($formChangeAvatar->isSubmitted() && $formChangeAvatar->isValid()) {
+            $avatar = $formChangeAvatar->get('avatar')->getData();
+
+            if ($avatar) {
+                $originalFilename = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$avatar->guessExtension();
+
+                try {
+                    $avatar->move(
+                        $this->getParameter('profile_avatar_directory'),
+                        $newFilename
+                    );
+                    $this->addFlash('success', 'Votre avatar a bien été modifié!');
+                } catch(FileException $e) {
+                    $this->addFlash('error', "Une erreur est survenue lors de l'upload de votre avatar.");
+                }
+
+                $user->setAvatarPathname($newFilename);
+                $entityManager->persist($user);
+                $entityManager->flush();
+            }
+
+        }
+
         return $this->render('profile/index.html.twig', [
             'user' => $user,
             'formChangeInformations' => $formChangeInformations,
-            'formChangePassword' => $formChangePassword
+            'formChangePassword' => $formChangePassword,
+            'formChangeAvatar' => $formChangeAvatar,
         ]);
     }
 
