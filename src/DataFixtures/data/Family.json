@@ -1,74 +1,74 @@
 [
   {
     "name": "Oiseau",
-    "desc": "Un oiseau est un animal appartenant à la classe des vertébrés, à sang chaud et au corps recouvert de plumes. Les oiseaux ont des ailes et des pattes, et ont la tête munie d'un bec dépourvu de dents."
+    "description": "Un oiseau est un animal à sang chaud avec un corps plumeux. Ils ont des ailes, des pattes et un bec sans dents."
   },
   {
     "name": "Crocodilien",
-    "desc": "Crocodilia (francisé en crocodiliens) est un ordre de vertébrés tétrapodes aquatiques ovipares et carnivores qui vivent dans les zones tropicales et subtropicales de la planète. Ils sont apparus sous leur forme actuelle il y a au moins 167,7 millions d'années, c'est-à-dire vers le milieu du Jurassique."
+    "description": "Crocodilia est un ordre de vertébrés ovipares vivant dans les tropiques depuis 167,7 millions d'années."
   },
   {
     "name": "Mammifère",
-    "desc": "Les Mammifères sont des animaux vertébrés, vivipares, qui sont caractérisés essentiellement par la présence de mamelles, d'un cœur à quatre cavités, d'un système nerveux et encéphalique développé, par une température interne constante et une respiration de type pulmonaire."
+    "description": "Les Mammifères sont des vertébrés vivipares avec mamelles et un système nerveux développé."
   },
   {
     "name": "Chélonien",
-    "desc": "Reptile dont le tronc est protégé par une carapace dorsale et un plastron ventral."
+    "description": "Reptile avec une carapace dorsale et un plastron ventral."
   },
   {
     "name": "Squamate",
-    "desc": "Les squamates (Squamata, du latin squama, « écaille », par allusion à leurs petites écailles épidermiques typiques et à leurs mues complètes, par desquamation) ou saurophidiens (« lézards/serpents ») sont un vaste ordre de vertébrés tétrapodes pourvus d'écailles qui comprend tous les lézards (au sens large), serpents, amphisbènes et mosasaures. Cet ordre regroupe des espèces qui changent régulièrement de peau (mue en lambeaux ou en un seul morceau, qui intervient plusieurs fois au cours de la période d'activité de ces animaux)."
+    "description": "Les squamates sont des vertébrés à écailles, incluant lézards et serpents, muant régulièrement."
   },
   {
     "name": "Lissamphibien",
-    "desc": "Les Lissamphibiens sont un groupe d'amphibiens comprenant les salamandres, les tritons, les grenouilles et les crapauds. Ils ont une peau nue et lisse, sans écailles, et sont souvent associés à des environnements aquatiques."
+    "description": "Groupe d'amphibiens comme salamandres et grenouilles avec peau lisse."
   },
   {
-  "name": "Actinoptérygien",
-  "desc": "Les Actinoptérygiens sont une classe de poissons à nageoires rayonnées, comprenant la plupart des poissons que l'on rencontre couramment. Leurs nageoires sont soutenues par des rayons osseux ou épineux."
+    "name": "Actinoptérygien",
+    "description": "Classe de poissons avec nageoires rayonnées et osseuses."
   },
   {
     "name": "Chondrichthyen",
-    "desc": "Les Chondrichthyens sont une classe de poissons cartilagineux comprenant les requins, les raies et les chimères. Leur squelette est principalement constitué de cartilage plutôt que d'os."
+    "description": "Classe de poissons cartilagineux incluant requins et raies."
   },
   {
     "name": "Myriapode",
-    "desc": "Les Myriapodes sont un sous-embranchement d'arthropodes comprenant les mille-pattes et les centipèdes. Ils ont de nombreuses paires de pattes segmentées et un corps allongé."
+    "description": "Arthropodes comme mille-pattes avec corps segmenté et allongé."
   },
   {
     "name": "Insecte",
-    "desc": "Les Insectes sont une classe d'arthropodes comprenant une grande diversité d'espèces comme les coléoptères, les papillons, les abeilles et les mouches. Ils ont un corps divisé en trois parties : la tête, le thorax et l'abdomen, et six pattes jointes aux segments thoraciques."
+    "description": "Arthropodes avec trois parties corporelles et six pattes."
   },
   {
     "name": "Arachnide",
-    "desc": "Les Arachnides sont une classe d'arthropodes comprenant les araignées, les scorpions, les acariens et les opilions. Ils ont un corps divisé en deux parties : le céphalothorax et l'abdomen, et quatre paires de pattes."
+    "description": "Arthropodes comme araignées avec céphalothorax et quatre paires de pattes."
   },
   {
     "name": "Crustacé",
-    "desc": "Les Crustacés sont un sous-embranchement d'arthropodes aquatiques comprenant les crabes, les crevettes, les homards et les bernard-l'hermite. Ils ont un exosquelette chitineux et de nombreux membres appendiculaires."
+    "description": "Arthropodes aquatiques comme crabes avec exosquelette chitineux."
   },
   {
     "name": "Céphalopode",
-    "desc": "Les Céphalopodes sont une classe de mollusques marins comprenant les calmars, les pieuvres et les seiches. Ils ont une tête bien développée, des bras préhensiles et un manteau qui peut sécréter une coquille ou être réduit."
+    "description": "Mollusques marins comme calmars avec bras préhensiles et manteau développé."
   },
   {
     "name": "Bivalve",
-    "desc": "Les Bivalves sont une classe de mollusques comprenant les moules, les huîtres, les palourdes et les coquilles Saint-Jacques. Ils ont une coquille formée de deux valves articulées."
+    "description": "Mollusques comme moules avec coquille formée de deux valves."
   },
   {
     "name": "Gastéropode",
-    "desc": "Les Gastéropodes sont une classe de mollusques comprenant les escargots, les limaces et les nudibranches. Ils ont un pied musculaire ventral, une coquille (présente chez certains) et une torsion du corps pendant le développement."
+    "description": "Mollusques comme escargots avec pied musculaire et torsion du corps."
   },
   {
     "name": "Echinoderme",
-    "desc": "Les Échinodermes sont un embranchement d'animaux marins comprenant les étoiles de mer, les oursins et les concombres de mer. Ils ont un corps pentaradiaire, une symétrie radiale et un système aquifère."
+    "description": "Animaux marins comme étoiles de mer avec corps pentaradiaire."
   },
   {
     "name": "Cnidaire",
-    "desc": "Les Cnidaires sont un embranchement d'animaux marins comprenant les méduses, les coraux et les anémones de mer. Ils ont des cellules urticantes appelées cnidocytes et une symétrie radiale."
+    "description": "Animaux marins comme méduses avec cellules urticantes."
   },
   {
     "name": "Amnélide",
-    "desc": "Les Annélides sont un embranchement de vers segmentés comprenant les lombrics et les sangsues. Ils ont un corps divisé en segments et des soies sur chaque segment."
+    "description": "Vers segmentés comme lombrics avec corps divisé et soies."
   }
 ]
