@@ -19,7 +19,7 @@ class Family
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $desc = null;
+    private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'family', targetEntity: Species::class)]
     private Collection $species;
@@ -46,14 +46,14 @@ class Family
         return $this;
     }
 
-    public function getDesc(): ?string
+    public function getDescription(): ?string
     {
-        return $this->desc;
+        return $this->description;
     }
 
-    public function setDesc(?string $desc): static
+    public function setDescription(?string $description): static
     {
-        $this->desc = $desc;
+        $this->description = $description;
 
         return $this;
     }
