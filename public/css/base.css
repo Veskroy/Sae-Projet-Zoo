@@ -24,6 +24,8 @@
     --red-color-admin: #B20000;
     --red-color-admin-hover: #d50000;
     --card-hover: rgb(234, 255, 233);
+    --background-container-body: #f3efef;
+    --background-badge-likes: #0500e8;
 
     /* styles pour les messages */
 
@@ -82,6 +84,10 @@ h3 {
 }
 
 h5 {
+    font-size: var(--font-size-m);
+}
+
+h5 a.link {
     font-size: var(--font-size-m);
 }
 
@@ -367,6 +373,7 @@ a.login-btn {
     font-size: var(--font-size-xs);
     padding: 5px 10px;
     border-radius: 15px;
+    width: max-content;
 }
 
 .badge-author {
@@ -381,7 +388,16 @@ a.login-btn {
     background-color: var(--primaryBlack);
 }
 
-img.checked-icon, img.msg-icon, img.edit-icon, img.back-icon, img.settings-icon {
+.badge-likes {
+    background-color: var(--background-badge-likes);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+img.basic-icon {
     width: 20px;
     height: 20px;
 }
@@ -408,6 +424,7 @@ a.mbc {
     margin-block: 20px;
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 a.link:hover {
@@ -814,12 +831,12 @@ img.icon-arrows:hover {
     margin-top: 50px;
 }
 
-.faq-container h5.question__title, .own-question .own-question__main-infos h5.question__title {
+.faq-container h5.question__title, .question .question__main-infos h5.question__title {
     font-size: var(--font-size-m);
     color: var(--primaryGreen);
 }
 
-.own-question div {
+.question div {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -896,7 +913,7 @@ img.icon-arrows:hover {
     justify-content: space-between;
 }
 
-.question__author img, .answer__author img {
+.question__author img.avatar, .answer__author img.avatar {
     width: 30px;
     height: 30px;
     object-fit: cover;
@@ -924,7 +941,7 @@ img.icon-arrows:hover {
     flex-direction: column;
 }
 
-.card-question .card-question__bottom-infos .question-dates p, .own-question p {
+.card-question .card-question__bottom-infos .question-dates p, .question p {
     font-size: 14px;
 }
 
@@ -937,7 +954,7 @@ p.date-creation {
     position: relative;
 }
 
-.questions-user .own-question-container {
+.questions-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -946,7 +963,7 @@ p.date-creation {
     justify-content: center;
 }
 
-.questions-user .own-question {
+.questions-user .question {
     background-color: var(--primaryWhite);
     border: 1px solid var(--primaryBlack);
     border-radius: 15px;
@@ -962,14 +979,14 @@ p.date-creation {
     width: max-content;
 }
 
-.own-question .own-question__main-infos {
+.question .question__main-infos {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.own-question h5.question__title {
+.question h5.question__title {
     text-align: center;
 }
 
@@ -1034,9 +1051,16 @@ p.date-creation {
     flex-direction: column;
 }
 
-.question-resolved {
+.question-interaction {
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.question-interaction .interaction-question__resolved, .question-interaction .interaction-question__like {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 20px;
 }
@@ -1173,7 +1197,6 @@ div.content {
 }
 
 div.content div.container-body-infos {
-    background-color: rgba(255, 255, 255, 0.92);
     border-radius: 10px;
     max-width: 1100px;
     padding: 0 0 100px;
@@ -1268,6 +1291,9 @@ div.content div.container-body-infos {
         background: url('/images/img-animaux/zebres-girafes.png') no-repeat center;
         background-size: cover;
     }
+    div.content div.container-body-infos {
+        background-color: var(--background-container-body);
+    }
     div.btn-actions {
         width: 70% !important;
         display: flex;
@@ -1323,7 +1349,7 @@ div.content div.container-body-infos {
     }
      */
 
-    .questions-user .own-question {
+    .questions-user .question {
         width: calc(100% / 3.5);
     }
     p.question__description {
