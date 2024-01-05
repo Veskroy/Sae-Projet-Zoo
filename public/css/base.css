@@ -313,12 +313,13 @@ a.btn.button-danger:hover, button.btn.button-danger:hover {
     background-color: var(--red-color-danger-hover);
 }
 
-a.button-tertiary {
+button.button-tertiary, a.button-tertiary {
     background-color: var(--secondaryBrown);
     color: white;
 }
 
-a.button-tertiary:hover {
+a.button-tertiary:hover,
+button.button-tertiary:hover {
     background-color: var(--secondaryBrown-hover);
 }
 
@@ -923,6 +924,27 @@ img.icon-arrows:hover {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+
+/* barre de recherche */
+
+input#search {
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    background-image: url('/images/icons/search_icon.svg');
+    background-size: 20px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+input#search:focus {
+    border: 2px solid var(--primaryGreen);
 }
 
 /**********************/
