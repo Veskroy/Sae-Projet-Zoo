@@ -65,7 +65,7 @@ class AnswerController extends AbstractController
 
         if ($formDelete->isSubmitted()) {
             if ($formDelete->get('delete')->isClicked()) {
-                // suppression du post
+                // suppression de la réponse
                 $entityManager->remove($answer);
                 $entityManager->flush();
 
