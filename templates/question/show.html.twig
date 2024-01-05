@@ -8,12 +8,12 @@
 
     <div class="btn-actions-question">
         <a href="{{ path('app_forum') }}" class="link mbc">
-            <img src="{{ asset('images/icons/back_icon.svg') }}" alt="back icon" class="back-icon" />
+            <img src="{{ asset('images/icons/back_icon.svg') }}" alt="back icon" class="basic-icon back-icon" />
             Retour au forum</a>
 
         {% if app.user == question.author or app.user.isAdmin %}
             <a href="{{ path('app_question_edit', {'id': question.id}) }}">
-                <img src="{{ asset('images/icons/edit_icon.svg') }}" alt="edit icon" class="edit-icon" />
+                <img src="{{ asset('images/icons/edit_icon.svg') }}" alt="edit icon" class="basic-icon edit-icon" />
                 Modifier
             </a>
         {% endif %}
@@ -57,6 +57,17 @@
             <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/y H:i') }}</p>
         </div>
         <p class="question__description">{{ question.description }}</p>
+
+        <p class="question__total-likes">
+            {% if question.countLikes > 0 %}
+                <span class="badge badge-likes">
+                    {{ question.countLikes }}
+                    <img src="{{ asset('images/icons/like_icon.svg') }}" alt="like icon" class="basic-icon like-icon" />
+                </span>
+            {% else %}
+                Ce post n'a pas été liké.
+            {% endif %}
+        </p>
     </div>
 
     <div class="question-answers-container mt-50">
@@ -110,24 +121,40 @@
     {% endfor %}
     </div>
 
-    {% if question.isResolved %}
+    <div class="question-interaction">
+        {% if question.isResolved %}
 
-        <div class="question-resolved mt-50">
-            <h5>Ce post est résolu!</h5>
-            <a class="btn button-primary" href="{{ path('app_question_new') }}">En créer un nouveau</a>
+            <div class="interaction-question__resolved mt-50">
+                <h5>Ce post est résolu, vous pouvez <a class="link" href="{{ path('app_question_new') }}">créer un nouveau post</a> si vous en avez besoin.</h5>
+            </div>
+
+        {% else %}
+            <div class="reply mt-50 full-width">
+
+                {{ form_start(formAnswer) }}
+
+                    {{ form_row(formAnswer.description, {'label': 'Votre réponse', 'attr': {'class': 'form-control'}}) }}
+
+                {{ form_end(formAnswer) }}
+
+            </div>
+
+        {% endif %}
+
+        <div class="interaction-question__like">
+            <h5 class="mt-50">Est-ce-que ce post vous a été utile ?</h5>
+            {% if question.isLikedByUser(user) %}
+                <p>Vous avez aimé ce post.</p>
+                <a href="{{ path('app_question_like', { 'id': question.id }) }}" class="btn button-primary mbc">
+                    <img src="{{ asset('images/icons/unlike_icon.svg') }}" alt="like icon" class="basic-icon like-icon" />
+                    Je n'aime plus
+                </a>
+            {% else %}
+                <a href="{{ path('app_question_like', { 'id': question.id }) }}" class="btn button-primary mbc">
+                    <img src="{{ asset('images/icons/like_icon.svg') }}" alt="unlike icon" class="basic-icon unlike-icon" />
+                    J'aime ce post</a>
+            {% endif %}
         </div>
-
-    {% else %}
-        <div class="reply mt-50">
-
-            {{ form_start(formAnswer) }}
-
-                {{ form_row(formAnswer.description, {'label': 'Votre réponse', 'attr': {'class': 'form-control'}}) }}
-
-            {{ form_end(formAnswer) }}
-
-        </div>
-
-    {% endif %}
+    </div>
 
 {% endblock %}

@@ -38,9 +38,14 @@ class Question
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, cascade: ['remove'])]
     private Collection $answers;
 
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\JoinTable('user_question_like')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -154,4 +159,40 @@ class Question
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function countLikes(): int
+    {
+        return $this->likes->count();
+    }
+
+    public function addLike(User $user): static
+    {
+        if (!$this->likes->contains($user)) {
+            $this->likes->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(User $user): static
+    {
+        $this->likes->removeElement($user);
+
+        return $this;
+    }
+
+    public function isLikedByUser(User $user): bool
+    {
+        return $this->likes->contains($user);
+    }
+
 }

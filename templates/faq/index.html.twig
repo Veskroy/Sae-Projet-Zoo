@@ -14,7 +14,23 @@
     </a>
 
     <div class="faq-container">
-        <h2 class="second-title">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
+        <h2 class="second-title mt-50 mb-50">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
+
+        <form action="{{ path('app_forum') }}" method="GET">
+            <div>
+                <label for="search">Rechercher un post</label>
+                <input type="text" name="search" id="search" placeholder="Saisissez un mot clé...">
+                <button class="btn button-primary" type="submit">Rechercher</button>
+            </div>
+        </form>
+
+        {% if search %}
+            <p class="mt-50">Résultats de la recherche pour <strong>{{ search }}</strong></p>
+            {% if pagination.totalItemCount == 0 %}
+                <p>Votre recherche n'a donné aucun résultat !</p>
+            {% endif %}
+        {% endif %}
+
         <div class="questions-container">
         {% for question in pagination %}
             <div class="card-question">
@@ -24,11 +40,11 @@
                         <h5 class="question__title">{{ question.title|u.truncate(30, '...') }}</h5>
                         <div class="data-answers">
                             <span>
-                                <img src="{{ asset('images/icons/message_icon.svg') }}" alt="msg-icon" class="msg-icon" />
+                                <img src="{{ asset('images/icons/message_icon.svg') }}" alt="msg-icon" class="basic-icon msg-icon" />
                                 {{ question.countAnswers }}
                             </span>
                             {% if question.isResolved %}
-                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="checked-icon" />
+                                <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="basic-icon checked-icon" />
                             {% else %}
                                 <a class="btn button-tertiary cursor-not-allowed">
                                     Non-résolu
@@ -51,6 +67,10 @@
                             {% endif %}
                             <p class="date-creation">Post créé le {{ question.createdAt|date('d/m/Y') }}</p>
                         </div>
+                        <span class="badge badge-likes">
+                                {{ question.countLikes }}
+                                <img src="{{ asset('images/icons/like_icon.svg') }}" alt="like icon" class="basic-icon like-icon" />
+                        </span>
                     </div>
                 </div>
             </div>

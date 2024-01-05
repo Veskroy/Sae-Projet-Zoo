@@ -53,6 +53,35 @@
 
         <div class="line line-mbc"></div>
 
+        <div class="last-questions">
+            <h3 class="presentation__title">Dernières questions posées sur le forum</h3>
+            <div class="questions-user">
+                <div class="questions-container">
+                    {% for question in questions %}
+                        <div class="question">
+                            {% if question.isResolved %}
+                                <div>
+                                    <p class="question-state">Question résolue</p>
+                                    <img src="{{ asset('images/icons/check_icon.svg') }}" alt="checked" class="basic-icon checked-icon" />
+                                </div>
+                            {% else %}
+                                <p class="question-state">Question non résolue</p>
+                            {% endif %}
+                            <div class="question__main-infos">
+                                <h5 class="question__title">{{ question.title|u.truncate(30, '...') }}</h5>
+                                <p class="date-creation">Question créée le {{ question.createdAt|date('d/m/Y') }}</p>
+                            </div>
+                            <a href="{{ path('app_question_show', {'id': question.id }) }}" class="btn button-primary">
+                                Accéder au post
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="line line-mbc"></div>
+
         <div class="presentation-user mb-100">
             {% if app.user %}
                 <h3>Bonjour, {{ app.user.toString() }}!</h3>
@@ -74,6 +103,7 @@
                 {% endif %}
             {% endif %}
         </div>
+
     </div>
 
 {% endblock %}
