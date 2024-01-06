@@ -79,4 +79,19 @@ class CrudCest
         $I->dontSee($this->question->getTitle());
     }
 
+    public function TestUserCantEditPostOfOtherUser(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $questionAdmin = QuestionFactory::createOne(
+            [
+                'title' => 'Post créé CRUD',
+                'description' => 'Description (test) de création de post',
+                'author' => $this->userAdmin,
+            ]
+        );
+        $I->amOnPage('/question/' . $questionAdmin->object()->getId() . '/edit');
+        $I->see('Vous n\'avez pas les droits pour modifier ce post.');
+    }
+
 }
