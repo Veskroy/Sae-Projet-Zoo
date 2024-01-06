@@ -91,7 +91,7 @@ class CrudCest
         $I->seeCurrentRouteIs('app_question_show', ['id' => $this->question->getId()]);
         $I->see('Description (test) de modification de réponse');
     }
-    
+
     public function TestDeleteAnswer(ControllerTester $I): void
     {
         $I->amLoggedInAs($this->userBasic);
@@ -117,6 +117,25 @@ class CrudCest
         $I->seeCurrentRouteIs('app_question_show', ['id' => $this->question->getId()]);
         // $I->dontSee($answer->getDescription());
         $I->dontSee('Description (test) de création de réponse');
+    }
+
+    public function TestAnswerEditNoAuthorized(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/question/' . $this->question->getId());
+
+        $answer = AnswerFactory::createOne(
+            [
+                'description' => 'Description (test) de création de réponse',
+                'question' => $this->question,
+                'author' => $this->userAdmin,
+            ]
+        );
+        $I->amOnPage('/answer/' . $answer->getId() . '/edit');
+
+        $I->see('Vous n\'avez pas les droits pour modifier cette réponse.');
+        $I->seeCurrentRouteIs('app_forum');
     }
 
 }
