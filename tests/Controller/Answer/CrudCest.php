@@ -53,4 +53,17 @@ class CrudCest
         $I->see($ans . ' ' . $res);
     }
 
+
+    public function TestCreateAnswerOnResolvedPost(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/question/' . $this->question->getId());
+        $I->seeResponseCodeIs(200);
+        $I->see($this->question->getTitle());
+        $I->click('Fermer le post');
+        $I->see('Ce post a bien été clôturé!');
+        $I->dontSee('Répondre');
+    }
+
 }
