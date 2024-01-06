@@ -389,13 +389,16 @@ a.login-btn {
     background-color: var(--primaryBlack);
 }
 
+p.question__total-likes {
+    margin-top: 20px;
+}
+
 .badge-likes {
     background-color: var(--background-badge-likes);
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 5px;
-    margin-top: 20px;
 }
 
 img.basic-icon {
