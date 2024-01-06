@@ -44,4 +44,26 @@ class CrudCest
         $I->see('Titre test de création');
     }
 
+
+    public function TestEditPost(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/questions/me');
+        $I->see($this->question->getTitle());
+        $I->amOnPage('/question/' . $this->question->getId());
+        $I->seeResponseCodeIs(200);
+        $I->see($this->question->getDescription());
+        $I->click('Modifier');
+        $I->seeCurrentRouteIs('app_question_edit', ['id' => $this->question->getId()]);
+        $I->fillField('question[title]', 'Post modifié CRUD');
+        $I->fillField('question[description]', 'Description (test) de modification de post');
+        $I->click('Modifier le post');
+        $I->see('Ce post a été modifié avec succès!');
+        $I->seeCurrentRouteIs('app_question_show', ['id' => $this->question->getId()]);
+        $I->amOnPage('/question/' . $this->question->getId());
+        $I->seeResponseCodeIs(200);
+        $I->see('Post modifié CRUD');
+    }
+
 }
