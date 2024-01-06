@@ -66,4 +66,30 @@ class CrudCest
         $I->dontSee('Répondre');
     }
 
+
+    public function TestEditAnswer(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/question/' . $this->question->getId());
+
+        $answer = AnswerFactory::createOne(
+            [
+                'description' => 'Description (test) de création de réponse',
+                'question' => $this->question,
+                'author' => $this->userBasic,
+            ]
+        );
+
+        $I->amOnPage('/answer/' . $answer->getId() . '/edit');
+        $I->seeResponseCodeIs(200);
+        $I->see($answer->getDescription());
+
+        $I->fillField('answer[description]', 'Description (test) de modification de réponse');
+        $I->click('Modifier la réponse');
+        $I->see('La réponse a bien été modifiée.');
+        $I->seeCurrentRouteIs('app_question_show', ['id' => $this->question->getId()]);
+        $I->see('Description (test) de modification de réponse');
+    }
+
 }
