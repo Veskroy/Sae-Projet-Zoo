@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ticket;
+use App\Form\TicketType;
 use App\Repository\TicketRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,13 @@ class TicketController extends AbstractController
     public function index(TicketRepository $ticket): Response
     {
         $tickets= $ticket->findBy([], ['id' => 'ASC']);
+        $newticket= new Ticket();
+        $form = $this->createForm(TicketType::class, $newticket);
 
         return $this->render('ticket/index.html.twig', [
             'controller_name' => 'TicketController',
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'form'=>$form
         ]);
     }
 
@@ -32,11 +36,11 @@ class TicketController extends AbstractController
     public function create() :Response
     {return $this->render('ticket/', [
        ]); }
-    #[Route ('/ticket/{id}/delete', name: 'app_ticket_delete')]
+    #[Route ('/ticket/{id}/delete', name: 'app_ticket_delete',requirements: ['id' => '\d+'])]
     public function delete(Ticket $ticket) :Response
     {return $this->render('ticket/', [
     ]); }
-    #[Route ('/ticket/{id}/Update', name: 'app_ticket_update')]
+    #[Route ('/ticket/{id}/Update', name: 'app_ticket_update',  requirements: ['id' => '\d+'])]
     public function update() :Response
     {return $this->render('ticket/', [
     ]); }

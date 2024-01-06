@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Event;
 use App\Entity\Ticket;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +18,14 @@ class TicketType extends AbstractType
             ->add('price')
             ->add('period')
             ->add('type')
-            ->add('events')
-            ->add('user')
+            /*->add('events',EntityType::class,[
+                'class' => Event::class,
+                'choice_label' => 'name',
+                    ])
+            */->add('user',EntityType::class,[
+                'class' => Event::class,
+                'choice_label' => 'firstName'.'lastName',
+                'multiple'=>false] )
         ;
     }
 

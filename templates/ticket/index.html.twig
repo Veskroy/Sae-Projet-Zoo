@@ -14,4 +14,6 @@
     <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}' > Ticket Achete Numero {{ ticket.id}} </a></li>
 
     {% endfor %}
+
+    <div>{{ form(form) }}</div>
 {% endblock %}
