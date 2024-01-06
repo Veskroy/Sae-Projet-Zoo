@@ -66,4 +66,17 @@ class CrudCest
         $I->see('Post modifié CRUD');
     }
 
+    public function TestDeletePost(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/question/' . $this->question->getId() . '/edit');
+        $I->click('button.btn.button-danger.open-modal');
+        $I->see('Êtes-vous sûr de vouloir supprimer ce post?');
+        $I->click('button#delete_delete');
+        $I->see('Ce post a bien été supprimé!');
+        $I->seeCurrentRouteIs('app_user_questions');
+        $I->dontSee($this->question->getTitle());
+    }
+
 }
