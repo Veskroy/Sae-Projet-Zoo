@@ -4,8 +4,10 @@
 
 {% block body %}
 <h1>Listes des Familles</h1>
-<div class="familylist">
+    <dl class="familylist">
     {% for family in families %}
-            <li>{{ family.name }}</li>
+            <dt>{{ family.name }}</dt>
+            <dd>Description : {{ family.description }}</dd>
     {% endfor %}
+    </dl>
 {% endblock %}
