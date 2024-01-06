@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Tests\Controller\Question;
+
+use App\Entity\Question;
+use App\Factory\QuestionFactory;
+use App\Tests\Support\ControllerTester;
+use App\Tests\Support\UsersSetup;
+
+class CrudCest
+{
+    use UsersSetup;
+
+    private Question $question;
+
+    public function _before(ControllerTester $I): void
+    {
+        $this->createUsers();
+
+        // création d'un post
+        $question = QuestionFactory::createOne(
+            [
+                'title' => 'Post créé CRUD',
+                'description' => 'Description (test) de création de post',
+                'isResolved' => false,
+                'author' => $this->userBasic,
+            ]
+        );
+        $this->question = $question->object();
+    }
+
+    public function TestCreatePost(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/forum');
+        $I->click('Créer un post');
+        $I->seeCurrentRouteIs('app_question_new');
+        $I->fillField('question[title]', 'Titre test de création');
+        $I->fillField('question[description]', 'Description (test) de création de post');
+        $I->click('Créer le post');
+        $I->see('Votre post a bien été créé!');
+        $I->seeCurrentRouteIs('app_user_questions');
+        $I->see('Titre test de création');
+    }
+
+}
