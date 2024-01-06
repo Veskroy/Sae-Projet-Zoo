@@ -91,5 +91,32 @@ class CrudCest
         $I->seeCurrentRouteIs('app_question_show', ['id' => $this->question->getId()]);
         $I->see('Description (test) de modification de réponse');
     }
+    
+    public function TestDeleteAnswer(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/question/' . $this->question->getId());
+
+        $answer = AnswerFactory::createOne(
+            [
+                'description' => 'Description (test) de création de réponse',
+                'question' => $this->question,
+                'author' => $this->userBasic,
+            ]
+        );
+        $I->amOnPage('/answer/' . $answer->getId() . '/edit');
+        $I->seeResponseCodeIs(200);
+        $I->see($answer->getDescription());
+
+        $I->click('button.btn.button-danger.open-modal');
+        $I->see('Êtes-vous sûr de vouloir supprimer cette réponse?');
+        $I->click('button#delete_delete');
+        $I->see('Cette réponse a bien été supprimée!');
+
+        $I->seeCurrentRouteIs('app_question_show', ['id' => $this->question->getId()]);
+        // $I->dontSee($answer->getDescription());
+        $I->dontSee('Description (test) de création de réponse');
+    }
 
 }
