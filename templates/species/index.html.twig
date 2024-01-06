@@ -3,5 +3,10 @@
 {% block title %}Species{% endblock %}
 
 {% block body %}
-
+    <h1>Listes des Espèces</h1>
+    <div class="specieslist">
+        {% for specie in species %}
+            <dt>{{ specie.name }}</dt>
+            <dd>Description : {{ specie.description }}</dd>
+        {% endfor %}
 {% endblock %}
