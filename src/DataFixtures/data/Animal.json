@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Wormy",
+    "gender": "M",
+    "description": "Un lombric domestique curieux qui aime creuser dans le sol.",
+    "weight": "0.5 g",
+    "size": "15 cm"
+  },
+  {
+    "name": "Sally",
+    "gender": "F",
+    "description": "Une salamandre aux motifs tachetés vivant près d'un petit ruisseau.",
+    "weight": "150 g",
+    "size": "20 cm"
+  },
+  {
+    "name": "Rainbow",
+    "gender": "M",
+    "description": "Une truite arc-en-ciel élevée dans une ferme aquacole.",
+    "weight": "2 kg",
+    "size": "50 cm"
+  },
+  {
+    "name": "Manta",
+    "gender": "F",
+    "description": "Une majestueuse raie manta explorant les eaux tropicales.",
+    "weight": "1,400 kg",
+    "size": "5 m"
+  },
+  {
+    "name": "Buzz",
+    "gender": "M",
+    "description": "Une abeille mellifère butineuse qui adore les fleurs.",
+    "weight": "0.1 g",
+    "size": "2 cm"
+  },
+  {
+    "name": "Spidey",
+    "gender": "M",
+    "description": "Une araignée de mer résidant dans les profondeurs océaniques.",
+    "weight": "10 g",
+    "size": "8 cm"
+  }
+]
