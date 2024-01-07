@@ -47,7 +47,7 @@ final class AnimalFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'NameAnm' => self::faker()->text(30),
+            'name' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
         ];
     }
 

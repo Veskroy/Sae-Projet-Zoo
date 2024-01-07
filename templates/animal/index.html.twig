@@ -3,5 +3,14 @@
 {% block title %}Animal{% endblock %}
 
 {% block body %}
-
+<h1>Listes des Animaux</h1>
+<div class="animalslist">
+    {% for animal in animals %}
+        <dt>{{ animal.name }}</dt>
+        <dd>Genre : {{ animal.gender }}</dd>
+        <dd>Description : {{ animal.description }}</dd>
+        <dd>Poids : {{ animal.weight }} g</dd>
+        <dd>Taille : {{ animal.size }} cm</dd>
+</div>
+    {% endfor %}
 {% endblock %}
