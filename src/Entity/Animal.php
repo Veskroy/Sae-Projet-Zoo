@@ -17,11 +17,11 @@ class Animal
     #[ORM\Column(length: 30)]
     private ?string $name = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $gender = null;
+    #[ORM\Column(length: 1)]
+    private ?string $gender = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $desc = null;
+    private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
     private ?float $weight = null;
@@ -43,6 +43,7 @@ class Animal
         return $this->id;
     }
 
+
     public function getName(): ?string
     {
         return $this->name;
@@ -55,26 +56,26 @@ class Animal
         return $this;
     }
 
-    public function getGender(): ?int
+    public function getGender(): ?string
     {
         return $this->gender;
     }
 
-    public function setGender(?int $gender): static
+    public function setGender(?string $gender): static
     {
         $this->gender = $gender;
 
         return $this;
     }
 
-    public function getDesc(): ?string
+    public function getDescription(): ?string
     {
-        return $this->desc;
+        return $this->description;
     }
 
-    public function setDesc(?string $desc): static
+    public function setDescription(?string $description): static
     {
-        $this->desc = $desc;
+        $this->description = $description;
 
         return $this;
     }
