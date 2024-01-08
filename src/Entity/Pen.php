@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PenRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PenRepository::class)]
@@ -14,16 +16,24 @@ class Pen
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Capacity = null;
+    private ?int $capacity = null;
 
     #[ORM\Column(length: 50, nullable: true)]
-    private ?string $TypePen = null;
+    private ?string $type = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $SizePen = null;
+    private ?float $size = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $Numplace = null;
+    private ?int $numPlace = null;
+
+    #[ORM\OneToMany(mappedBy: 'pen', targetEntity: Animal::class)]
+    private Collection $animal;
+
+    public function __construct()
+    {
+        $this->animal = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -32,48 +42,78 @@ class Pen
 
     public function getCapacity(): ?int
     {
-        return $this->Capacity;
+        return $this->capacity;
     }
 
-    public function setCapacity(?int $Capacity): static
+    public function setCapacity(?int $capacity): static
     {
-        $this->Capacity = $Capacity;
+        $this->capacity = $capacity;
 
         return $this;
     }
 
-    public function getTypePen(): ?string
+    public function getType(): ?string
     {
-        return $this->TypePen;
+        return $this->type;
     }
 
-    public function setTypePen(?string $TypePen): static
+    public function setType(?string $type): static
     {
-        $this->TypePen = $TypePen;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getSizePen(): ?float
+    public function getSize(): ?float
     {
-        return $this->SizePen;
+        return $this->size;
     }
 
-    public function setSizePen(?float $SizePen): static
+    public function setSize(?float $size): static
     {
-        $this->SizePen = $SizePen;
+        $this->size = $size;
 
         return $this;
     }
 
-    public function getNumplace(): ?int
+    public function getNumPlace(): ?int
     {
-        return $this->Numplace;
+        return $this->numPlace;
     }
 
-    public function setNumplace(?int $Numplace): static
+    public function setNumPlace(?int $numPlace): static
     {
-        $this->Numplace = $Numplace;
+        $this->numPlace = $numPlace;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Animal>
+     */
+    public function getAnimal(): Collection
+    {
+        return $this->animal;
+    }
+
+    public function addAnimal(Animal $animal): static
+    {
+        if (!$this->animal->contains($animal)) {
+            $this->animal->add($animal);
+            $animal->setPen($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimal(Animal $animal): static
+    {
+        if ($this->animal->removeElement($animal)) {
+            // set the owning side to null (unless already changed)
+            if ($animal->getPen() === $this) {
+                $animal->setPen(null);
+            }
+        }
 
         return $this;
     }

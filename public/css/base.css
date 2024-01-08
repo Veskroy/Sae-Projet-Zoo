@@ -1405,4 +1405,85 @@ div.content div.container-body-infos {
         justify-content: center;
         gap: 20px;
     }
+
+    /********/
+    /* Spot */
+    /********/
+
+    .allcartespot {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 5%;
+    }
+    .cartespot{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        width: 250px;
+        margin: 5px;
+        background-color: var(--darkenGreen);
+        color: var(--primaryWhite);
+        border-radius: 30px;
+    }
+    img.img-spot{
+        height: 175px;
+        width: 175px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    /**************/
+    /* ListAnimal */
+    /**************/
+
+    .carteanimal{
+        border-radius: 3px;
+        border: 3px solid var(--darkenGreen);
+        margin: 3px;
+    }
+
+    /**************/
+    /* ListSpecies */
+    /**************/
+
+    .cartespecies{
+        border-radius: 3px;
+        border: 3px solid var(--darkenGreen);
+        margin: 3px;
+    }
+
+    /**************/
+    /* ListFamily */
+    /**************/
+
+    .cartefamily{
+        border-radius: 3px;
+        border: 3px solid var(--darkenGreen);
+        margin: 3px;
+    }
+
+    /************/
+    /* All List */
+    /************/
+
+    .button_for_list{
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .button_list{
+        color: var(--primaryWhite);
+        background-color: var(--primaryGreen);
+        padding: 10px;
+        border-radius: 5px;
+    }
+    a.button_list:hover, a.button_list:focus,
+    button.button_list:hover, button.button_list:focus {
+        background-color: var(--darkenGreen);
+    }
 }

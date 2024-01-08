@@ -13,52 +13,22 @@ class Spot
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $CodeSpot = null;
-
-    #[ORM\Column(length: 10)]
-    private ?string $TypeSpot = null;
-
     #[ORM\Column(length: 30, nullable: true)]
-    private ?string $NameSpot = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCodeSpot(): ?int
+    public function getName(): ?string
     {
-        return $this->CodeSpot;
+        return $this->name;
     }
 
-    public function setCodeSpot(?int $CodeSpot): static
+    public function setName(?string $name): static
     {
-        $this->CodeSpot = $CodeSpot;
-
-        return $this;
-    }
-
-    public function getTypeSpot(): ?string
-    {
-        return $this->TypeSpot;
-    }
-
-    public function setTypeSpot(string $TypeSpot): static
-    {
-        $this->TypeSpot = $TypeSpot;
-
-        return $this;
-    }
-
-    public function getNameSpot(): ?string
-    {
-        return $this->NameSpot;
-    }
-
-    public function setNameSpot(?string $NameSpot): static
-    {
-        $this->NameSpot = $NameSpot;
+        $this->name = $name;
 
         return $this;
     }
