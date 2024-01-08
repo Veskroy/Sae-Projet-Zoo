@@ -1432,4 +1432,34 @@ div.content div.container-body-infos {
         border-radius: 10px;
         margin-bottom: 10px;
     }
+
+    /**************/
+    /* ListAnimal */
+    /**************/
+
+    .carteanimal{
+        border-radius: 3px;
+        border: 3px solid #364434;
+        margin: 3px;
+    }
+
+    /**************/
+    /* ListSpecies */
+    /**************/
+
+    .cartespecies{
+        border-radius: 3px;
+        border: 3px solid #364434;
+        margin: 3px;
+    }
+
+    /**************/
+    /* ListFamily */
+    /**************/
+
+    .cartefamily{
+        border-radius: 3px;
+        border: 3px solid #364434;
+        margin: 3px;
+    }
 }

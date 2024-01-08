@@ -6,8 +6,10 @@
 <h1>Listes des Familles</h1>
     <dl class="familylist">
     {% for family in families %}
-            <dt>{{ family.name }}</dt>
+        <div class="cartefamily">
+        <dt>{{ family.name }}</dt>
             <dd>Description : {{ family.description }}</dd>
+        </div>
     {% endfor %}
     </dl>
 {% endblock %}

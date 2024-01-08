@@ -6,7 +6,9 @@
     <h1>Listes des Espèces</h1>
     <div class="specieslist">
         {% for specie in species %}
+        <div class="cartespecies">
             <dt>{{ specie.name }}</dt>
             <dd>Description : {{ specie.description }}</dd>
+        </div>
         {% endfor %}
 {% endblock %}
