@@ -2,7 +2,8 @@
 
 {% block title %}Ticket{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/base.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/Ticket.css')}}" type="text/css">
+
 {% endblock %}
 
 {% block body %}
@@ -11,9 +12,17 @@
 
     {% for ticket in tickets %}
 
-    <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}' > Ticket Achete Numero {{ ticket.id}} </a></li>
+    <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}'>Ticket Achete Numero {{ ticket.id}} </a></li>
 
     {% endfor %}
 
-    <div>{{ form(form) }}</div>
+    <bouton type="button" class="button-lik"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></bouton>
+
+    {{ form_start(form, {'method': 'GET'}) }}
+    {{ form_row(form.date) }}
+
+
+    {{ form_end(form)}}
+
+    <input type="submit" value="type" />
 {% endblock %}

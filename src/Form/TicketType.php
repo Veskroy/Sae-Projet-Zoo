@@ -6,6 +6,8 @@ use App\Entity\Event;
 use App\Entity\Ticket;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,19 +16,28 @@ class TicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date')
-            ->add('price')
-            ->add('period')
+            ->add('date',DateType::class,[
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                ],
+            ] )
+           // ->add('price', MoneyType::class,[
+
+           // ])
             ->add('type')
-            /*->add('events',EntityType::class,[
+
+           /* ->add('event',EntityType::class,[
                 'class' => Event::class,
                 'choice_label' => 'name',
+                'multiple'=>true,
+
+
                     ])
-            */->add('user',EntityType::class,[
+            ->add('user',EntityType::class,[
                 'class' => Event::class,
                 'choice_label' => 'firstName'.'lastName',
                 'multiple'=>false] )
-        ;
+        */;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
