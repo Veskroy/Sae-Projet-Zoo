@@ -13,7 +13,7 @@ class TicketFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-       TicketFactory::createMany(2);
+       TicketFactory::createMany(5);
 
     }
 }
