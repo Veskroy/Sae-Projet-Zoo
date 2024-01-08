@@ -3,26 +3,30 @@
 
 namespace App\Tests\Controller\FAQController;
 
-use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
-
+use App\Tests\Support\UsersSetup;
 class IndexCest
 {
-    public function TestIndexFaq(ControllerTester $I)
+    use UsersSetup;
+
+    public function _before(ControllerTester $I): void
     {
-        $user = UserFactory::CreateOne([
-            'firstname' => 'Clément',
-            'lastname' => 'Perrot',
-            'email' => 'clementperrot@example.com',
-            'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
-        ]);
-        $realUser = $user->object();
-
-        $I->amLoggedInAs($realUser);
-
-        $I->amOnPage('/faq');
-        $I->seeCurrentRouteIs('app_faq');
-        $I->see('Foire aux questions du Zoo de la Palmyre');
+        $this->createUsers();
     }
+    public function TestIndexFaq(ControllerTester $I): void
+    {
+        $I->amLoggedInAs($this->userBasic);
+
+        $I->amOnPage('/forum');
+        $I->seeCurrentRouteIs('app_forum');
+        $I->see('Forum du Zoo de la Palmyre');
+    }
+
+    public function TestLoginForUsers(ControllerTester $I): void
+    {
+        $I->amOnPage('/forum');
+        $I->seeCurrentRouteIs('app_login');
+        $I->see('Connectez-vous!');
+    }
+
 }

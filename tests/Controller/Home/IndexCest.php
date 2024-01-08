@@ -3,42 +3,48 @@
 
 namespace App\Tests\Controller\Home;
 
-use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
+use App\Tests\Support\UsersSetup;
 
 class IndexCest
 {
-    public function TestIndexHome(ControllerTester $I)
+    use UsersSetup;
+
+    public function _before(ControllerTester $I): void
+    {
+        $this->createUsers();
+    }
+    public function TestIndex(ControllerTester $I): void
     {
         $I->amOnPage('/');
         $I->seeCurrentRouteIs('app_presentation');
         $I->seeResponseCodeIs(200);
         $I->seeElement('header');
-        $I->seeElement('.content');
+        $I->seeElement('.homepage');
         $I->seeElement('footer');
     }
 
-    public function TestProfileForAuthenticatedUsers(ControllerTester $I)
+    public function TestIndexForAuthenticatedAdmins(ControllerTester $I): void
     {
-        $user = UserFactory::CreateOne([
-            'firstname' => 'Clément',
-            'lastname' => 'Perrot',
-            'email' => 'clementperrot@example.com',
-            'password' => 'test',
-            'roles' => ['ROLE_ADMIN'],
-        ]);
-        $realUser = $user->object();
-        $I->amLoggedInAs($realUser);
-        $I->amOnPage('/profile');
-        $I->seeCurrentRouteIs('app_profile');
-        $I->see('Votre profil');
-        $identityUser = 'Bonjour, ' . $user->getFirstName() . ' ' . $user->getLastName();
+        $I->amLoggedInAs($this->userAdmin);
+        $I->amOnPage('/presentation');
+        $I->seeCurrentRouteIs('app_presentation');
+        $I->see('Bienvenue sur le site du Zoo de la Palmyre');
+        $identityUser = 'Bonjour, ' . $this->userAdmin->getFirstName() . ' ' . $this->userAdmin->getLastName();
         $I->see($identityUser);
+        $I->see('Accès administratif');
+        $I->click('Accès administratif');
+        $I->seeCurrentRouteIs('admin');
     }
-    public function TestLoginForUsers(ControllerTester $I)
+
+    public function TestIndexForAuthenticatedUsers(ControllerTester $I): void
     {
-        $I->amOnPage('/profile');
-        $I->seeCurrentRouteIs('app_login');
-        $I->see('Connectez-vous!');
+        $I->amLoggedInAs($this->userBasic);
+        $I->amOnPage('/presentation');
+        $I->seeCurrentRouteIs('app_presentation');
+        $I->dontSee('Accès administratif');
+        $I->amOnPage('/admin');
+        $I->seeResponseCodeIs(403);
     }
+
 }

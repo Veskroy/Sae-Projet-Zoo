@@ -69,7 +69,7 @@ class AnswerController extends AbstractController
                 $entityManager->remove($answer);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Cette réponse a bien été supprimé!');
+                $this->addFlash('success', 'Cette réponse a bien été supprimée!');
 
                 return $this->redirectToRoute('app_question_show', ['id' => $answer->getQuestion()->getId()]);
             } else {
