@@ -62,7 +62,14 @@ class Ticket
 
     public function setPrice(?int $Price): static
     {
-        $this->price = $Price;
+        // les prix possible
+        $all_price= [20,12,15,16,0,14];
+
+        if (in_array($Price,$all_price)){
+        $this->price = $Price;}
+
+        else
+        {$this->price=null;}
 
         return $this;
     }
@@ -110,8 +117,12 @@ class Ticket
 
     public function setType(?string $Type): static
     {
-        $this->type = $Type;
-
+        // les Types de ticket possible
+        $all_type= ['ENFANT','ETUDIANT','SENIOR','JUNIOR','HANDICAPE',null,''];
+            if(in_array($Type,$all_type)){
+        $this->type = $Type;}
+            else
+            {$this->type=null;}
         return $this;
     }
 

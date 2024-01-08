@@ -47,13 +47,35 @@ final class TicketFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-
+        $type=self::faker()->randomElement(['ENFANT','ETUDIANT','SENIOR','JUNIOR','HANDICAPE',null,'']);
+        switch ($type) {
+            case 'ENFANT':
+                $price = 12;
+                break;
+            case 'ETUDIANT':
+                $price= 15;
+                break;
+            case 'SENIOR':
+                $price= 16;
+                break;
+            case 'JUNIOR':
+                $price=0;
+                break;
+            case 'HANDICAPE':
+                $price=14;
+                break;
+            case '':
+                $price=20;
+                break;
+            default:
+                $price=null;
+        }
         return [
             'user' => null, // Temporaire on initialise  A null
             'date'=> null,
-            'price'=> self::faker()->numberBetween(0,200),
-            'period'=>self::faker()->numberBetween(0,14),
-            'type' => null,
+            'type' => $type,
+            'price'=> $price
+
         ];
     }
 
