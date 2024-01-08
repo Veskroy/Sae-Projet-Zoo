@@ -1425,8 +1425,8 @@ div.content div.container-body-infos {
         height: 250px;
         width: 250px;
         margin: 5px;
-        background-color: #364434;
-        color: #FFFFFF;
+        background-color: var(--darkenGreen);
+        color: var(--primaryWhite);
         border-radius: 30px;
     }
     img.img-spot{
@@ -1442,7 +1442,7 @@ div.content div.container-body-infos {
 
     .carteanimal{
         border-radius: 3px;
-        border: 3px solid #364434;
+        border: 3px solid var(--darkenGreen);
         margin: 3px;
     }
 
@@ -1452,7 +1452,7 @@ div.content div.container-body-infos {
 
     .cartespecies{
         border-radius: 3px;
-        border: 3px solid #364434;
+        border: 3px solid var(--darkenGreen);
         margin: 3px;
     }
 
@@ -1462,7 +1462,28 @@ div.content div.container-body-infos {
 
     .cartefamily{
         border-radius: 3px;
-        border: 3px solid #364434;
+        border: 3px solid var(--darkenGreen);
         margin: 3px;
+    }
+
+    /************/
+    /* All List */
+    /************/
+
+    .button_for_list{
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .button_list{
+        color: var(--primaryWhite);
+        background-color: var(--primaryGreen);
+        padding: 10px;
+        border-radius: 5px;
+    }
+    a.button_list:hover, a.button_list:focus,
+    button.button_list:hover, button.button_list:focus {
+        background-color: var(--darkenGreen);
     }
 }
