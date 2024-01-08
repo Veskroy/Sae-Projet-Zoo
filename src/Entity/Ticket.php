@@ -22,8 +22,6 @@ class Ticket
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $period = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
     private Collection $events ;
@@ -65,18 +63,6 @@ class Ticket
     public function setPrice(?int $Price): static
     {
         $this->price = $Price;
-
-        return $this;
-    }
-
-    public function getPeriod(): ?int
-    {
-        return $this->period;
-    }
-
-    public function setPeriod(?int $Period): static
-    {
-        $this->period = $Period;
 
         return $this;
     }
