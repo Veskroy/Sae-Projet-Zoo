@@ -14,5 +14,9 @@
         <dd>Taille : {{ animal.size }} cm</dd>
     </div>
     {% endfor %}
+    <div class="button_for_list">
+        <a class="button_list" href="{{path('app_family')}}">Liste des familles</a>
+        <a class="button_list" href="{{path('app_species')}}">Liste des espèces</a>
+    </div>
 </div>
 {% endblock %}

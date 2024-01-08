@@ -4,12 +4,16 @@
 
 {% block body %}
 <h1>Listes des Familles</h1>
-    <dl class="familylist">
+<div class="familylist">
     {% for family in families %}
         <div class="cartefamily">
         <dt>{{ family.name }}</dt>
             <dd>Description : {{ family.description }}</dd>
         </div>
     {% endfor %}
-    </dl>
+    <div class="button_for_list">
+        <a class="button_list" href="{{path('app_species')}}">Liste des espèces</a>
+        <a class="button_list" href="{{path('app_animal')}}">Liste des animaux</a>
+    </div>
+</div>
 {% endblock %}
