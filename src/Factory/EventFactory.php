@@ -46,11 +46,14 @@ final class EventFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $start = strtotime(self::faker()->time());
+        $end = strtotime(self::faker()->time());
+
         return [
             'nameEvent' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
             'dateEvent' => self::faker()->dateTimeBetween('now', '+1 month'),
-            'hStartEvent' => self::faker()->time(),
-            'hEndEvent' => self::faker()->time(),
+            #'hStartEvent' => date('h:i:s', $start),
+            #'hEndEvent' => date('h:i:s', $end),
             'maxNbPlaces' => self::faker()->randomNumber(3, true),
             'descEvent' => self::faker()->words(20, true),
         ];
