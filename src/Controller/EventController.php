@@ -13,7 +13,8 @@ class EventController extends AbstractController
     #[Route('/events', name: 'app_events')]
     public function index(EventRepository $eventRepository): Response
     {
-        return $this->render('event/index.html.twig', ['events' => $eventRepository]);
+        $events = $eventRepository->findAll();
+        return $this->render('event/index.html.twig', ['events' => $events]);
     }
 
     #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
