@@ -13,13 +13,17 @@
         Créer un post
     </a>
 
+    <a href="{{ path('app_question_liked') }}" class="link mbc">
+        Vos posts aimés
+    </a>
+
     <div class="faq-container">
         <h2 class="second-title mt-50 mb-50">Les posts les plus récents (page {{ pagination.currentPageNumber }})</h2>
 
         <form action="{{ path('app_forum') }}" method="GET">
             <div>
                 <label for="search">Rechercher un post</label>
-                <input type="text" name="search" id="search" placeholder="Saisissez un mot clé...">
+                <input type="text" name="search" id="search" placeholder="Saisissez un mot clé..." value={{ search }}>
                 <button class="btn button-primary" type="submit">Rechercher</button>
             </div>
         </form>
@@ -55,7 +59,7 @@
                     <div class="question__author">
                         <div class="author">
                             {% if question.author.avatarPathname is not null %}
-                                <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+                                <img src="{{ asset('uploads/avatars/' ~ question.author.avatarPathname) }}" alt="avatar" class="avatar">
                             {% else %}
                                 <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
                             {% endif %}
@@ -77,7 +81,7 @@
         {% endfor %}
         </div>
 
-        {{ include('components/pagination.html.twig', { 'pagination': pagination }) }}
+        {{ include('components/pagination.html.twig', { 'pagination': pagination, 'path': 'app_forum' }) }}
 
     </div>
 
