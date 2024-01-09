@@ -17,5 +17,5 @@
 /.idea
 
 .git-credentials
-###>js - fullcalendar ###
-/node_modules/
+
+public/uploads/**

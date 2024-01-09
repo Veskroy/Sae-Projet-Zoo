@@ -29,6 +29,9 @@ WildWonderHub est une application de gestion des visiteurs et des animaux du Zoo
 - Orm-fixtures
 - Zenstruck/foundry
 - EasyAdmin2
+- IconFinder (pour les icônes d'utilisateur, toutes gratuites)
+- Plugins Tabler Icons de Figma (pour les icônes de l'application, toutes gratuites)
+- Pexels et Unsplash, pour les images et vidéos de l'application, toutes gratuites et libres de droit
 
 ## Mises en place
 

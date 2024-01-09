@@ -10,6 +10,7 @@ use App\Form\QuestionType;
 use App\Repository\QuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -208,6 +209,33 @@ class QuestionController extends AbstractController
             );
         }
 
+    }
+
+    #[Route('/questions/liked', name: 'app_question_liked')]
+    public function likedQuestions(QuestionRepository $questionRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // récupération de toutes les questions likées par l'utilisateur courant
+        //$likedQuestions = $questionRepository->findLikedQuestions($user);
+        //dd($likedQuestions);
+
+        // pagination
+        $pagination = $paginator->paginate(
+            $questionRepository->findLikedQuestions($user),
+            $request->query->getInt('page', 1)
+        );
+
+        $totalLikedQuestions = $pagination->getTotalItemCount();
+
+        return $this->render('question/liked.html.twig', [
+            'user' => $user,
+            'pagination' => $pagination,
+            'totalLiked' => $totalLikedQuestions,
+        ]);
     }
 
 }
