@@ -14,7 +14,7 @@
     {% for event in events %}
         {% if event.dateEvent > 'now'|date('d - m -Y') %}
             <div>
-                <a>{{ event.nameEvent }}</a>
+                <a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.nameEvent }}</a>
                 <p>Nombre de places : {{ event.maxNbPlaces }}</p>
                 <p>{{ event.descEvent }}</p>
             </div>
