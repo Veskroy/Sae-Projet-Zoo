@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Question;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,7 +30,8 @@ class QuestionRepository extends ServiceEntityRepository
             ->getQuery();
     }
 
-    public function search(string $text = ''): array {
+    public function search(string $text = ''): array
+    {
         return $this->createQueryBuilder('q')
             ->where('q.title LIKE :text')
             ->orWhere('q.description LIKE :text')
@@ -37,6 +39,16 @@ class QuestionRepository extends ServiceEntityRepository
             ->orderBy('q.updatedAt', 'DESC')
             ->getQuery()
             ->getResult();
+    }
+
+    public function findLikedQuestions(User $user): Query
+    {
+        return $this->createQueryBuilder('q')
+            ->innerJoin('q.likes', 'u')
+            ->where('u.id = :user')
+            ->setParameter('user', $user)
+            ->orderBy('q.updatedAt', 'DESC')
+            ->getQuery();
     }
 
 //    /**
