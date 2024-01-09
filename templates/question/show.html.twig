@@ -41,7 +41,7 @@
             </div>
             <div class="author">
                 {% if question.author.avatarPathname is not null %}
-                    <img src="{{ asset('uploads/avatars/' ~ app.user.avatarPathname) }}" alt="avatar" class="avatar">
+                    <img src="{{ asset('uploads/avatars/' ~ question.author.avatarPathname) }}" alt="avatar" class="avatar">
                 {% else %}
                     <img src="{{asset('images/icons/profil_icon.svg')}}" alt="icone de profil" class="avatar" />
                 {% endif %}
