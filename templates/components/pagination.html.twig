@@ -1,3 +1,8 @@
+{#
+pagination: knppaginator,
+path: path to the route
+#}
+
 {% set result = pagination.totalItemCount / pagination.itemNumberPerPage %}
 {% set roundedResult = result|round(0, 'ceil') %}
 {% set numberPagesDisplayed = 2 %}
@@ -7,7 +12,7 @@
     {% if pagination.totalItemCount > pagination.itemNumberPerPage %}
 
         {% if pagination.currentPageNumber > 1 %}
-            <a href="{{ path('app_forum', {'page': 1, 'search': app.request.query.get('search')}) }}" class="btn-pagination link-first">
+            <a href="{{ path(path, {'page': 1, 'search': app.request.query.get('search')}) }}" class="btn-pagination link-first">
                 <<
             </a>
         {% else %}
@@ -29,7 +34,7 @@
                         >
                             {{ i }}</span>
                     {% else %}
-                        <a href="{{ path('app_forum', {'page': i, 'search': app.request.query.get('search')}) }}"
+                        <a href="{{ path(path, {'page': i, 'search': app.request.query.get('search')}) }}"
                            class="btn-pagination link-page"
                         >{{ i }}</a>
                     {% endif %}
@@ -42,7 +47,7 @@
         </div>
 
         {% if pagination.currentPageNumber != roundedResult %}
-            <a href="{{ path('app_forum', {'page': roundedResult, 'search': app.request.query.get('search')}) }}" class="btn-pagination link-last">
+            <a href="{{ path(path, {'page': roundedResult, 'search': app.request.query.get('search')}) }}" class="btn-pagination link-last">
                 >>
             </a>
         {% else %}
