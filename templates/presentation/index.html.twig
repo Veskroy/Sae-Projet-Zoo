@@ -40,15 +40,66 @@
 
         <div class="presentation-infos mt-50">
             <p class="presentation-infos__text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, placeat. Illo nulla beatae harum qui, id vel sunt quasi nihil laudantium sequi dolor officiis eligendi enim velit iure aspernatur! Soluta.
-                Amet error ullam commodi placeat nesciunt fuga quasi recusandae inventore impedit pariatur deserunt voluptatibus tempora eos, asperiores praesentium magni quidem doloremque qui mollitia. Nemo sequi odit delectus facilis dolore accusantium.
-                Laborum error voluptate neque culpa possimus reprehenderit, cum et ipsa explicabo sequi expedita laboriosam unde eveniet omnis quas inventore mollitia ad perspiciatis iste optio, nesciunt aliquam? Earum quo animi quidem?
-                Accusantium quibusdam officia voluptate aliquid aperiam, minima, deleniti itaque eligendi, adipisci exercitationem mollitia sapiente consequatur corporis modi necessitatibus harum tempore. Voluptatibus illum delectus aspernatur veniam corporis error eum labore incidunt!
+                Le Zoo de La Palmyre, situé sur la côte ouest de la France, est l'un des plus grands et des plus renommés
+                zoos d'Europe. Fondé en 1966, ce parc zoologique s'étend sur près de 18 hectares au cœur d'une magnifique
+                pinède. Il abrite une incroyable diversité d'animaux provenant des quatre coins du globe, offrant ainsi une
+                expérience immersive et éducative aux visiteurs de tous âges. Avec plus de 1 600 animaux appartenant à plus
+                de 115 espèces différentes (<a class="link" href="{{ path('app_species') }}">que vous pouvez retrouver ici</a>), le zoo s'engage activement dans la conservation et la préservation des espèces
+                menacées, tout en offrant des habitats spacieux et naturels pour le bien-être de ses résidents. En plus des
+                fascinantes rencontres animalières, les visiteurs peuvent également profiter de spectacles éducatifs,
+                d'aires de jeux et d'espaces de restauration au sein de ce véritable havre de biodiversité.
                 <br />
                 <br />
                 Pour toutes questions, n’hésitez pas à consulter notre <a class="link" href="{{ path('app_forum') }}">forum</a> ou <a class="link" href="{{ path('app_presentation') }}">nous contacter</a> à notre adresse mail !
             </p>
             <img src="{{ asset('images/img-animaux/suricates.png') }}" alt="img animal" />
+        </div>
+
+        <div class="presentation-practical-infos mt-50">
+            <h3 class="presentation__title mb-50">Informations pratiques
+            </h3>
+            <p class="presentation-pratical-infos__text center mt-50 mb-100">
+                Tournant le dos aux anciennes pratiques des parcs zoologiques, le parc met l'accent sur une amélioration
+                constante de la qualité de vie des animaux, et joue un rôle important dans la réintroduction dans leur
+                milieu naturel de certaines espèces menacées. Il joue également un rôle pédagogique auprès du visiteur
+                en l'informant sur la biologie et le comportement des espèces, ainsi qu'en le sensibilisant aux menaces
+                nécessitant de mettre en œuvre des mesures de conservation.
+            </p>
+
+            {{ include('components/video.html.twig', {
+                'video': asset('images/videos/singe.mp4'),
+                'controls': false
+            }) }}
+
+            <div class="practical-infos__content mt-100 mb-100">
+                <div class="practical-infos__item">
+                    <img src="{{ asset('images/icons/home/hour_icon.svg') }}" alt="hour icon" class="large-icon" />
+                    <p class="practical-infos__text">
+                        Notre zoo vous est ouvert tou£te l’année (jours fériés compris) de 9h à 19h du 1er avril au 30 septembre et de 9h à 18h le reste de l'année.</p>
+                </div>
+                <div class="practical-infos__item">
+                    <img src="{{ asset('images/icons/home/localisation_icon.svg') }}" alt="price icon" class="large-icon" />
+                    <p class="practical-infos__text">
+                        Rendez-vous à l'adresse suivante : <i>6 Avenue de Royan, 17570 Les Mathes</i> pour pouvoir profiter pleinement de notre Zoo !
+                    </p>
+                </div>
+                <div class="practical-infos__item">
+                    <img src="{{ asset('images/icons/home/price_icon.svg') }}" alt="localisation icon" class="large-icon" />
+                    <p class="practical-infos__text">
+                    Le prix d'entrée sans réduction est de 20€.
+                    <br />
+                    Gratuite pour les enfants de moins de 3 ans, 12€ pour ceux âgés de 3 à 12 ans.
+                    Les personnes en situation de handicap peuvent accéder au zoo au tarif de 14€. Les étudiants bénéficient d'un tarif réduit à 15€ tandis que les
+                    seniors peuvent profiter de leur visite au tarif de 16€.
+                    </p>
+                </div>
+            </div>
+
+            {{ include('components/video.html.twig', {
+                'video': asset('images/videos/pingouins.mp4'),
+                'controls': false
+            }) }}
+
         </div>
 
         <div class="line line-mbc"></div>
