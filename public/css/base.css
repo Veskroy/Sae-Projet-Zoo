@@ -9,6 +9,7 @@
     --primaryGreen: #4F614B;
     --primaryGreen-hover: #171f17;
     --darkenGreen: #364434;
+    --lightGreen: #afd5a7;
     --primaryBrown: #8D6536;
     --secondaryBrown: #4F3C26;
     --secondaryBrown-hover: #36291b;
@@ -356,6 +357,49 @@ label {
     font-size: 14px;
 }
 
+/* video */
+
+.video {
+    position: relative;
+}
+
+video {
+    position: relative;
+    z-index: 99;
+    max-width: 1000px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-inline: auto;
+    border: 20px solid var(--primaryGreen);
+}
+
+.video .top-video::before {
+    content: '';
+    width: 10%;
+    max-width: 50px;
+    height: 3px;
+    transform: rotate(45deg);
+    background: var(--primaryGreen);
+    position: absolute;
+    top: -15px;
+    left: calc(50% - 40px);
+}
+
+.video .top-video::after {
+    content: '';
+    width: 10%;
+    max-width: 50px;
+    height: 3px;
+    transform: rotate(135deg);
+    background: var(--primaryGreen);
+    position: absolute;
+    top: -15px;
+    left: calc(50% + 10px);
+}
+
+/*********/
+
 textarea {
     resize: vertical;
     min-height: 100px;
@@ -406,6 +450,11 @@ img.basic-icon {
     height: 20px;
 }
 
+img.large-icon {
+    width: 75px;
+    height: 75px;
+}
+
 /*.settings-action:hover {
     transform: translateY(-3px);
 }*/
@@ -434,6 +483,10 @@ a.mbc {
 a.link:hover {
     color: var(--primaryGray);
     text-decoration: none;
+}
+
+p.center {
+    text-align: center;
 }
 
 /* pagination */
@@ -789,6 +842,7 @@ img.icon-arrows:hover {
 }
 
 .presentation-infos {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -819,6 +873,62 @@ img.icon-arrows:hover {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.presentation-practical-infos {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.presentation-practical-infos img.background-home {
+    display: none;
+}
+
+p.presentation-pratical-infos__text {
+    color: var(--primaryGreen);
+    font-size: var(--font-size-m);
+    font-weight: bolder;
+}
+
+p.practical-infos__text {
+    color: var(--primaryGreen);
+    font-size: var(--font-size-s);
+    width: 70%;
+}
+
+.practical-infos__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.practical-infos__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 950px;
+    padding: 20px;
+    gap: 40px;
+}
+
+.practical-infos__item img {
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.practical-infos__item:nth-child(even) img {
+    background: var(--primaryGreen);
+}
+
+.practical-infos__item:nth-child(odd) img {
+    background: var(--primaryBrown);
 }
 
 /*********/
@@ -1360,6 +1470,12 @@ div.content div.container-body-infos {
     .card-question .card-question__bottom-infos .question-dates {
         text-align: right;
     }
+
+    .practical-infos__item {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
     /*h1.main-title::after {
         content: '';
         background-image: url("/images/Sae_Zoo_Image/LogoSAE_Zoo.png");
