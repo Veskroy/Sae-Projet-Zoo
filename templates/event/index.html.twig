@@ -15,7 +15,7 @@
         {% if event.dateEvent > 'now'|date('d - m -Y') %}
             <div>
                 <a>{{ event.nameEvent }}</a>
-                <p>Nombre de places :</p>
+                <p>Nombre de places : {{ event.maxNbPlaces }}</p>
                 <p>{{ event.descEvent }}</p>
             </div>
         {% endif %}
