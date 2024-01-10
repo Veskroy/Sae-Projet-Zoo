@@ -34,7 +34,7 @@ class Event
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $desc = null;
 
-    #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'Event')]
+    #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'event')]
     private Collection $tickets;
 
     public function __construct()
@@ -145,5 +145,4 @@ class Event
 
         return $this;
     }
-
 }

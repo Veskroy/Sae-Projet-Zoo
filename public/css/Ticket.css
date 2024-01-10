@@ -1,7 +1,19 @@
 
-.button-link{
-    text-decoration: whitesmoke;
-    background-color: lightskyblue;
-    border: 1px solid ;
-    border-radius: 90px ;
+.repeat-ticket{
+    border-bottom: 4px solid;
+    border-top: 4px solid;
+}
+
+.form-ticket-add{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    border-radius: 90px;
+    background-color: gainsboro;
+}
+
+#inter-flex{
+    width:90%;
+
 }

@@ -22,20 +22,20 @@ class Ticket
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
-
-    #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
-    private Collection $events ;
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'tickets')]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $type = null; // true a modifier
+    #[ORM\ManyToMany(targetEntity: Event::class, inversedBy: 'tickets')]
+    #[ORM\JoinColumn(nullable: true)]
+    private Collection $event;
 
     public function __construct()
     {
-        $this->events = new ArrayCollection();
+       $this->event = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -74,27 +74,19 @@ class Ticket
         return $this;
     }
 
-    /**
-     * @return Collection<int, Event>
-     */
-    public function getEvent(): Collection
+    public function getType(): ?string
     {
-        return $this->events;
+        return $this->type;
     }
 
-    public function addEvent(event $event): static
+    public function setType(?string $Type): static
     {
-        if (!$this->events->contains($event)) {
-            $this->events->add($event);
-        }
-
-        return $this;
-    }
-
-    public function removeEvent(Event $event): static
-    {
-        $this->events->removeElement($event);
-
+        // les Types de ticket possible
+        $all_type= ['ENFANT','ETUDIANT','SENIOR','JUNIOR','HANDICAPE',null,''];
+            if(in_array($Type,$all_type)){
+        $this->type = $Type;}
+            else
+            {$this->type=null;}
         return $this;
     }
 
@@ -110,19 +102,27 @@ class Ticket
         return $this;
     }
 
-    public function getType(): ?string
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvent(): Collection
     {
-        return $this->type;
+        return $this->event;
     }
 
-    public function setType(?string $Type): static
+    public function addEvent(Event $event): static
     {
-        // les Types de ticket possible
-        $all_type= ['ENFANT','ETUDIANT','SENIOR','JUNIOR','HANDICAPE',null,''];
-            if(in_array($Type,$all_type)){
-        $this->type = $Type;}
-            else
-            {$this->type=null;}
+        if (!$this->event->contains($event)) {
+            $this->event->add($event);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): static
+    {
+        $this->event->removeElement($event);
+
         return $this;
     }
 

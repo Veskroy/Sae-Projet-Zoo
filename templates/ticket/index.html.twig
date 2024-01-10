@@ -11,19 +11,26 @@
     <h1>Liste de Ticket Achete</h1>
 
     {% for ticket in tickets %}
-
-    <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}'>Ticket Achete Numero {{ ticket.id}} </a></li>
-
+    <div class="repeat-ticket">
+        <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}'>Ticket Achete Numero {{ ticket.id}} </a></li>
+    </div>
     {% endfor %}
 
-    <div class="button-link"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></div>
+    <div class="form-ticket-add">
 
-    <div>
-    {{ form(form, {'method': 'GET'}) }}
+    {{ form_start(form, {'method': 'GET'}) }}
+        <div id="inter-flex">
+        <h5>Selectioner la date d'application de votre ticket</h5>
+        {{ form_row(form.date)}}
+        </div>
+
+        <div id="inter-flex">
+        <h5>Selectionner votre type de forfait</h5>
+        {{ form_row(form.type) }}
+        <i> * Type de forfait { Normal = 20 € / Enfant = 12 € / Etudient = 15€ / Senior = 16 € / Junior = Gratuit / Handicape = 14 €</i>
     </div>
+    {{ form_end(form) }}
 
-    <div class="button">
-        <button type="submit">Envoyer le message</button>
     </div>
 
 

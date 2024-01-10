@@ -6,8 +6,10 @@ use App\Entity\Event;
 use App\Entity\Ticket;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +26,12 @@ class TicketType extends AbstractType
            // ->add('price', MoneyType::class,[
 
            // ])
-            ->add('type')
+            ->add('type',ChoiceType::class,[
+               'choices' => [
+                   'choix 1' => 'blabla',
+                   'choix 2' => 'blabla',
+                   'choix 3' => 'blabla',
+               ]])
 
            /* ->add('event',EntityType::class,[
                 'class' => Event::class,
