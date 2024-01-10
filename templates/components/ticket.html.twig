@@ -2,11 +2,19 @@
 ticket: Ticket
 #}
 
+{% set tomorrow = "tomorrow"|date("Y-m-d") %}
+{% set ticketDate = ticket.date|date("Y-m-d") %}
+
 <div class="ticket">
     <div class="ticket-content">
         <div class="ticket-content__top">
             <p>
-                {{ ticket.date }}
+                {{ ticketDate < "now"|date("Y-m-d")
+                    ?
+                    "Passé"
+                    :
+                    (ticketDate == "now"|date("Y-m-d") ? "Aujourd'hui" : (ticketDate == tomorrow ? "Demain" : "Bientôt"))
+                }}
             </p>
             {{ include('components/dropdown.html.twig' ,
                 {
