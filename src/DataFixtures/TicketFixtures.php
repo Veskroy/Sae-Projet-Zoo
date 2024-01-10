@@ -16,7 +16,7 @@ class TicketFixtures extends Fixture
     {
        TicketFactory::createMany(5, function (){
            return [
-               'user'=> UserFactory::random()
+               'user'=> UserFactory::random(),
            ];
        });
 
