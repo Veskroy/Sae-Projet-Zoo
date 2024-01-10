@@ -4,21 +4,26 @@ namespace App\DataFixtures;
 
 use App\Factory\TicketFactory;
 use App\Factory\UserFactory;
+use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
-
-;
 
 class TicketFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-       TicketFactory::createMany(5, function (){
-           return [
-               'user'=> UserFactory::random(),
-           ];
-       });
+        $allUsers = UserFactory::repository()->findAll();
+        foreach ($allUsers as $user) {
+            $random = range(2, 10);
+            TicketFactory::createMany($random[array_rand($random)], function () use ($user) {
+                return [
+                    'user' => $user,
+                ];
+            });
+        }
+
+        $manager->flush();
 
     }
 }
