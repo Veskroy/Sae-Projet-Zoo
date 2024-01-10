@@ -15,7 +15,9 @@ class TicketFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
        TicketFactory::createMany(5, function (){
-           return ['user'=>UserFactory::random()];
+           return [
+               'user'=> UserFactory::random()
+           ];
        });
 
     }
