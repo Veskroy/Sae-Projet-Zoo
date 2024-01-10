@@ -23,6 +23,20 @@ class TicketFixtures extends Fixture
             });
         }
 
+        $user = UserFactory::repository()->findOneBy(['email' => 'root@example.com']);
+        TicketFactory::createOne(
+            [
+                'user' => $user,
+                'date' => new \DateTime('+1 day'),
+            ]
+        );
+        TicketFactory::createOne(
+            [
+                'user' => $user,
+                'date' => new \DateTime(),
+            ]
+        );
+
         $manager->flush();
 
     }
