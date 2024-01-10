@@ -22,12 +22,16 @@ path: path to the route
         {% endif %}
 
         <div class="pagination-data">
-            {% if (pagination.currentPageNumber - numberPagesDisplayed) > 1 %}
+            <a href="{{ path(path, {'page': 1, 'search': app.request.query.get('search')}) }}"
+               class="btn-pagination link-page {{ pagination.currentPageNumber == 1 ? 'pagination-actual-number' : '' }}"
+            >1</a>
+
+            {% if (pagination.currentPageNumber - numberPagesDisplayed) - 1 > 1 %}
                 <span class="btn-pagination indicator">...</span>
             {% endif %}
 
             {% for i in (pagination.currentPageNumber - numberPagesDisplayed)..(pagination.currentPageNumber+numberPagesDisplayed) %}
-                {% if i > 0 and i <= roundedResult %}
+                {% if i > 1 and i <= roundedResult - 1 %}
                     {% if pagination.currentPageNumber == i %}
                         <span class=
                               "btn-pagination pagination-actual-number"
@@ -41,9 +45,13 @@ path: path to the route
                 {% endif %}
             {% endfor %}
 
-            {% if (pagination.currentPageNumber + numberPagesDisplayed) < roundedResult %}
+            {% if (pagination.currentPageNumber + numberPagesDisplayed) < roundedResult - 1 %}
                 <span class="btn-pagination indicator">...</span>
             {% endif %}
+
+            <a href="{{ path(path, {'page': roundedResult, 'search': app.request.query.get('search')}) }}"
+               class="btn-pagination link-page {{ pagination.currentPageNumber == roundedResult ? 'pagination-actual-number' : '' }}"
+            >{{ roundedResult }}</a>
         </div>
 
         {% if pagination.currentPageNumber != roundedResult %}
