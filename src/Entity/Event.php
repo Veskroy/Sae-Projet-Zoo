@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,96 +17,131 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 30, nullable: true)]
-    private ?string $nameEvent = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateEvent = null;
+    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $hStartEvent = null;
+    private ?\DateTimeInterface $hstart = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $hEndEvent = null;
+    private ?\DateTimeInterface $hend = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $maxNbPlaces = null;
+    private ?int $maxiNumPlace = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $descEvent = null;
+    private ?string $desc = null;
+
+    #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'Event')]
+    private Collection $tickets;
+
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNameEvent(): ?string
+    public function getName(): ?string
     {
-        return $this->nameEvent;
+        return $this->name;
     }
 
-    public function setNameEvent(?string $nameEvent): static
+    public function setName(?string $Name): static
     {
-        $this->nameEvent = $nameEvent;
+        $this->name = $Name;
 
         return $this;
     }
 
-    public function getDateEvent(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->dateEvent;
+        return $this->date;
     }
 
-    public function setDateEvent(?\DateTimeInterface $dateEvent): static
+    public function setDate(?\DateTimeInterface $Date): static
     {
-        $this->dateEvent = $dateEvent;
+        $this->date = $Date;
 
         return $this;
     }
 
-    public function getHStartEvent(): ?\DateTimeInterface
+    public function getHstart(): ?\DateTimeInterface
     {
-        return $this->hStartEvent;
+        return $this->hstart;
     }
 
-    public function setHStartEvent(?\DateTimeInterface $hStartEvent): static
+    public function setHstart(?\DateTimeInterface $Hstart): static
     {
-        $this->hStartEvent = $hStartEvent;
+        $this->hstart = $Hstart;
 
         return $this;
     }
 
-    public function getHEndEvent(): ?\DateTimeInterface
+    public function getHend(): ?\DateTimeInterface
     {
-        return $this->hEndEvent;
+        return $this->hend;
     }
 
-    public function setHEndEvent(?\DateTimeInterface $hEndEvent): static
+    public function setHend(?\DateTimeInterface $Hend): static
     {
-        $this->hEndEvent = $hEndEvent;
+        $this->hend = $Hend;
 
         return $this;
     }
 
     public function getMaxNbPlaces(): ?int
     {
-        return $this->maxNbPlaces;
+        return $this->maxiNumPlace;
     }
 
     public function setMaxNbPlaces(?int $maxNbPlaces): static
     {
-        $this->maxNbPlaces = $maxNbPlaces;
+        $this->maxiNumPlace = $MaxiNumPlace;
 
         return $this;
     }
 
-    public function getDescEvent(): ?string
+    public function getDesc(): ?string
     {
-        return $this->descEvent;
+        return $this->desc;
     }
 
-    public function setDescEvent(?string $descEvent): static
+    public function setDesc(?string $Desc): static
     {
-        $this->descEvent = $descEvent;
+        $this->desc = $Desc;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ticket>
+     */
+    public function getTickets(): Collection
+    {
+        return $this->tickets;
+    }
+
+    public function addTicket(Ticket $ticket): static
+    {
+        if (!$this->tickets->contains($ticket)) {
+            $this->tickets->add($ticket);
+            $ticket->addEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Ticket $ticket): static
+    {
+        if ($this->tickets->removeElement($ticket)) {
+            $ticket->removeEvent($this);
+        }
 
         return $this;
     }

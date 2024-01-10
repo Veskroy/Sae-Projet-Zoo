@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Ticket{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/Ticket.css')}}" type="text/css">
+
+{% endblock %}
 
 {% block body %}
+
+    <h1>Liste de Ticket Achete</h1>
+
+    {% for ticket in tickets %}
+
+    <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}'>Ticket Achete Numero {{ ticket.id}} </a></li>
+
+    {% endfor %}
+
+    <div class="button-link"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></div>
+
+    <div>
+    {{ form(form, {'method': 'GET'}) }}
+    </div>
+
+    <div class="button">
+        <button type="submit">Envoyer le message</button>
+    </div>
+
+
+
 
 {% endblock %}
