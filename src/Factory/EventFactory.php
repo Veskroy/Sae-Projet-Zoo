@@ -50,12 +50,12 @@ final class EventFactory extends ModelFactory
         $end = strtotime(self::faker()->time());
 
         return [
-            'nameEvent' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
-            'dateEvent' => self::faker()->dateTimeBetween('now', '+1 month'),
+            'name' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
+            'date' => self::faker()->dateTimeBetween('now', '+1 month'),
             #'hStartEvent' => date('h:i:s', $start),
             #'hEndEvent' => date('h:i:s', $end),
-            'maxNbPlaces' => self::faker()->randomNumber(3, true),
-            'descEvent' => self::faker()->words(20, true),
+            'maxNumPlaces' => self::faker()->randomNumber(3, true),
+            'description' => self::faker()->words(20, true),
         ];
     }
 
