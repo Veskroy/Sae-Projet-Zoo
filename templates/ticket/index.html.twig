@@ -16,13 +16,17 @@
 
     {% endfor %}
 
-    <bouton type="button" class="button-lik"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></bouton>
+    <div class="button-link"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></div>
 
-    {{ form_start(form, {'method': 'GET'}) }}
-    {{ form_row(form.date) }}
+    <div>
+    {{ form(form, {'method': 'GET'}) }}
+    </div>
+
+    <div class="button">
+        <button type="submit">Envoyer le message</button>
+    </div>
 
 
-    {{ form_end(form)}}
 
-    <input type="submit" value="type" />
+
 {% endblock %}

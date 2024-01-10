@@ -3,5 +3,20 @@
 {% block title %}Animal{% endblock %}
 
 {% block body %}
-
+<h1>Listes des Animaux</h1>
+<div class="animalslist">
+    {% for animal in animals %}
+    <div class="carteanimal">
+        <dt>{{ animal.name }}</dt>
+        <dd>Genre : {{ animal.gender }}</dd>
+        <dd>Description : {{ animal.description }}</dd>
+        <dd>Poids : {{ animal.weight }} g</dd>
+        <dd>Taille : {{ animal.size }} cm</dd>
+    </div>
+    {% endfor %}
+    <div class="button_for_list">
+        <a class="button_list" href="{{path('app_family')}}">Liste des familles</a>
+        <a class="button_list" href="{{path('app_species')}}">Liste des espèces</a>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Crocodile du Nil",
+    "diet": "Carnivore",
+    "origin": "Afrique subsaharienne",
+    "description": "Reptile de la famille des Crocodylidae. Il est l'un des plus grands crocodiliens d'Afrique et est bien adapté aux habitats aquatiques."
+  },
+  {
+    "name": "Serpent à sonnette",
+    "diet": "Carnivore",
+    "origin": "Amériques",
+    "description": "Serpent venimeux de la famille des Viperidae. Il est reconnaissable par son anneau de sonnette à la pointe de sa queue."
+  },
+  {
+    "name": "Grenouille taureau",
+    "diet": "Carnivore",
+    "origin": "Amériques",
+    "description": "Amphibien de la famille des Ranidae. Elle est parmi les plus grandes grenouilles d'Amérique du Nord."
+  },
+  {
+    "name": "Thon rouge",
+    "diet": "Carnivore",
+    "origin": "Océans du monde",
+    "description": "Poisson de la famille des Scombridae. Il est très prisé pour sa chair, ce qui a conduit à une surpêche sévère."
+  },
+  {
+    "name": "Requin-tigre",
+    "diet": "Carnivore",
+    "origin": "Océans tropicaux",
+    "description": "Requin de la famille des Carcharhinidae. Reconnaissable par ses bandes verticales, il est l'un des plus grands requins."
+  },
+  {
+    "name": "Mille-pattes géant d'Afrique",
+    "diet": "Carnivore",
+    "origin": "Afrique tropicale",
+    "description": "Arthropode de la famille des Scutigeridae. Bien qu'il porte le nom de mille-pattes, il possède beaucoup moins de pattes."
+  },
+  {
+    "name": "Papillon monarque",
+    "diet": "Herbivore",
+    "origin": "Amériques",
+    "description": "Insecte de la famille des Nymphalidae. Il est célèbre pour ses migrations annuelles sur de longues distances."
+  },
+  {
+    "name": "Araignée-loup",
+    "diet": "Carnivore",
+    "origin": "Régions tempérées",
+    "description": "Arachnide de la famille des Lycosidae. Elle chasse activement ses proies plutôt que de les piéger dans une toile."
+  },
+  {
+    "name": "Homard bleu",
+    "diet": "Omnivore",
+    "origin": "Océans Atlantique",
+    "description": "Crustacé de la famille des Nephropidae. Il est prisé pour sa chair tendre et est souvent considéré comme un mets de luxe."
+  },
+  {
+    "name": "Pieuvre commune",
+    "diet": "Carnivore",
+    "origin": "Océans mondiaux",
+    "description": "Céphalopode de la famille des Octopodidae. Elle est connue pour sa capacité à changer rapidement de couleur et de texture."
+  },
+  {
+    "name": "Panda géant",
+    "diet": "Herbivore",
+    "origin": "Régions montagneuses des provinces du Sichuan et du Gansu",
+    "description": "Mammifères de la famille des Ursidés (Ursidae), endémique de Chine centrale. Il fait partie de l'ordre des Carnivores, même si son régime alimentaire est constitué à 99 % de végétaux, principalement de bambou."
+  },
+  {
+    "name": "Moule perlière",
+    "diet": "Filtrivore",
+    "origin": "Rivières d'eau douce d'Europe",
+    "description": "Bivalve de la famille des Unionidae. Elle est connue pour produire des perles lorsqu'un grain de sable ou un parasite pénètre dans sa coquille."
+  },
+  {
+    "name": "Escargot de Bourgogne",
+    "diet": "Herbivore",
+    "origin": "Régions d'Europe",
+    "description": "Gastéropode terrestre de la famille des Helicidae. C'est une espèce largement consommée en gastronomie."
+  },
+  {
+    "name": "Étoile de mer commune",
+    "diet": "Carnivore",
+    "origin": "Océans du monde",
+    "description": "Échinoderme de la famille des Asteriidae. Elle se déplace en utilisant des centaines de petits pieds ambulacraires."
+  },
+  {
+    "name": "Méduse lumineuse",
+    "diet": "Carnivore",
+    "origin": "Océans tropicaux",
+    "description": "Cnidaria de la famille des Pelagiidae. Certains membres de cette famille sont bioluminescents, émettant une lueur bleutée dans l'eau."
+  },
+  {
+    "name": "Lombric de terre",
+    "diet": "Détritivore",
+    "origin": "Sols du monde entier",
+    "description": "Annélide de la famille des Lumbricidae. Il joue un rôle essentiel dans l'aération et la fertilisation du sol."
+  },
+  {
+    "name": "Salamandre tachetée",
+    "diet": "Carnivore",
+    "origin": "Forêts d'Amérique du Nord",
+    "description": "Amphibien de la famille des Salamandridae. Elle possède une peau lisse et des motifs colorés qui avertissent les prédateurs de sa toxicité."
+  },
+  {
+    "name": "Truite arc-en-ciel",
+    "diet": "Carnivore",
+    "origin": "Lacs et rivières d'Amérique du Nord",
+    "description": "Poisson de la famille des Salmonidae. Elle est appréciée pour sa chair savoureuse et est largement élevée en pisciculture."
+  },
+  {
+    "name": "Raie manta",
+    "diet": "Planctonivore",
+    "origin": "Océans tropicaux",
+    "description": "Chondrichthyen de la famille des Mobulidae. C'est la plus grande des raies, pouvant atteindre une envergure de plus de sept mètres."
+  },
+  {
+    "name": "Abeille mellifère",
+    "diet": "Nectarivore",
+    "origin": "Régions tempérées du monde",
+    "description": "Insecte de la famille des Apidae. Elle est essentielle à la pollinisation des plantes à fleurs et à la production de miel."
+  },
+  {
+    "name": "Araignée de mer",
+    "diet": "Carnivore",
+    "origin": "Fonds marins",
+    "description": "Arachnide de la famille des Pycnogonidae. Bien que ressemblant à des araignées, elles sont adaptées à la vie marine et possèdent des appendices étranges."
+  }
+]

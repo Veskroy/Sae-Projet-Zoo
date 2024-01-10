@@ -34,7 +34,7 @@ class TicketController extends AbstractController
     }
 
     #[Route ('/ticket/Create', name: 'app_ticket_create')]
-    public function create(Ticket $ticket) :Response
+    public function create() :Response
     {   $newticket= new Ticket();
         $form = $this->createForm(TicketType::class, $newticket);
         return $this->render('ticket/ticketcreate.html.twig', [
@@ -46,7 +46,7 @@ class TicketController extends AbstractController
     {return $this->render('ticket/', [
     ]); }
     #[Route ('/ticket/{id}/Update', name: 'app_ticket_update',  requirements: ['id' => '\d+'])]
-    public function update() :Response
+    public function update(Ticket $ticket) :Response
     {return $this->render('ticket/', [
     ]); }
 }

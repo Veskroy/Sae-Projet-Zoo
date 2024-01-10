@@ -22,3 +22,5 @@
 /.idea
 
 .git-credentials
+
+public/uploads/**

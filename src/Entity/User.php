@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -19,6 +20,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(['max' => 100])]
+    #[Assert\Email(['message' => 'The email " {{ value }} " is not a valid email.'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -31,29 +35,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Assert\NotBlank()]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 40)]
+    #[Assert\NotBlank()]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 10, nullable: true)]
+    #[Assert\Length(['max' => 20])]
+    #[Assert\Regex(pattern: '/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4})$/', message: 'Format de téléphone invalide')]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 5, nullable: true)]
     private ?string $pc = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Ticket::class)]
-    private Collection $tickets;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatarPathname = null;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Question::class, orphanRemoval: true)]
+    private Collection $questions;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Answer::class, orphanRemoval: true)]
+    private Collection $answers;
 
     public function __construct()
     {
-        $this->tickets = new ArrayCollection();
+        $this->questions = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,33 +213,86 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Ticket>
-     */
-    public function getTickets(): Collection
+    public function getAvatarPathname(): ?string
     {
-        return $this->tickets;
+        return $this->avatarPathname;
     }
 
-    public function addTicket(Ticket $ticket): static
+    public function setAvatarPathname(?string $avatarPathname): static
     {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets->add($ticket);
-            $ticket->setUser($this);
+        $this->avatarPathname = $avatarPathname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Question>
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): static
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions->add($question);
+            $question->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeTicket(Ticket $ticket): static
+    public function removeQuestion(Question $question): static
     {
-        if ($this->tickets->removeElement($ticket)) {
+        if ($this->questions->removeElement($question)) {
             // set the owning side to null (unless already changed)
-            if ($ticket->getUser() === $this) {
-                $ticket->setUser(null);
+            if ($question->getAuthor() === $this) {
+                $question->setAuthor(null);
             }
         }
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): static
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+            $answer->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): static
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getAuthor() === $this) {
+                $answer->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN', $this->getRoles());
+    }
+
+    public function toString(): string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }
+
