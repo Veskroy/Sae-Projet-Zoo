@@ -70,4 +70,42 @@ class CrudCest
         $I->see('Vous avez saisi deux mots de passe différents...');
     }
 
+    public function TestEditPasswordOfUser(ControllerTester $I): void
+    {
+        // connecté en tant que userBasic
+        /* 'firstname' => 'Clément',
+            'lastname' => 'Perrot',
+            'email' => $uniqueEmailBasic,
+            'password' => 'test',
+            'roles' => ['ROLE_USER'], */
+
+        $I->amLoggedInAs($this->userBasic);
+        $I->amOnPage('/profile');
+        $I->seeResponseCodeIs(200);
+        $I->seeCurrentRouteIs('app_profile');
+
+        $I->fillField('profile_password[currentPassword]', 'test');
+        $I->fillField('profile_password[newPassword][first]', 'test2');
+        $I->fillField('profile_password[newPassword][second]', 'test2');
+        $I->click('Modifier mon mot de passe');
+
+        $I->see('Le mot de passe a bien été modifié!');
+
+        // logout
+        $I->click('Se déconnecter');
+        $I->seeCurrentRouteIs('app_presentation');
+
+        // login
+        $I->amOnPage('/login');
+        $I->seeResponseCodeIs(200);
+        $I->seeCurrentRouteIs('app_login');
+        $I->fillField('email', $this->userBasic->getEmail());
+        $I->fillField('password', 'test2');
+        $I->click('Me connecter');
+        $I->amOnPage('/profile');
+        $I->seeResponseCodeIs(200);
+        $I->see('Bonjour, ' . $this->userBasic->toString());
+    }
+
+
 }
