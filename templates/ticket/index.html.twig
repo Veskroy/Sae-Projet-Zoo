@@ -17,20 +17,20 @@
     {% endfor %}
 
     <div class="form-ticket-add">
-   <!---<div class="button-link"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></div> --->
-
 
     {{ form_start(form, {'method': 'GET'}) }}
+        <div id="inter-flex">
         <h5>Selectioner la date d'application de votre ticket</h5>
         {{ form_row(form.date)}}
+        </div>
 
+        <div id="inter-flex">
         <h5>Selectionner votre type de forfait</h5>
         {{ form_row(form.type) }}
-        <i> * Type de forfait <br/> Normal = 20 € <br/> Enfant = 12 €<br/> Etudient = 15€ <br/> Senior = 16 €<br/> Junior = Gratuit <br/> Handicape = 14 €</i>
-
+        <i> * Type de forfait { Normal = 20 € / Enfant = 12 € / Etudient = 15€ / Senior = 16 € / Junior = Gratuit / Handicape = 14 €</i>
+    </div>
     {{ form_end(form) }}
-        
-        <input type="submit" value="Creer le ticket">
+
     </div>
 
 

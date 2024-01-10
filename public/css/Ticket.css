@@ -6,6 +6,14 @@
 
 .form-ticket-add{
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
     border-radius: 90px;
     background-color: gainsboro;
+}
+
+#inter-flex{
+    width:90%;
+
 }
