@@ -102,7 +102,7 @@ class Event
 
     public function setMaxNbPlaces(?int $maxNbPlaces): static
     {
-        $this->maxiNumPlace = $MaxiNumPlace;
+        $this->maxiNumPlace = $maxNbPlaces;
 
         return $this;
     }
