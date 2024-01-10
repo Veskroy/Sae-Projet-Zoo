@@ -16,7 +16,7 @@
 
             {% if app.user %}
                 <a href="{{path('app_forum')}}" class="menu-link">Forum</a>
-                <a href="{{path('app_home')}}" class="btn button-secondary">Réserver</a>
+                <a href="{{path('app_ticket')}}" class="btn button-secondary">Réserver</a>
                 <a href="{{path('app_logout')}}" class="btn button-primary">Se déconnecter</a>
 
                 {% if is_granted('ROLE_ADMIN') %}
