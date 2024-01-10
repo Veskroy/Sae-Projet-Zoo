@@ -71,8 +71,7 @@ final class TicketFactory extends ModelFactory
                 $price=null;
         }
         return [
-            'user' => null, // Temporaire on initialise  A null
-            'date'=> null,
+            'date'=> self::faker()->DateTime,
             'type' => $type,
             'price'=> $price
 
