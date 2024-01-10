@@ -95,12 +95,12 @@ class Event
         return $this;
     }
 
-    public function getMaxiNumPlace(): ?int
+    public function getMaxNbPlaces(): ?int
     {
         return $this->maxiNumPlace;
     }
 
-    public function setMaxiNumPlace(?int $MaxiNumPlace): static
+    public function setMaxNbPlaces(?int $maxNbPlaces): static
     {
         $this->maxiNumPlace = $MaxiNumPlace;
 

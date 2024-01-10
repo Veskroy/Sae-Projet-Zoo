@@ -1,7 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event{% endblock %}
+{% block title %}Évènements à venir{% endblock %}
+
+{% block javascripts %}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src="{{ asset('scripts/eventCalendars.js') }}" defer></script>
+{% endblock %}
 
 {% block body %}
-
+    <h1>Calendrier des évènements</h1>
+    <div id='calendar'></div>
+    <h1>Liste des évènements à venir</h1>
+    {% for event in events %}
+        {% if event.dateEvent > 'now'|date('d - m -Y') %}
+            <div>
+                <a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.nameEvent }}</a>
+                <p>Nombre de places : {{ event.maxNbPlaces }}</p>
+                <p>{{ event.descEvent }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
