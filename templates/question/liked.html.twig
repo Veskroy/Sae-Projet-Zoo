@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Vos posts likés
+    Vos posts favoris
 {% endblock %}
 
 {% block body %}
 
-    <h1 class="main-title">Vos posts likés</h1>
+    <h1 class="main-title">Vos posts favoris</h1>
 
     {% if totalLiked > 0 %}
         <p class="center mt-50">Vous avez aimé {{ totalLiked > 1 ? totalLiked ~ ' posts' : totalLiked ~ ' post' }}</p>
