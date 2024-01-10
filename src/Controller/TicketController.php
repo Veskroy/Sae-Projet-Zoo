@@ -50,13 +50,7 @@ class TicketController extends AbstractController
             'user'=>$user]);
     }
 
-    #[Route ('/ticket/Create', name: 'app_ticket_create')]
-    public function create() :Response
-    {   $newticket= new Ticket();
-        $form = $this->createForm(TicketType::class, $newticket);
-        return $this->render('ticket/ticketcreate.html.twig', [
-            'form'=>$form
-       ]); }
+
 
     #[Route ('/ticket/{id}/delete', name: 'app_ticket_delete',requirements: ['id' => '\d+'])]
     public function delete(Ticket $ticket) :Response
