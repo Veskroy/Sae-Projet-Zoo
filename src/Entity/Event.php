@@ -32,7 +32,7 @@ class Event
     private ?int $maxiNumPlace = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $desc = null;
+    private ?string $description = null;
 
     #[ORM\ManyToMany(targetEntity: Ticket::class, mappedBy: 'event')]
     private Collection $tickets;
@@ -100,21 +100,21 @@ class Event
         return $this->maxiNumPlace;
     }
 
-    public function setMaxNbPlaces(?int $maxNbPlaces): static
+    public function setMaxNbPlaces(?int $maxNumPlaces): static
     {
-        $this->maxiNumPlace = $MaxiNumPlace;
+        $this->maxiNumPlace = $maxNumPlaces;
 
         return $this;
     }
 
-    public function getDesc(): ?string
+    public function getDescription(): ?string
     {
-        return $this->desc;
+        return $this->description;
     }
 
-    public function setDesc(?string $Desc): static
+    public function setDescription(?string $Description): static
     {
-        $this->desc = $Desc;
+        $this->description = $Description;
 
         return $this;
     }
