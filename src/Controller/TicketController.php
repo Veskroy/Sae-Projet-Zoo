@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ticket;
+use App\Entity\User;
 use App\Form\TicketType;
 use App\Repository\TicketRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,8 +30,10 @@ class TicketController extends AbstractController
     #[Route('/ticket/{id}', name: 'app_ticket_id')]
     public function show(Ticket $ticket): Response
     {
+        $user=$this->getUser();
         return $this->render('ticket/show.html.twig', [
-            'ticket' => $ticket]);
+            'ticket' => $ticket,
+            'user'=>$user]);
     }
 
     #[Route ('/ticket/Create', name: 'app_ticket_create')]

@@ -8,20 +8,14 @@
 {% block body %}
     <h1>Recapitulatiof de votre ticket </h1>
 
-    <table>
-        <tr>
-            <td> Numero de ticket </td>
-            <td> Prix de ticket</td>
-            <td> Type de ticket  </td>
-            <td> Proprietaire ticket  </td>
-            <td> Activité Ticket  </td>
+<div class="repeat-ticket">
+             Numero de ticket: N° {{ ticket.id}}
+             Prix de ticket:  {{ ticket.price}} €
+            Type de ticket :{{ ticket.type}}
+             Proprietaire ticket: {{ user.lastname }},{{ user.firstname }}
+             Activité Ticket:
 
-        </tr>
-        <tr>
-            <td> N° {{ ticket.id}} </td>
-            <td> {{ ticket.price}} € </td>
-            <td> {{ ticket.type}} </td>
+</div>
 
-        </tr>
-    </table>
+
 {% endblock %}
