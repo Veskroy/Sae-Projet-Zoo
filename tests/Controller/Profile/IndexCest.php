@@ -9,12 +9,12 @@ use App\Tests\Support\UsersSetup;
 class IndexCest
 {
     use UsersSetup;
-    public function _before(ControllerTester $I)
+    public function _before(ControllerTester $I): void
     {
         $this->createUsers();
     }
 
-    public function TestIndexProfile(ControllerTester $I)
+    public function TestIndexProfile(ControllerTester $I): void
     {
         $I->amLoggedInAs($this->userBasic);
 
