@@ -71,10 +71,9 @@ final class TicketFactory extends ModelFactory
                 $price=null;
         }
         return [
-            'date'=> self::faker()->dateTime(),
+            'date' => self::faker()->dateTimeBetween('-1 months', '+1 months'),
             'type' => $type,
             'price'=> $price
-
         ];
     }
 
