@@ -11,9 +11,9 @@
     <h1>Liste de Ticket Achete</h1>
 
     {% for ticket in tickets %}
-
-    <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}'>Ticket Achete Numero {{ ticket.id}} </a></li>
-
+    <div class="">
+        <li> <a href='{{ path('app_ticket_id', {"id": ticket.id } ) }}'>Ticket Achete Numero {{ ticket.id}} </a></li>
+    </div>
     {% endfor %}
 
     <div class="button-link"> <a href="{{ path('app_ticket_create') }}" > <strong> Creation de Ticket</strong> </a></div>
