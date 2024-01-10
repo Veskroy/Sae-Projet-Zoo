@@ -371,7 +371,9 @@ video {
     height: 100%;
     display: block;
     margin-inline: auto;
-    border: 20px solid var(--primaryGreen);
+    border: 5px solid var(--primaryGreen);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .video .top-video::before {
@@ -382,7 +384,7 @@ video {
     transform: rotate(45deg);
     background: var(--primaryGreen);
     position: absolute;
-    top: -15px;
+    top: -10px;
     left: calc(50% - 40px);
 }
 
@@ -394,7 +396,7 @@ video {
     transform: rotate(135deg);
     background: var(--primaryGreen);
     position: absolute;
-    top: -15px;
+    top: -10px;
     left: calc(50% + 10px);
 }
 
@@ -495,13 +497,12 @@ p.center {
     margin-block: 50px;
     width: 100%;
     display: flex;
-    /* flex-direction: column */
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     max-width: 700px;
-    /* background-color: red; */
     margin-inline: auto;
+    gap: 20px;
 }
 
 .pagination .pagination-data {
@@ -763,8 +764,8 @@ div.edit-profile div.btn-actions {
 }
 
 img.avatar {
-    max-width: 50px;
     object-fit: cover;
+    width: 40px;
 }
 
 /************/
@@ -929,6 +930,22 @@ p.practical-infos__text {
 
 .practical-infos__item:nth-child(odd) img {
     background: var(--primaryBrown);
+}
+
+/******+*************************/
+/* politique de confidentialité */
+/********************************/
+
+.politique-de-confidentialite h3 {
+    color: var(--primaryGreen);
+}
+
+.politique-de-confidentialite h5 {
+    margin-block: 20px;
+}
+
+.politique-de-confidentialite ul li {
+    color: var(--primaryGray);
 }
 
 /*********/
@@ -1520,6 +1537,10 @@ div.content div.container-body-infos {
         flex-direction: row;
         justify-content: center;
         gap: 20px;
+    }
+
+    .pagination {
+        flex-direction: row;
     }
 
     /********/
