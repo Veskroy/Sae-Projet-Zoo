@@ -76,6 +76,7 @@ a {
 h1, h2, h3 {
     font-family: var(--titles-font-family-secondary);
     position: relative;
+    width: max-content;
 }
 
 h1, h2 {
@@ -564,6 +565,11 @@ p.center {
     background-color: var(--primaryWhite-hover);
 }
 
+a.button_list:hover, a.button_list:focus,
+button.button_list:hover, button.button_list:focus {
+    background-color: var(--darkenGreen);
+}
+
 .disabled {
     background-color: var(--primaryWhite-hover);
 }
@@ -876,7 +882,7 @@ img.icon-arrows:hover {
     gap: 50px;
 }
 
-.presentation-infos .presentation-infos__text {
+.presentation-infos__text {
     font-size: var(--font-size-s);
     text-align: justify;
 }
@@ -1296,6 +1302,83 @@ form.setResolved button#form_submit:hover {
     gap: 30px;
 }
 
+/***********/
+/* animals */
+/***********/
+
+.button_for_list{
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.button_list{
+    color: var(--primaryWhite);
+    background-color: var(--primaryGreen);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/********/
+/* Spot */
+/********/
+
+.allcartespot {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 5%;
+}
+.cartespot{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    width: 250px;
+    margin: 5px;
+    background-color: var(--darkenGreen);
+    color: var(--primaryWhite);
+    border-radius: 30px;
+}
+img.img-spot{
+    height: 175px;
+    width: 175px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/**************/
+/* ListAnimal */
+/**************/
+
+.carteanimal{
+    border-radius: 3px;
+    border: 3px solid var(--darkenGreen);
+    margin: 3px;
+}
+
+/**************/
+/* ListSpecies */
+/**************/
+
+.cartespecies{
+    border-radius: 3px;
+    border: 3px solid var(--darkenGreen);
+    margin: 3px;
+}
+
+/**************/
+/* ListFamily */
+/**************/
+
+.cartefamily{
+    border-radius: 3px;
+    border: 3px solid var(--darkenGreen);
+    margin: 3px;
+}
+
 /**********/
 /* footer */
 /**********/
@@ -1478,7 +1561,7 @@ div.content div.container-body-infos {
         justify-content: flex-end !important;
     }
     div.content div.container-body-infos {
-        width: 95%;
+        min-width: 95%;
         margin: 0 auto;
         padding: 40px 40px 100px;
     }
@@ -1498,6 +1581,19 @@ div.content div.container-body-infos {
 }
 
 @media screen and (min-width: 1000px) {
+    h1.main-title::after {
+        content: '';
+        background-image: url("/images/icons/paw-filled_icon.svg");
+        display: block;
+        width: 40px;
+        height: 40px;
+        background-size: cover;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) rotate(-30deg);
+        left: -50px;
+    }
+
     img.responsive-icon {
         width: 25px;
         height: 25px;
@@ -1523,20 +1619,6 @@ div.content div.container-body-infos {
         flex-direction: row;
         justify-content: space-around;
     }
-
-    /*h1.main-title::after {
-        content: '';
-        background-image: url("/images/Sae_Zoo_Image/LogoSAE_Zoo.png");
-        display: block;
-        width: 40px;
-        height: 40px;
-        background-size: cover;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: -60px;
-    }
-     */
 
     .questions-user .question {
         width: calc(100% / 3.5);
@@ -1574,84 +1656,4 @@ div.content div.container-body-infos {
         flex-direction: row;
     }
 
-    /********/
-    /* Spot */
-    /********/
-
-    .allcartespot {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        justify-content: space-evenly;
-        padding: 5%;
-    }
-    .cartespot{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 250px;
-        width: 250px;
-        margin: 5px;
-        background-color: var(--darkenGreen);
-        color: var(--primaryWhite);
-        border-radius: 30px;
-    }
-    img.img-spot{
-        height: 175px;
-        width: 175px;
-        border-radius: 10px;
-        margin-bottom: 10px;
-    }
-
-    /**************/
-    /* ListAnimal */
-    /**************/
-
-    .carteanimal{
-        border-radius: 3px;
-        border: 3px solid var(--darkenGreen);
-        margin: 3px;
-    }
-
-    /**************/
-    /* ListSpecies */
-    /**************/
-
-    .cartespecies{
-        border-radius: 3px;
-        border: 3px solid var(--darkenGreen);
-        margin: 3px;
-    }
-
-    /**************/
-    /* ListFamily */
-    /**************/
-
-    .cartefamily{
-        border-radius: 3px;
-        border: 3px solid var(--darkenGreen);
-        margin: 3px;
-    }
-
-    /************/
-    /* All List */
-    /************/
-
-    .button_for_list{
-        margin-top: 15px;
-        display: flex;
-        justify-content: space-evenly;
-    }
-
-    .button_list{
-        color: var(--primaryWhite);
-        background-color: var(--primaryGreen);
-        padding: 10px;
-        border-radius: 5px;
-    }
-    a.button_list:hover, a.button_list:focus,
-    button.button_list:hover, button.button_list:focus {
-        background-color: var(--darkenGreen);
-    }
 }
