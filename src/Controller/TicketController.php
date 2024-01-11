@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Ticket;
 use App\Entity\User;
+use App\Form\DeleteType;
 use App\Form\TicketType;
 use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -158,10 +159,28 @@ class TicketController extends AbstractController
             }
         }
 
+            // suppresion d'un ticket
 
+        $form_delt = $this->createForm(DeleteType::class, null, [
+            'attr' => ['class' => 'delete-form'],
+        ]);
+
+        $form_delt->handleRequest($request);
+
+        if ($form_delt->isSubmitted()) {
+            if ($form_delt->get('delete')->isClicked()) {
+                // suppression du post
+                $entityManager->remove($ticket);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Ce ticket a bien été supprimé!');
+            }
+
+        }
         return $this->render('ticket/update.html.twig', [
             'ticket' => $ticket,
             'user'=>$user,
             'form_mdt'=>$form_mdt,
+            'form_delt'=>$form_delt
     ]); }
 }
