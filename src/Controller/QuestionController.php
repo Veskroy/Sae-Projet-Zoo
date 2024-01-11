@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Answer;
 use App\Entity\Question;
+use App\Entity\User;
 use App\Form\AnswerType;
 use App\Form\DeleteType;
 use App\Form\QuestionType;
@@ -27,7 +28,7 @@ class QuestionController extends AbstractController
     public function show(QuestionRepository $questionRepository, Question $questionId, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -98,7 +99,7 @@ class QuestionController extends AbstractController
     public function userQuestions(QuestionRepository $questionRepository): Response
     {
         $user = $this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -118,7 +119,7 @@ class QuestionController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
@@ -154,7 +155,7 @@ class QuestionController extends AbstractController
     public function edit(Request $request, EntityManagerInterface $entityManager, Question $question): Response
     {
         $user = $this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         } else if ($question->getAuthor() !== $user && !($user->isAdmin())) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour modifier ce post.');
@@ -215,7 +216,7 @@ class QuestionController extends AbstractController
     public function likedQuestions(QuestionRepository $questionRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $user = $this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 

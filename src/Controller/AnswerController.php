@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
+use App\Entity\User;
 use App\Form\AnswerType;
 use App\Form\DeleteType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +30,7 @@ class AnswerController extends AbstractController
     public function edit(Answer $answer, Request $request, EntityManagerInterface $entityManager): Response {
 
         $user = $this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         } else if ($answer->getAuthor() !== $user && !($user->isAdmin())) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour modifier cette réponse.');
