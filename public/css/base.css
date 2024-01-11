@@ -726,6 +726,10 @@ div.profile {
     max-width: 1400px;
 }
 
+.profile .tickets-container {
+    margin-inline: auto;
+}
+
 div.profile button,
 div.btn-actions a {
     min-height: 50px;
@@ -741,6 +745,12 @@ div.edit-profile form {
     justify-content: space-between;
     margin: 0 auto;
     gap: 20px;
+}
+
+.tickets-container .buttons-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 div.edit-profile form::after {

@@ -9,7 +9,7 @@ animal: Animal
             <h3>{{ animal.name }}</h3>
         </div>
         <div class="card__content-right">
-            <img src="{{ asset('images/icons/arrow-state_icon.svg') }}" alt="icon" class="basic-icon responsive-icon expanded-state-icon" />
+            <img src="{{ asset('images/icons/arrow-state_icon.svg') }}" alt="icon" class="basic-icon responsive-icon expanded-state-icon" style="{{ first ? 'transform: rotate(0deg);' : '' }}" />
         </div>
     </div>
     <div class="animal-card__infos card-content-expanded {{ first ? '' : 'hidden' }}">
