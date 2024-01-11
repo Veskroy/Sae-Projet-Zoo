@@ -46,8 +46,19 @@ final class AnimalFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $name = self::faker()->firstname();
+        $gender = self::faker()->randomElement(['M', 'F']);
+        $description = self::faker()->sentence();
+        $weight = self::faker()->randomFloat(1, 50, 300);
+        $size = self::faker()->randomFloat(1, 50, 300);
+        $birthDate = self::faker()->dateTime();
         return [
-            'name' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
+            'name' => $name,
+            'gender' => $gender,
+            'description' => $description,
+            'weight' => $weight,
+            'size' => $size,
+            'birthDate' => $birthDate,
         ];
     }
 
