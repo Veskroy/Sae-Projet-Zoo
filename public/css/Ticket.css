@@ -38,7 +38,7 @@
     flex-direction: column;
 }
 
-.tickets-future, .tickets-past {
+.tickets-future, .tickets-past, .last-tickets {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -62,7 +62,7 @@
     box-shadow: 3px 3px 0 0 var(--primaryBrown);
 }
 
-.tickets-future .ticket {
+.tickets-future .ticket, .last-tickets .ticket {
     background: var(--lightGray);
     border: 3px solid var(--primaryGreen);
     box-shadow: 3px 3px 0 0 var(--primaryGreen);
@@ -109,7 +109,6 @@
 }
 
 .tickets-infos {
-
 }
 
 .tickets-infos p.tickets-infos__text {
