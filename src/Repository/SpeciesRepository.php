@@ -21,6 +21,24 @@ class SpeciesRepository extends ServiceEntityRepository
         parent::__construct($registry, Species::class);
     }
 
+
+    /**
+     * @return Species[]
+     */
+    public function search(string $search = ''): array
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->addSelect('animal','family')
+            ->innerJoin('s.animal', 'animal')
+            ->leftJoin('s.family', 'family')
+            ->where('s.name LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->orderBy('s.name', 'ASC');
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Species[] Returns an array of Species objects
 //     */
