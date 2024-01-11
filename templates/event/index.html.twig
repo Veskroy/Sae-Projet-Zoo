@@ -13,9 +13,11 @@
         {% for event in events %}
             {% if event.date > 'now'|date('d - m -Y') %}
                 <div>
-                    <a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.name }}</a>
+                    <h5>
+                        <a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.name }}</a>
+                    </h5>
                     <p>Nombre de places : {{ event.maxiNumPlace }}</p>
-                    <p>{{ event.description }}</p>
+                    <p>Horaire : {{ event.date|date("d/m/y") ? event.date|date("d/m/y") : 'Aujourd"hui' }} - de {{ event.hstart ? event.hstart : '12:00' }} à {{ event.hend ? event.hend : '14:00' }}</p>
                 </div>
             {% endif %}
         {% endfor %}
