@@ -5,4 +5,9 @@ for (const div of allDropdownDiv) {
     iconSettings.addEventListener('click', function () {
         div.classList.toggle('visible');
     });
+    document.addEventListener('click', (event) => {
+        if (div.classList.contains('visible') && !div.contains(event.target)) {
+            div.classList.remove('visible');
+        }
+    });
 }

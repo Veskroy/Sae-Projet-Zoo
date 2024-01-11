@@ -23,24 +23,7 @@
     --card-hover: rgb(234, 255, 233);
     --background-container-body: #f3efef;
     --background-badge-likes: #0500e8;
-
-    /* styles pour les messages */
-
-    --background-message-success: #d4edda;
-    --border-message-success: #c3e6cb;
-    --color-message-success: #155724;
-
-    --background-message-error: #f8d7da;
-    --border-message-error: #f5c6cb;
-    --color-message-error: #721c24;
-
-    --background-message-warning: #fff3cd;
-    --border-message-warning: #ffeeba;
-    --color-message-warning: #856404;
-
-    /* fonts */
-    --main-font-family-text: 'Didact Gothic', 'Inter', sans-serif;
-    --titles-font-family: 'Dangrek', 'Inter', sans-serif;
+    --red-color-ticket: rgba(255, 97, 97, 0.2);
 
     /* font-sizes */
     --font-size-xl: clamp(20px, 4vw, 32px);
@@ -76,11 +59,13 @@
 .tickets-past .ticket {
     background: var(--lightBrown);
     border: 3px solid var(--primaryBrown);
+    box-shadow: 3px 3px 0 0 var(--primaryBrown);
 }
 
 .tickets-future .ticket {
     background: var(--lightGray);
     border: 3px solid var(--primaryGreen);
+    box-shadow: 3px 3px 0 0 var(--primaryGreen);
 }
 
 .ticket .ticket-content {
@@ -135,6 +120,14 @@
 .tickets-infos p.tickets-infos__text a {
     display: block;
     margin-block: 20px;
+}
+
+.ticket.planned-ticket {
+    background: var(--red-color-ticket);
+}
+
+.ticket.planned-ticket .ticket-content__top p {
+    color: var(--red-color-danger);
 }
 
 @media screen and (min-width: 1000px) {
