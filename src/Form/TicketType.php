@@ -33,7 +33,7 @@ class TicketType extends AbstractType
                    'Senior' => 'SENIOR',
                    'Junior'=>'JUNIOR',
                    'Handicape'=> 'HANFICAPE',
-                   'Normal'=>''
+                   'Normal'=>'CLASSIC'
                ]])
 
            /* ->add('event',EntityType::class,[
