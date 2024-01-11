@@ -10,11 +10,18 @@
 <div>
     <h1 class="main-title">Modification du ticket N°{{ ticket. id }}</h1>
 
-    <a href="{{ path('app_ticket')}}"class="link mbc">
+    <a href="{{ path('app_ticket')}}" class="link mbc">
         <img src="{{ asset('images/icons/back_icon.svg') }}" alt="back icon" class="basic-icon back-icon" />
         Retour
     </a>
 
+    <div class="mt-50">
+{#
+    {{ form_start(form_mdt) }}
 
+    {{ form_row(form_mdt.date)}}
+    {{ form_row(form_mdt.type)}}
 
+    {{ form_end(form_mdt) }}
+#}
 {% endblock %}
