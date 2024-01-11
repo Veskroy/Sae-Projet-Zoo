@@ -28,13 +28,15 @@ class TicketType extends AbstractType
            // ])
             ->add('type',ChoiceType::class,[
                'choices' => [
+                   'Classique' =>'CLASSIC',
+                   'Junior' =>'JUNIOR',
                    'Enfant' => 'ENFANT',
-                   'Etudient' => 'ETUDIENT',
                    'Senior' => 'SENIOR',
-                   'Junior'=>'JUNIOR',
-                   'Handicape'=> 'HANFICAPE',
-                   'Normal'=>'CLASSIC'
-               ]])
+                   'Étudiant' => 'ÉTUDIANT',
+                   'Personne handicapée' => 'HANDICAPE'
+               ],
+               'data' => 'CLASSIC'
+           ])
 
            /* ->add('event',EntityType::class,[
                 'class' => Event::class,
