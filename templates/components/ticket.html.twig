@@ -21,15 +21,11 @@ ticket: Ticket
                     'actions': [
                         {
                             'label': 'Récapitulatif',
-                            'path': path('app_presentation')
+                            'path': path('app_ticket_id', {"id": ticket.id })
                         },
                         {
                             'label': 'Modifier',
-                            'path': path('app_presentation')
-                        },
-                        {
-                            'label': 'Supprimer',
-                            'path': path('app_presentation')
+                            'path': path('app_ticket_update', {"id": ticket.id })
                         }
                     ],
                 }
