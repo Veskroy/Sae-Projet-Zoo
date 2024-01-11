@@ -12,11 +12,11 @@
     <div id='calendar'></div>
     <h1>Liste des évènements à venir</h1>
     {% for event in events %}
-        {% if event.dateEvent > 'now'|date('d - m -Y') %}
+        {% if event.date > 'now'|date('d - m -Y') %}
             <div>
-                <a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.nameEvent }}</a>
-                <p>Nombre de places : {{ event.maxNbPlaces }}</p>
-                <p>{{ event.descEvent }}</p>
+                <a href="{{ path('app_event_show', {id: event.id}) }}">{{ event.name }}</a>
+                <p>Nombre de places : {{ event.maxiNumPlace }}</p>
+                <p>{{ event.description }}</p>
             </div>
         {% endif %}
     {% endfor %}
