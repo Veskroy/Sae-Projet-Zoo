@@ -6,6 +6,7 @@ use App\Entity\Ticket;
 use App\Entity\User;
 use App\Form\TicketType;
 use App\Repository\TicketRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,8 +15,33 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TicketController extends AbstractController
 {
+    /// methode de conversion du type en price for entity ticket
+    private function forsetprice($type){
+        switch ($type) {
+            case 'ENFANT':
+                $price = 12;
+                break;
+            case 'ETUDIANT':
+                $price = 15;
+                break;
+            case 'SENIOR':
+                $price = 16;
+                break;
+            case 'JUNIOR':
+                $price = 0;
+                break;
+            case 'HANDICAPE':
+                $price = 14;
+                break;
+            case '':
+                $price = 20;
+                break;
+            default:
+                $price = null;
+        } return $price;
+    }
     #[Route('/ticket', name: 'app_ticket')]
-    public function index(TicketRepository $ticketRepository, Request $request): Response
+    public function index(TicketRepository $ticketRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
@@ -54,33 +80,9 @@ class TicketController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newticket =$form->getData();
             $newticket->setUser($this->getUser());
-            $new_tp=$newticket->getType();
-            $newticket->setPrice(function($type,) use ($new_tp){
-                switch ($type) {
-                    case 'ENFANT':
-                        $price = 12;
-                        break;
-                    case 'ETUDIANT':
-                        $price = 15;
-                        break;
-                    case 'SENIOR':
-                        $price = 16;
-                        break;
-                    case 'JUNIOR':
-                        $price = 0;
-                        break;
-                    case 'HANDICAPE':
-                        $price = 14;
-                        break;
-                    case '':
-                        $price = 20;
-                        break;
-                    default:
-                        $price = null;
-                } return $price;
-            }
-            );
-
+            $newticket->setPrice( $this->forsetprice($newticket->getType()));
+            $entityManager->flush();
+            $this->addFlash('success', 'Votre ticket a été enregistre !');
         }
 
         return $this->render('ticket/index.html.twig', [
