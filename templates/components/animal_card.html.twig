@@ -12,7 +12,7 @@ animal: Animal
             <img src="{{ asset('images/icons/arrow-state_icon.svg') }}" alt="icon" class="basic-icon responsive-icon expanded-state-icon" />
         </div>
     </div>
-    <div class="animal-card__infos card-content-expanded hidden">
+    <div class="animal-card__infos card-content-expanded {{ first ? '' : 'hidden' }}">
         <ul class="infos-list">
             <li><span class="keyword">Genre</span> : {{ animal.gender }}</li>
             <li><span class="keyword">Description</span> : {{ animal.description }}</li>
