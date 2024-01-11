@@ -43,7 +43,8 @@
 
         {% for animal in animals %}
             {{ include('components/animal_card.html.twig', {
-                'animal': animal
+                'animal': animal,
+                'first': animal.id == animals[0].id
             }) }}
         {% endfor %}
 
