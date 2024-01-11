@@ -33,7 +33,7 @@ class TicketController extends AbstractController
             case 'HANDICAPE':
                 $price = 14;
                 break;
-            case '':
+            case 'CLASSIC':
                 $price = 20;
                 break;
             default:
@@ -78,12 +78,22 @@ class TicketController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newticket =$form->getData();
+
             $newticket->setUser($this->getUser());
             $newticket->setPrice( $this->forsetprice($newticket->getType()));
-            $entityManager->flush();
-            $this->addFlash('success', 'Votre ticket a été enregistre !');
-        }
+
+            /// comparaison date
+
+
+         if ($newticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
+             $this->addFlash('error',"La date donnée n'est pas valable");
+         }
+         else {
+             $entityManager->persist($newticket);
+             $entityManager->flush();
+             $this->addFlash('success', "Votre ticket a été enregistre !{}" . $newticket->getDate());
+         }
+         }
 
         return $this->render('ticket/index.html.twig', [
             'controller_name' => 'TicketController',
