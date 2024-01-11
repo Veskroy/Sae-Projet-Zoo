@@ -91,7 +91,7 @@ class TicketController extends AbstractController
          else {
              $entityManager->persist($newticket);
              $entityManager->flush();
-             $this->addFlash('success', "Votre ticket a été enregistre !{}" . $newticket->getDate());
+             $this->addFlash('success', "Votre ticket a été enregistre !");
          }
          }
 
