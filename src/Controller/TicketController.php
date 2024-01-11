@@ -138,6 +138,9 @@ class TicketController extends AbstractController
         } else if ($ticket->getUser() !== $user && !($user->isAdmin())) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour consulter ce ticket.');
             return $this->redirectToRoute('app_ticket');
+        } else if ($ticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
+            $this->addFlash('error', 'Vous ne pouvez pas modifier un ticket passé.');
+            return $this->redirectToRoute('app_ticket');
         }
 
         // modification d'un ticket
