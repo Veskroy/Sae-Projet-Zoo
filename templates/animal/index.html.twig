@@ -4,7 +4,15 @@
 
 {% block body %}
 <h1>Listes des Animaux</h1>
-<div class="animalslist">
+    <form action="{{ path('app_animal') }}" method="GET">
+        <div>
+            <label for="search">Rechercher un animal</label>
+            <input type="text" name="search" id="search" placeholder="Saisissez un mot clé..." value={{ search }}>
+            <button class="btn button-primary" type="submit">Rechercher</button>
+        </div>
+    </form>
+
+    <div class="animalslist">
     {% for animal in animals %}
     <div class="carteanimal">
         <dt>{{ animal.name }}</dt>
