@@ -1473,6 +1473,22 @@ div.content div.container-body-infos {
     padding: 0 0 100px;
 }
 
+/**************/
+/* évènements */
+/**************/
+
+.events {
+    display: flex;
+    flex-direction: column;
+}
+
+.event {
+    flex-direction: column;
+    border: solid 2px green;
+    padding: 5px;
+    margin: 10px 0 5px 0;
+}
+
 /*****************/
 /* media queries */
 /*****************/
