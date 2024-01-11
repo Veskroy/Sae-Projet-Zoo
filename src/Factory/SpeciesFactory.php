@@ -46,7 +46,18 @@ final class SpeciesFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $name = self::faker()->word();
+        $name = self::faker()->randomElement([
+            'Lion',
+            'Girafe',
+            'Éléphant',
+            'Singe',
+            'Panda',
+            'Tigre',
+            'Ours',
+            'Kangourou',
+            'Hippopotame',
+            'Zèbre',
+        ]);
         $diet = self::faker()->randomElement(['carnivore', 'herbivore', 'omnivore']);
         $origin = self::faker()->randomElement(['Afrique', 'Europe', 'Asie','Amérique','Australie']);
         $description = self::faker()->sentence();
