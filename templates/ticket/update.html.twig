@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modification du ticket N°{{ ticket. id }}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/Ticket.css')}}" type="text/css">
+{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1 class="main-title">Modification du ticket N°{{ ticket. id }}</h1>
+
+    <a href="{{ path('app_ticket')}}"class="link mbc">
+        <img src="{{ asset('images/icons/back_icon.svg') }}" alt="back icon" class="basic-icon back-icon" />
+        Retour
+    </a>
+
+
+
+{% endblock %}
