@@ -1,10 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Animal{% endblock %}
+{% block title %}Les animaux de notre Zoo{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/animals.css') }}">
+{% endblock %}
 
 {% block body %}
-<h1>Listes des Animaux</h1>
-    <form action="{{ path('app_animal') }}" method="GET">
+    <div class="animal-infos">
+        <h1 class="main-title green mt-50 mb-50">
+            Les animaux de notre zoo
+        </h1>
+        <img src="{{ asset('images/img-animaux/zoo-2.png') }}" alt="img animal" />
+        <p class="presentation-pratical-infos__text mt-50 center">
+            Ici, vous pouvez retrouver tous les animaux de notre zoo.
+            <br />
+            Vous pouvez également consulter la liste des familles et des espèces.
+            <br />
+            <br />
+            Pour chaque animal, vous pouvez consulter sa fiche détaillée en cliquant dessus.
+            <br />
+            Vous pouvez également rechercher un animal par son nom !
+        </p>
+    </div>
+
+    <div class="line line-mbc"></div>
+
+    <form class="mb-50" action="{{ path('app_animal') }}" method="GET">
         <div>
             <label for="search">Rechercher un animal</label>
             <input type="text" name="search" id="search" placeholder="Saisissez un mot clé..." value={{ search }}>
@@ -12,19 +34,19 @@
         </div>
     </form>
 
-    <div class="animalslist">
-    {% for animal in animals %}
-    <div class="carteanimal">
-        <dt>{{ animal.name }}</dt>
-        <dd>Genre : {{ animal.gender }}</dd>
-        <dd>Description : {{ animal.description }}</dd>
-        <dd>Poids : {{ animal.weight }} g</dd>
-        <dd>Taille : {{ animal.size }} cm</dd>
+    <div class="list-animals">
+
+        {% for animal in animals %}
+            {{ include('components/animal_card.html.twig', {
+                'animal': animal
+            }) }}
+        {% endfor %}
+
     </div>
-    {% endfor %}
+
     <div class="button_for_list">
-        <a class="button_list" href="{{path('app_family')}}">Liste des familles</a>
-        <a class="button_list" href="{{path('app_species')}}">Liste des espèces</a>
+        <a class="btn button-primary" href="{{path('app_family')}}">Liste des familles</a>
+        <a class="btn button-secondary" href="{{path('app_species')}}">Liste des espèces</a>
     </div>
-</div>
+
 {% endblock %}
