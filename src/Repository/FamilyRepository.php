@@ -21,6 +21,22 @@ class FamilyRepository extends ServiceEntityRepository
         parent::__construct($registry, Family::class);
     }
 
+    /**
+     * @return Family[]
+     */
+    public function search(string $search = ''): array
+    {
+        $qb = $this->createQueryBuilder('f');
+        $qb->addSelect('species')
+            ->innerJoin('f.species', 'species')
+            ->where('f.name LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->orderBy('f.name', 'ASC');
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Family[] Returns an array of Family objects
 //     */
