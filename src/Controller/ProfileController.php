@@ -7,6 +7,7 @@ use App\Form\AvatarType;
 use App\Form\DeleteType;
 use App\Form\ProfilePasswordType;
 use App\Form\ProfileType;
+use App\Repository\TicketRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
-    public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, SluggerInterface $slugger, UserRepository $userRepository): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $userPasswordHasher, SluggerInterface $slugger, TicketRepository $ticketRepository): Response
     {
         $user = $this->getUser();
         if (!$user instanceof User) {
@@ -99,11 +100,14 @@ class ProfileController extends AbstractController
 
         }
 
+        $tickets = $ticketRepository->findBy(['user' => $user], ['date' => 'ASC'], 3);
+
         return $this->render('profile/index.html.twig', [
             'user' => $user,
             'formChangeInformations' => $formChangeInformations,
             'formChangePassword' => $formChangePassword,
             'formChangeAvatar' => $formChangeAvatar,
+            'tickets' => $tickets,
         ]);
     }
 
