@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="{{ asset('css/animals.css') }}">
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('scripts/toggleCard.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
     <div class="animal-infos">
         <h1 class="main-title green mt-50 mb-50">
