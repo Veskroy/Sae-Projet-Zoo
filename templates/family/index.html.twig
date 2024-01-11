@@ -4,6 +4,13 @@
 
 {% block body %}
 <h1>Listes des Familles</h1>
+    <form action="{{ path('app_family') }}" method="GET">
+        <div>
+            <label for="search">Rechercher une famille</label>
+            <input type="text" name="search" id="search" placeholder="Saisissez un mot clé..." value={{ search }}>
+            <button class="btn button-primary" type="submit">Rechercher</button>
+        </div>
+    </form>
 <div class="familylist">
     {% for family in families %}
         <div class="cartefamily">

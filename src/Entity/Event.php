@@ -30,7 +30,6 @@ class Event
 
     #[ORM\Column(nullable: true)]
     private ?int $maxiNumPlace = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
@@ -95,22 +94,12 @@ class Event
         return $this;
     }
 
-    public function getMaxNbPlaces(): ?int
-    {
-        return $this->maxiNumPlace;
-    }
-
-    public function setMaxNbPlaces(?int $maxNumPlaces): static
-    {
-        $this->maxiNumPlace = $maxNumPlaces;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
     }
+
+
 
     public function setDescription(?string $Description): static
     {
@@ -144,5 +133,22 @@ class Event
         }
 
         return $this;
+    }
+
+
+    /**
+     * @return int|null
+     */
+    public function getMaxiNumPlace(): ?int
+    {
+        return $this->maxiNumPlace;
+    }
+
+    /**
+     * @param int|null $maxiNumPlace
+     */
+    public function setMaxiNumPlace(?int $maxiNumPlace): void
+    {
+        $this->maxiNumPlace = $maxiNumPlace;
     }
 }

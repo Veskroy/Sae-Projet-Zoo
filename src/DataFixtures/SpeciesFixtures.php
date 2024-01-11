@@ -2,19 +2,28 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\FamilyFactory;
 use App\Factory\SpeciesFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class SpeciesFixtures extends Fixture
+class SpeciesFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $file = file_get_contents(__DIR__.'/data/Species.json');
-        $array = json_decode($file, true);
-        SpeciesFactory::createSequence($array);
-
-
-        $manager->flush();
+        SpeciesFactory::createMany(15, function () {
+            return [
+                'family' => FamilyFactory::random(),
+            ];
+        });
     }
+
+    public function getDependencies(): array
+    {
+        return [
+            FamilyFixtures::class,
+        ];
+    }
+
 }

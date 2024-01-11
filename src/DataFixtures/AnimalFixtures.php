@@ -3,18 +3,31 @@
 namespace App\DataFixtures;
 
 use App\Factory\AnimalFactory;
+use App\Factory\PenFactory;
+use App\Factory\SpeciesFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AnimalFixtures extends Fixture
+class AnimalFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $file = file_get_contents(__DIR__.'/data/Animal.json');
-        $array = json_decode($file, true);
-        AnimalFactory::createSequence($array);
 
-
-        $manager->flush();
+        AnimalFactory::createMany(30, function () {
+            return [
+                'species' => SpeciesFactory::random(),
+                'pen' => PenFactory::random()
+            ];
+        });
     }
+
+    public function getDependencies(): array
+    {
+        return [
+            SpeciesFixtures::class,
+            PenFixtures::class,
+        ];
+    }
+
 }

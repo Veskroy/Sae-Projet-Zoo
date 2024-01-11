@@ -46,8 +46,15 @@ final class SpeciesFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $name = self::faker()->word();
+        $diet = self::faker()->randomElement(['carnivore', 'herbivore', 'omnivore']);
+        $origin = self::faker()->randomElement(['Afrique', 'Europe', 'Asie','Amérique','Australie']);
+        $description = self::faker()->sentence();
         return [
-            'name' => mb_convert_case(self::faker()->word(), MB_CASE_TITLE, 'UTF-8'),
+            'name' => $name,
+            'diet' => $diet,
+            'origin' => $origin,
+            'description' => $description,
         ];
     }
 
