@@ -24,11 +24,11 @@ class Pen
     #[ORM\Column(nullable: true)]
     private ?float $size = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $numPlace = null;
-
     #[ORM\OneToMany(mappedBy: 'pen', targetEntity: Animal::class)]
     private Collection $animal;
+
+    #[ORM\ManyToOne(inversedBy: 'pens')]
+    private ?Spot $spot = null;
 
     public function __construct()
     {
@@ -76,18 +76,6 @@ class Pen
         return $this;
     }
 
-    public function getNumPlace(): ?int
-    {
-        return $this->numPlace;
-    }
-
-    public function setNumPlace(?int $numPlace): static
-    {
-        $this->numPlace = $numPlace;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Animal>
      */
@@ -114,6 +102,18 @@ class Pen
                 $animal->setPen(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSpot(): ?Spot
+    {
+        return $this->spot;
+    }
+
+    public function setSpot(?Spot $spot): static
+    {
+        $this->spot = $spot;
 
         return $this;
     }

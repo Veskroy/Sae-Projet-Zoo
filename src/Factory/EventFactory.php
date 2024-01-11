@@ -54,7 +54,7 @@ final class EventFactory extends ModelFactory
             'date' => self::faker()->dateTimeBetween('now', '+1 month'),
             #'hStartEvent' => date('h:i:s', $start),
             #'hEndEvent' => date('h:i:s', $end),
-            'maxNumPlaces' => self::faker()->randomNumber(3, true),
+            'maxiNumPlace' => self::faker()->randomNumber(3, true),
             'description' => self::faker()->words(20, true),
         ];
     }
