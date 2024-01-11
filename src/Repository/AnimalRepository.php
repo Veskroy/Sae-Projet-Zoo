@@ -21,6 +21,23 @@ class AnimalRepository extends ServiceEntityRepository
         parent::__construct($registry, Animal::class);
     }
 
+    /**
+     * @return Animal[]
+     */
+    public function search(string $search = ''): array
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->addSelect('species','pen')
+            ->leftJoin('a.species', 'species')
+            ->leftJoin('a.pen', 'pen')
+            ->where('a.name LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->orderBy('a.name', 'ASC');
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Animal[] Returns an array of Animal objects
 //     */
