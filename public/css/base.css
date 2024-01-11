@@ -1,6 +1,7 @@
 /* imports */
 
 @import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Didact+Gothic&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mooli&display=swap');
 
 /* variables */
 
@@ -45,6 +46,7 @@
     /* fonts */
     --main-font-family-text: 'Didact Gothic', 'Inter', sans-serif;
     --titles-font-family: 'Dangrek', 'Inter', sans-serif;
+    --titles-font-family-secondary: 'Mooli', sans-serif;
 
     /* font-sizes */
     --font-size-xl: clamp(20px, 4vw, 32px);
@@ -72,7 +74,7 @@ a {
 }
 
 h1, h2, h3 {
-    font-family: var(--titles-font-family);
+    font-family: var(--titles-font-family-secondary);
     position: relative;
 }
 
@@ -90,6 +92,12 @@ h5 {
 
 h5 a.link {
     font-size: var(--font-size-m);
+}
+
+span.keyword {
+    color: var(--primaryGreen);
+    font-weight: bolder;
+    text-decoration: underline;
 }
 
 a.menu-link {
@@ -168,7 +176,7 @@ h3.presentation__title::after {
     height: 5px;
     background-color: var(--primaryGreen);
     position: absolute;
-    bottom: 0;
+    bottom: -7px;
     left: 0;
 }
 
@@ -338,7 +346,7 @@ a.button-admin:hover {
     background-color: var(--red-color-admin-hover);
 }
 
-input {
+input, select {
     border: 1px solid var(--primaryGreen);
     padding: 10px;
     border-radius: 10px;
@@ -361,6 +369,14 @@ label {
 
 .video {
     position: relative;
+}
+
+.video p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: var(--font-size-s);
+    color: var(--primaryGray);
+    font-style: italic;
 }
 
 video {
@@ -450,6 +466,16 @@ p.question__total-likes {
 img.basic-icon {
     width: 20px;
     height: 20px;
+}
+
+img.responsive-icon {
+    width: 20px;
+    height: 20px;
+}
+
+img.logo {
+    width: 40px;
+    height: 40px;
 }
 
 img.large-icon {
@@ -1472,6 +1498,11 @@ div.content div.container-body-infos {
 }
 
 @media screen and (min-width: 1000px) {
+    img.responsive-icon {
+        width: 25px;
+        height: 25px;
+    }
+
     div.intro-profile {
         justify-content: center;
         flex-direction: row;

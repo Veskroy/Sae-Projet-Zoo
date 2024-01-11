@@ -6,7 +6,6 @@ use App\Entity\Ticket;
 use App\Entity\User;
 use App\Form\TicketType;
 use App\Repository\TicketRepository;
-use GuzzleHttp\Psr7\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,13 +14,38 @@ use Symfony\Component\Routing\Annotation\Route;
 class TicketController extends AbstractController
 {
     #[Route('/ticket', name: 'app_ticket')]
-    public function index(TicketRepository $ticket): Response
+    public function index(TicketRepository $ticketRepository): Response
     {
-        $tickets= $ticket->findBy([], ['id' => 'ASC']);
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $tickets = $ticketRepository->findBy(['user' => $user]);
+
+        $pastTickets = [];
+        /*foreach ($tickets as $ticket) {
+            if ($ticket->getDate() < new \DateTime()) {
+                $pastTickets[] = $ticket;
+            }
+        }
+        $avalaibleTickets = array_diff($tickets, $pastTickets); */
+
+        $pastTickets = array_filter($tickets, function ($ticket) {
+            return $ticket->getDate() < new \DateTime('-1 day');
+        });
+
+        $availableTickets = array_filter($tickets, function ($ticket) {
+            return $ticket->getDate() >= new \DateTime('-1 day');
+        });
+
+        usort($availableTickets, function ($ticket1, $ticket2) {
+            return $ticket1->getDate() <=> $ticket2->getDate();
+        });
 
         $newticket= new Ticket();
         $form = $this->createForm(TicketType::class, $newticket)
-                        ->add('submit', SubmitType::class,['label'=> 'Obtenir un nouveaux ticket']);
+            ->add('submit', SubmitType::class, ['label' => 'Obtenir mon nouveau ticket', 'attr' => ['class' => 'btn button-primary full-width mt-50']]);
 
        /* $form->handleRequest($resquest);*/
 
@@ -32,8 +56,9 @@ class TicketController extends AbstractController
         return $this->render('ticket/index.html.twig', [
             'controller_name' => 'TicketController',
             'tickets' => $tickets,
-            'form'=>$form
-
+            'form'=>$form,
+            'pastTickets' => $pastTickets,
+            'availableTickets' => $availableTickets,
         ]);
     }
 
@@ -41,7 +66,7 @@ class TicketController extends AbstractController
     public function show(Ticket $ticket): Response
     {
         $user=$this->getUser();
-        if (!$user) {
+        if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
         }
 
