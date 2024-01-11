@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{event.nameEvent}}{% endblock %}
+{% block title %}{{event.name}}{% endblock %}
 
 {% block body %}
-    <h1>{{ event.nameEvent }}</h1>
-    <p>{{ event.descEvent }}</p>
+    <h1 class="main-title mt-50 mb-50 green">{{ event.name }}</h1>
+    <p>{{ event.description }}</p>
 {% endblock %}
