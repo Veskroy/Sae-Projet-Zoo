@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\FormTypeInterface;
 
 class TicketController extends AbstractController
 {
@@ -119,12 +120,48 @@ class TicketController extends AbstractController
 
 
 
-    #[Route ('/ticket/{id}/delete', name: 'app_ticket_delete',requirements: ['id' => '\d+'])]
+    /*#[Route ('/ticket/{id}/delete', name: 'app_ticket_delete',requirements: ['id' => '\d+'])]
     public function delete(Ticket $ticket) :Response
     {return $this->render('ticket/', [
     ]); }
-    #[Route ('/ticket/{id}/Update', name: 'app_ticket_update',  requirements: ['id' => '\d+'])]
-    public function update(Ticket $ticket) :Response
-    {return $this->render('ticket/', [
+    */
+    #[Route ('/ticket/{id}/update', name: 'app_ticket_update',  requirements: ['id' => '\d+'])]
+    public function update(Ticket $ticket,Request $request,EntityManagerInterface $entityManager) :Response
+    {
+        $user=$this->getUser();
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        // modification d'un ticket
+
+        $form_mdt=$this->createForm(TicketType::class, $ticket)
+            ->add('submit',SubmitType::class, ['label' => 'Enregistrer les modification du ticket','attr' => ['class' => 'btn button-primary full-width mt-50']]);
+
+        $form_mdt->handleRequest($request);
+
+        if ($form_mdt->isSubmitted() && $form_mdt->isValid()) {
+
+            $ticket->setUser($this->getUser());
+            $ticket->setPrice( $this->forsetprice($ticket->getType()));
+
+            /// comparaison date
+
+            if ($ticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
+                $this->addFlash('error',"La date donnée n'est pas valable");
+            }
+
+            else {
+                $entityManager->persist($ticket);
+                $entityManager->flush();
+                $this->addFlash('success', "Votre ticket a été modifier !");
+            }
+        }
+
+
+        return $this->render('ticket/update.html.twig', [
+            'ticket' => $ticket,
+            'user'=>$user,
+            'form_mdt'=>$form_mdt,
     ]); }
 }
