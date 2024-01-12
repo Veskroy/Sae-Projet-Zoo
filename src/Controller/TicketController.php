@@ -13,7 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\FormTypeInterface;
 
 class TicketController extends AbstractController
 {
@@ -42,6 +41,10 @@ class TicketController extends AbstractController
                 $price = null;
         } return $price;
     }
+
+    /**
+     * @throws \Exception
+     */
     #[Route('/ticket', name: 'app_ticket')]
     public function index(TicketRepository $ticketRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -109,35 +112,41 @@ class TicketController extends AbstractController
     #[Route('/ticket/{id}', name: 'app_ticket_id')]
     public function show(Ticket $ticket): Response
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
+        } else if ($ticket->getUser() !== $user && !($user->isAdmin())) {
+            $this->addFlash('error', 'Vous n\'avez pas les droits pour consulter ce ticket.');
+            return $this->redirectToRoute('app_ticket');
         }
 
         return $this->render('ticket/show.html.twig', [
             'ticket' => $ticket,
-            'user'=>$user]);
+            'user'=>$user
+        ]);
     }
 
-
-
-    /*#[Route ('/ticket/{id}/delete', name: 'app_ticket_delete',requirements: ['id' => '\d+'])]
-    public function delete(Ticket $ticket) :Response
-    {return $this->render('ticket/', [
-    ]); }
-    */
+    /**
+     * @throws \Exception
+     */
     #[Route ('/ticket/{id}/update', name: 'app_ticket_update',  requirements: ['id' => '\d+'])]
     public function update(Ticket $ticket,Request $request,EntityManagerInterface $entityManager) :Response
     {
-        $user=$this->getUser();
+        $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
+        } else if ($ticket->getUser() !== $user && !($user->isAdmin())) {
+            $this->addFlash('error', 'Vous n\'avez pas les droits pour consulter ce ticket.');
+            return $this->redirectToRoute('app_ticket');
+        } else if ($ticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
+            $this->addFlash('error', 'Vous ne pouvez pas modifier un ticket passé.');
+            return $this->redirectToRoute('app_ticket');
         }
 
         // modification d'un ticket
 
         $form_mdt=$this->createForm(TicketType::class, $ticket)
-            ->add('submit',SubmitType::class, ['label' => 'Enregistrer les modification du ticket','attr' => ['class' => 'btn button-primary full-width mt-50']]);
+            ->add('submit',SubmitType::class, ['label' => 'Enregistrer les modifications du ticket','attr' => ['class' => 'btn button-primary full-width mt-50']]);
 
         $form_mdt->handleRequest($request);
 
@@ -159,7 +168,7 @@ class TicketController extends AbstractController
             }
         }
 
-            // suppresion d'un ticket
+        // suppression d'un ticket
 
         $form_delt = $this->createForm(DeleteType::class, null, [
             'attr' => ['class' => 'delete-form'],
@@ -169,7 +178,7 @@ class TicketController extends AbstractController
 
         if ($form_delt->isSubmitted()) {
             if ($form_delt->get('delete')->isClicked()) {
-                // suppression du post
+                // suppression du ticket
                 $entityManager->remove($ticket);
                 $entityManager->flush();
 
