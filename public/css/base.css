@@ -1490,6 +1490,16 @@ div.content div.container-body-infos {
     margin: 10px 0 5px 0;
 }
 
+.event-detail {
+    font-size: 1.5vw;
+    flex-direction: column;
+    padding-bottom: 60px;
+}
+
+.event-detail p{
+    padding: 5px;
+}
+
 /*****************/
 /* media queries */
 /*****************/
