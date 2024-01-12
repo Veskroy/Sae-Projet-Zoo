@@ -56,7 +56,7 @@ final class SpeciesFactory extends ModelFactory
             'Ours',
             'Kangourou',
             'Hippopotame',
-            'Zèbre',
+            'Zèbre'
         ]);
         $diet = self::faker()->randomElement(['carnivore', 'herbivore', 'omnivore']);
         $origin = self::faker()->randomElement(['Afrique', 'Europe', 'Asie','Amérique','Australie']);
