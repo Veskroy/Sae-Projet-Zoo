@@ -1,5 +1,6 @@
 {#
-ticket: Ticket
+ticket: Ticket,
+available: boolean
 #}
 
 {% set tomorrow = "tomorrow"|date("Y-m-d") %}
@@ -16,24 +17,33 @@ ticket: Ticket
                     (ticketDate == "now"|date("Y-m-d") ? "Aujourd'hui" : (ticketDate == tomorrow ? "Demain" : "Bientôt"))
                 }}
             </p>
-            {{ include('components/dropdown.html.twig' ,
-                {
-                    'actions': [
-                        {
-                            'label': 'Récapitulatif',
-                            'path': path('app_presentation')
-                        },
-                        {
-                            'label': 'Modifier',
-                            'path': path('app_presentation')
-                        },
-                        {
-                            'label': 'Supprimer',
-                            'path': path('app_presentation')
-                        }
-                    ],
-                }
-            ) }}
+            {% if available %}
+                {{ include('components/dropdown.html.twig' ,
+                    {
+                        'actions': [
+                            {
+                                'label': 'Récapitulatif',
+                                'path': path('app_ticket_id', {"id": ticket.id })
+                            }
+                        ],
+                    }
+                ) }}
+            {% else %}
+                {{ include('components/dropdown.html.twig' ,
+                    {
+                        'actions': [
+                            {
+                                'label': 'Récapitulatif',
+                                'path': path('app_ticket_id', {"id": ticket.id })
+                            },
+                            {
+                                'label': 'Modifier',
+                                'path': path('app_ticket_update', {"id": ticket.id })
+                            }
+                        ],
+                    }
+                ) }}
+            {% endif %}
         </div>
         <div class="ticket-content__middle">
             <img src="{{ asset('images/Sae_Zoo_Image/LogoSAE_Zoo.png') }}" alt="logo" class="logo" />

@@ -111,7 +111,7 @@
 .tickets-infos {
 }
 
-.tickets-infos p.tickets-infos__text {
+p.tickets-infos__text, ul.tickets-infos__text li {
     font-size: var(--font-size-s);
     color: var(--primaryGray);
 }

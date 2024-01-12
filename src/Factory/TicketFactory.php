@@ -64,7 +64,7 @@ final class TicketFactory extends ModelFactory
             case 'HANDICAPE':
                 $price=14;
                 break;
-            case '':
+            case 'CLASSIC':
                 $price=20;
                 break;
             default:

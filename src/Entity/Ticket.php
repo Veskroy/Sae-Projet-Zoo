@@ -82,7 +82,7 @@ class Ticket
     public function setType(?string $Type): static
     {
         // les Types de ticket possible
-        $all_type= ['ENFANT','ETUDIANT','SENIOR','JUNIOR','HANDICAPE',null,''];
+        $all_type= ['ENFANT','ETUDIANT','SENIOR','JUNIOR','HANDICAPE',null,'CLASSIC'];
             if(in_array($Type,$all_type)){
         $this->type = $Type;}
             else
@@ -125,5 +125,6 @@ class Ticket
 
         return $this;
     }
+
 
 }

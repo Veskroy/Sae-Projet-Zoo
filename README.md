@@ -155,6 +155,10 @@ git commit -m "edit: <fonctionnalité modifiée>"
 git commit -m "delete: <fonctionnalité supprimée>"
 ```
 
+```shell
+git commit -m "edit(<component>): <fonctionnalité modifiée sur le dit component>"
+```
+
 ## Entity
 **Arboresence**
 - Animal
