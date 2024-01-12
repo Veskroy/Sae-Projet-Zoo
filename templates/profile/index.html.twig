@@ -61,7 +61,8 @@
                 {% if tickets|length > 0 %}
                     {% for ticket in tickets %}
                         {{ include('components/ticket.html.twig', {
-                            'ticket': ticket
+                            'ticket': ticket,
+                            'available': ticket.date > 'now'|date('Y-m-d'),
                         }) }}
                     {% endfor %}
                 {% else %}
