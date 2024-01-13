@@ -11,7 +11,7 @@
             <img src="{{ asset('images/icons/back_icon.svg') }}" alt="back icon" class="basic-icon back-icon" />
             Retour au forum</a>
 
-        {% if app.user == question.author or app.user.isAdmin %}
+        {% if app.user == question.author or app.user.isAdmin or app.user.isEmployee %}
             <a href="{{ path('app_question_edit', {'id': question.id}) }}">
                 <img src="{{ asset('images/icons/edit_icon.svg') }}" alt="edit icon" class="basic-icon edit-icon" />
                 Modifier
@@ -23,7 +23,7 @@
             <div class="question-main__informations">
                 <h2>{{ question.title }}</h2>
                 <div class="question-state">
-                    {% if app.user == question.author or app.user.isAdmin %}
+                    {% if app.user == question.author or app.user.isAdmin or app.user.isEmployee %}
                         {{ form_start(formSetResolved) }}
 
                             {{ form_row(formSetResolved.submit,
@@ -51,6 +51,11 @@
                 {% if question.author.isAdmin() %}
                     <span class="badge badge-admin">
                         Admin
+                    </span>
+                {% endif %}
+                {% if question.author.isEmployee() %}
+                    <span class="badge badge-employee">
+                        Employé
                     </span>
                 {% endif %}
             </div>
@@ -97,11 +102,16 @@
                             Admin
                         </span>
                     {% endif %}
+                    {% if answer.author.isEmployee() %}
+                        <span class="badge badge-employee">
+                            Employé
+                        </span>
+                    {% endif %}
                 </div>
             </div>
             <div class="answer-description">
                 <p class="text">{{ answer.description }}</p>
-                    {% if answer.author == user or user.isAdmin %}
+                    {% if answer.author == user or user.isAdmin or user.isEmployee %}
                         {{ include('components/dropdown.html.twig' ,
                             {
                                 'actions': [
