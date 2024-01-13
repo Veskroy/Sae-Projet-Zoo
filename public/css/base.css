@@ -367,6 +367,14 @@ label {
     font-size: 14px;
 }
 
+p.admin-or-employee-only {
+    background: var(--background-message-warning);
+    border: 1px solid var(--border-message-warning);
+    color: var(--color-message-warning);
+    padding: 15px;
+    width: 100%;
+}
+
 /* video */
 
 .video {
@@ -447,6 +455,10 @@ a.login-btn {
 
 .badge-admin {
     background-color: var(--red-color-admin);
+}
+
+.badge-employee {
+    background-color: var(--primaryGreen);
 }
 
 .badge-resolved {
@@ -1504,7 +1516,7 @@ div.content div.container-body-infos {
 /* media queries */
 /*****************/
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
     header.header nav {
         display: none;
     }
