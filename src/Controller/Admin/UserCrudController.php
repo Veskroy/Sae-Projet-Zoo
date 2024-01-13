@@ -81,7 +81,13 @@ class UserCrudController extends AbstractCrudController
                             </span>
                             HTML;
                     } elseif (in_array('ROLE_USER', $roles)) {
-                        return <<<HTML
+                        if (in_array('ROLE_EMPLOYEE', $roles)) {
+                            return <<<HTML
+                            <span class="material-symbols-outlined">
+                                work
+                            </span>
+                            HTML;
+                        } return <<<HTML
                             <span class="material-symbols-outlined">
                                 person
                             </span>
