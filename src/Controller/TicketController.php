@@ -183,6 +183,7 @@ class TicketController extends AbstractController
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Ce ticket a bien été supprimé!');
+                return $this->redirectToRoute('app_ticket');
             }
 
         }
