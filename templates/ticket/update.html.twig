@@ -17,18 +17,22 @@
 
     <div class="mt-50">
 
-    {{ form_start(form_mdt) }}
+        {{ form_start(form_mdt) }}
 
-    {{ form_row(form_mdt.date)}}
-    {{ form_row(form_mdt.type)}}
+        {{ form_row(form_mdt.date)}}
+        {{ form_row(form_mdt.type)}}
 
-    {{ form_end(form_mdt) }}
+        {{ form_end(form_mdt) }}
 
-    {{ include('components/modal.html.twig', {
-        form: form_delt,
-        modalQuestion: 'Êtes-vous sûr de vouloir supprimer ce ticket?',
-        modalAction: 'Supprimer',
-        fullWidth: true
-    }) }}
+        {{ include('components/modal.html.twig', {
+            form: form_delt,
+            modalQuestion: 'Êtes-vous sûr de vouloir supprimer ce ticket?',
+            modalAction: 'Supprimer',
+            fullWidth: true
+        }) }}
+
+    </div>
+
+</div>
 
 {% endblock %}
