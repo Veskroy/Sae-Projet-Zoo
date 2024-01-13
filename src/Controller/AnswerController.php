@@ -32,7 +32,7 @@ class AnswerController extends AbstractController
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
-        } else if ($answer->getAuthor() !== $user && !($user->isAdmin())) {
+        } else if ($answer->getAuthor() !== $user && !($user->isAdmin()) && (!$user->isEmployee())) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour modifier cette réponse.');
             return $this->redirectToRoute('app_forum');
         }
