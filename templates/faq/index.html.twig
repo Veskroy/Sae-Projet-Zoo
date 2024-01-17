@@ -15,6 +15,18 @@
         Merci de respecter nos règles de bonne conduite.
     </p>
 
+    {% if app.user.isAdmin or app.user.isEmployee %}
+
+        <p class="admin-or-employee-only">
+            Bonjour, {{ app.user.toString() }}, vous êtes un administrateur ou employé de notre Zoo.
+            <br />
+            Par conséquent, vous avez la possibilité de supprimer un post, de le modifier, de le rendre résolu ou non.
+            <br />
+            Vous pouvez également supprimer ou modifier un commentaire qui pourrait être offensant, ou non approprié.
+        </p>
+
+    {% endif %}
+
     <a href="{{ path('app_user_questions') }}" class="link mbc">
         Voir mes posts
     </a>

@@ -25,6 +25,13 @@ class UserFixtures extends Fixture
             'password' => 'test',
             'roles' => ['ROLE_USER'],
         ]);
+        UserFactory::CreateOne([
+            'firstname' => 'Clément',
+            'lastname' => 'Perrot',
+            'email' => 'employe@example.com',
+            'password' => 'test',
+            'roles' => ['ROLE_EMPLOYEE', 'ROLE_USER'],
+        ]);
         UserFactory::createMany(10);
 
         // source pour les icônes gratuites (voir README.md) : https://www.iconfinder.com/

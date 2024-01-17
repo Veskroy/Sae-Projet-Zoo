@@ -71,8 +71,7 @@ class QuestionController extends AbstractController
         $formSetResolved->handleRequest($request);
 
         if ($formSetResolved->isSubmitted() && $formSetResolved->isValid()) {
-            // utiliser isAdmin plutôt que in_array(...)
-            if ($user === $question->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles())) {
+            if ($user === $question->getAuthor() || $user->isAdmin() || $user->isEmployee()) {
                 $question->setIsResolved(!$question->isIsResolved());
 
                 $entityManager->persist($question);
@@ -157,7 +156,7 @@ class QuestionController extends AbstractController
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
-        } else if ($question->getAuthor() !== $user && !($user->isAdmin())) {
+        } else if ($question->getAuthor() !== $user && !($user->isAdmin()) && !($user->isEmployee())) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour modifier ce post.');
             return $this->redirectToRoute('app_forum');
         }

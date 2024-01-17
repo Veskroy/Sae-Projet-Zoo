@@ -96,13 +96,14 @@ composer db
 ```
 Cette commande détruit la bd si elle existe, en crée une nouvelle, effectue les migrations et génère les données factices.
 
-## Authorisations et utilisateurs de démonstration
+## Autorisations et utilisateurs de démonstration
 
 
-| Email               | Mot de passe | Type de compte      |
-|---------------------|--------------|---------------------|
-| root@example.com    | test         | Administrateur      |
-| user@example.com    | test         | Utilisateur         |
+| Email               | Mot de passe | Type de compte |
+|---------------------|--------------|----------------|
+| root@example.com    | test         | Administrateur |
+| user@example.com    | test         | Utilisateur    |
+| employe@example.com | test         | Employé du zoo |
 
 ## Rappel pour le projet
 

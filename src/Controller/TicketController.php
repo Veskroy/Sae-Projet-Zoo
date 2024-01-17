@@ -10,6 +10,7 @@ use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,6 +43,15 @@ class TicketController extends AbstractController
         } return $price;
     }
 
+    private function checkAccess($user): ?RedirectResponse
+    {
+        if ($user->isAdmin() || $user->isEmployee()) {
+            $this->addFlash('warning', 'En tant qu\'administrateur ou employé de ce Zoo, vous ne pouvez pas acheter ni consulter de billets. En revanche, vous pouvez consulter ici les événements à venir et les modifier, ou supprimer, ainsi que le nombre de places restantes.');
+            return $this->redirectToRoute('app_events');
+        }
+        return null;
+    }
+
     /**
      * @throws \Exception
      */
@@ -53,15 +63,12 @@ class TicketController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        $tickets = $ticketRepository->findBy(['user' => $user]);
-
-        $pastTickets = [];
-        /*foreach ($tickets as $ticket) {
-            if ($ticket->getDate() < new \DateTime()) {
-                $pastTickets[] = $ticket;
-            }
+        $res = $this->checkAccess($user);
+        if ($res) {
+            return $res;
         }
-        $avalaibleTickets = array_diff($tickets, $pastTickets); */
+
+        $tickets = $ticketRepository->findBy(['user' => $user]);
 
         $pastTickets = array_filter($tickets, function ($ticket) {
             return $ticket->getDate() < new \DateTime('-1 day');
@@ -76,7 +83,7 @@ class TicketController extends AbstractController
         });
             /////// Formulaire
 
-        $newticket= new Ticket();
+        $newticket = new Ticket();
         $form = $this->createForm(TicketType::class, $newticket)
             ->add('submit', SubmitType::class, ['label' => 'Obtenir mon nouveau ticket', 'attr' => ['class' => 'btn button-primary full-width mt-50']]);
 
@@ -89,16 +96,15 @@ class TicketController extends AbstractController
 
             /// comparaison date
 
-
-         if ($newticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
-             $this->addFlash('error',"La date donnée n'est pas valable");
-         }
-         else {
-             $entityManager->persist($newticket);
-             $entityManager->flush();
-             $this->addFlash('success', "Votre ticket a été enregistre !");
-         }
-         }
+             if ($newticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
+                 $this->addFlash('error',"La date donnée n'est pas valable, veuillez en saisir une autre.");
+             }
+             else {
+                 $entityManager->persist($newticket);
+                 $entityManager->flush();
+                 $this->addFlash('success', "Votre ticket a été enregistré!");
+             }
+        }
 
         return $this->render('ticket/index.html.twig', [
             'controller_name' => 'TicketController',
@@ -115,9 +121,14 @@ class TicketController extends AbstractController
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
-        } else if ($ticket->getUser() !== $user && !($user->isAdmin())) {
+        } else if ($ticket->getUser() !== $user) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour consulter ce ticket.');
             return $this->redirectToRoute('app_ticket');
+        }
+
+        $res = $this->checkAccess($user);
+        if ($res) {
+            return $res;
         }
 
         return $this->render('ticket/show.html.twig', [
@@ -135,12 +146,14 @@ class TicketController extends AbstractController
         $user = $this->getUser();
         if (!$user instanceof User) {
             return $this->redirectToRoute('app_login');
-        } else if ($ticket->getUser() !== $user && !($user->isAdmin())) {
+        } else if ($ticket->getUser() !== $user) {
             $this->addFlash('error', 'Vous n\'avez pas les droits pour consulter ce ticket.');
             return $this->redirectToRoute('app_ticket');
-        } else if ($ticket->getDate() < new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'))) {
-            $this->addFlash('error', 'Vous ne pouvez pas modifier un ticket passé.');
-            return $this->redirectToRoute('app_ticket');
+        }
+
+        $res = $this->checkAccess($user);
+        if ($res) {
+            return $res;
         }
 
         // modification d'un ticket
@@ -193,4 +206,5 @@ class TicketController extends AbstractController
             'form_mdt'=>$form_mdt,
             'form_delt'=>$form_delt
     ]); }
+
 }
